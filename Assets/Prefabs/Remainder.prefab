@@ -235,7 +235,7 @@ MonoBehaviour:
   Remainder_1: {fileID: 1536814113235326215}
   Remainder_2: {fileID: 7347330623536265435}
   _rigidbody: {fileID: 6548169772337678011}
-  _power: 4
+  _power: 10
 --- !u!54 &6548169772337678011
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TreeEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,8 +53,8 @@ public class BlockCollision : BlockCollisionBase
         var a1 = Vector3.Project(center - _contactPoints[0].point, side[0]).magnitude;
         var a2 = Vector3.Project(center - _contactPoints[0].point, side[1]).magnitude;
         //Debug.Log($"{a1} - {a2}");
-        Debug.Log($"dot_sise_0: {Vector3.Dot(side[0].normalized, transform.forward)}");
-        Debug.Log($"dot_side_1: {Vector3.Dot(side[1].normalized, transform.forward)}");
+        //Debug.Log($"dot_sise_0: {Vector3.Dot(side[0].normalized, transform.forward)}");
+        //Debug.Log($"dot_side_1: {Vector3.Dot(side[1].normalized, transform.forward)}");
 
         Vector3 scale = Vector3.zero;
         Vector3 scale_remainder = Vector3.zero;
@@ -75,8 +74,8 @@ public class BlockCollision : BlockCollisionBase
             var direction_litle = Vector3.Dot(side[1].normalized, Vector3.forward);
             var direction_large = Vector3.Dot(side[0].normalized, Vector3.left);
             
-            Debug.Log($"direction_litle: {direction_litle}");
-            Debug.Log($"direction_large: {direction_large}");
+           // Debug.Log($"direction_litle: {direction_litle}");
+          //  Debug.Log($"direction_large: {direction_large}");
             
             scale_remainder = new Vector3(side[0].magnitude, Block.localScale.y, Block.localScale.z - side[1].magnitude);
             position_remainder = new Vector3(center.x, transform.position.y, _contactPoints[0].point.z + direction_litle * (Block.localScale.z - side[1].magnitude)/2f);
@@ -93,8 +92,8 @@ public class BlockCollision : BlockCollisionBase
             var direction_litle = Vector3.Dot(side[1].normalized, Vector3.left);
             var direction_large = dot;
             
-            Debug.Log($"direction_litle: {direction_litle}");
-            Debug.Log($"direction_large: {direction_large}");
+            //Debug.Log($"direction_litle: {direction_litle}");
+            //Debug.Log($"direction_large: {direction_large}");
             
             scale_remainder = new Vector3(Block.localScale.x - side[1].magnitude, Block.localScale.y, side[0].magnitude);
             position_remainder = new Vector3(_contactPoints[0].point.x - direction_litle * (Block.localScale.x - side[1].magnitude)/2f, transform.position.y, center.z);
@@ -105,7 +104,7 @@ public class BlockCollision : BlockCollisionBase
 
         Block.position = center;
         Block.localScale = scale;
-        Debug.Log($"scale: {scale}");
+        Debug.Log($"scale:{scale}  center:{center}");
         
         var remainder = Instantiate(_remainderPrefab);
         remainder.Remainder_1.localScale = scale_remainder;

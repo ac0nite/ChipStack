@@ -44,7 +44,7 @@ public class BlockMovement : MonoBehaviour
         //_center.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
         
         //var radius = (_center.position - transform.position).magnitude;
-        _center.y = 0.6f;
+       // _center.y = 0.5f;
         
         _nextTarget = RandomNextTarget(_maxRadius);
 
@@ -77,6 +77,18 @@ public class BlockMovement : MonoBehaviour
         InputManager.Instance.EventTap += Stop;
     }
 
+    public void Init(Vector3 center)
+    {
+        Debug.Log($"NEW CENTER: {center}");
+        
+        _center = new Vector3(center.x, 0f, center.z);
+
+        //_maxRadius = Mathf.Abs(transform.localScale.x);
+        //_center = center;
+        //Debug.DrawLine(center.normalized, Vector3.up, Color.blue, 3f);
+        //_maxRadius = transform.localScale.x;
+    }
+
     private void Update()
     {
         if(!_go)
@@ -103,9 +115,12 @@ public class BlockMovement : MonoBehaviour
        }
        else 
        {
-           //_center.Translate((_nextTarget - _center.transform.position).normalized * (Time.deltaTime * _speedCenter));
-           _center += (_nextTarget - _center).normalized * (Time.deltaTime * _speedCenter);
-           //_center.Translate((_nextTarget - _center.transform.position).normalized * (Time.deltaTime * _speedCenter));
+            //_center.Translate((_nextTarget - _center.transform.position).normalized * (Time.deltaTime * _speedCenter));
+
+            //_center += (_nextTarget - _center).normalized * (Time.deltaTime * _speedCenter);
+            _center = _center;
+
+            //_center.Translate((_nextTarget - _center.transform.position).normalized * (Time.deltaTime * _speedCenter));
        }
     }
 
@@ -118,8 +133,9 @@ public class BlockMovement : MonoBehaviour
     private Vector3 RandomNextTarget(float radius)
     {
         var c = UnityEngine.Random.insideUnitCircle * radius;
-        var t = new Vector3(c.x, transform.position.y, c.y);
-        //Debug.Log($"RandomNextTarget: {t}");
+        // var t = new Vector3(c.x, transform.position.y, c.y);
+        var t = new Vector3(c.x, 0f, c.y);
+       // Debug.Log($"RandomNextTarget: {t}");
         return t;
     }
 

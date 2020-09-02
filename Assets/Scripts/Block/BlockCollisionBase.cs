@@ -8,6 +8,10 @@ public class BlockCollisionBase : MonoBehaviour
     [SerializeField] public bool IsCollision
     {
         get { return _isCollision;}
-        set { _isCollision = value; }
+        set
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+            _isCollision = value;
+        }
     }
 }

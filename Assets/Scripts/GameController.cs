@@ -24,7 +24,10 @@ public class GameController : MonoBehaviour
 
         // block.transform.position = _transform.position;
         _block.Collision.Block.transform.localScale = _transform.localScale;
-        
+
+        _block.Movement.Init(_transform.position);
+
+
         _block.Collision.EventNextBlock += OnNextBlock;
         _block.Movement.EventExit += OnExitRound;
     }
@@ -32,7 +35,7 @@ public class GameController : MonoBehaviour
     private void OnNextBlock(BlockCollision block)
     {
         //Vector3.down * (_nextBlock.transform.localScale.y)
-        Debug.Log($"new scale: {block.Block.transform.localScale}");
+        Debug.Log($"spawn new  scale:{block.Block.transform.localScale} position: {block.Block.transform.position}");
         GameManager.Instance.Base.transform.position += Vector3.down * block.Block.localScale.y;
         _block.Collision.EventNextBlock -= OnNextBlock;
         _block.Movement.EventExit -= OnExitRound;

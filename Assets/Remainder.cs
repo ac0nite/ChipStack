@@ -7,7 +7,7 @@ public class Remainder : MonoBehaviour
     [SerializeField] public Transform Remainder_1 = null;
     [SerializeField] public Transform Remainder_2 = null;
     [SerializeField] private Rigidbody _rigidbody = null;
-    [SerializeField] private float _power = 5f;
+    [SerializeField] private float _power = 10f;
 
     public void Force(Vector3 direction)
     {
