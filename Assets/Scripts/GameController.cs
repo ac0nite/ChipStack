@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
     private Block _block = null;
     void Start()
     {
-        SpawnBlock(GameManager.Instance.BlockPrefab.Collision.Block.transform);
+        SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
     }
 
     // Update is called once per frame
@@ -23,9 +23,9 @@ public class GameController : MonoBehaviour
         _block.transform.SetParent(GameManager.Instance.Base.transform);
 
         // block.transform.position = _transform.position;
-        _block.Collision.Block.transform.localScale = _transform.localScale;
+        _block.Collision.transform.localScale = _transform.localScale;
 
-        _block.Movement.Init(_transform.position);
+        _block.Movement.Init(_transform);
 
 
         _block.Collision.EventNextBlock += OnNextBlock;
@@ -34,12 +34,12 @@ public class GameController : MonoBehaviour
 
     private void OnNextBlock(BlockCollision block)
     {
-        //Vector3.down * (_nextBlock.transform.localScale.y)
-        Debug.Log($"spawn new  scale:{block.Block.transform.localScale} position: {block.Block.transform.position}");
-        GameManager.Instance.Base.transform.position += Vector3.down * block.Block.localScale.y;
+        //Vector3.down * (_nexttransform.localScale.y)
+        Debug.Log($"spawn new  scale:{block.transform.localScale} position: {block.transform.position}");
+        GameManager.Instance.Base.transform.position += Vector3.down * block.transform.localScale.y;
         _block.Collision.EventNextBlock -= OnNextBlock;
         _block.Movement.EventExit -= OnExitRound;
-        SpawnBlock(block.Block);
+        SpawnBlock(block.transform);
     }
 
     private void OnExitRound()
@@ -52,7 +52,7 @@ public class GameController : MonoBehaviour
         {
             Destroy(block.gameObject);
         }
-        SpawnBlock(GameManager.Instance.BlockPrefab.Collision.Block.transform);
+        SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
         GameManager.Instance.Base.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
         GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().IsCollision = true;
     }

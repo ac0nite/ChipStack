@@ -60,12 +60,12 @@ public class BlockMovement : MonoBehaviour
         //Debug.Log($"{_direction}");
         if (_direction == CLOCK_DIRECTION.Clock_Wise)
         {
-            transform.position = new Vector3(-13f, transform.position.y, 0f);
+            transform.position = new Vector3(-13f, 0f, 0f);
             _timerCount = 4.75f;
         }
         else
         {
-            transform.position = new Vector3(0f, transform.position.y, -13f);
+            transform.position = new Vector3(0f, 0f, -13f);
             _timerCount = 4.8f;
         }
 
@@ -77,11 +77,14 @@ public class BlockMovement : MonoBehaviour
         InputManager.Instance.EventTap += Stop;
     }
 
-    public void Init(Vector3 center)
+    public void Init(Transform block)
     {
-        Debug.Log($"NEW CENTER: {center}");
+        Debug.Log($"NEW CENTER: {block.transform.position}");
         
-        _center = new Vector3(center.x, 0f, center.z);
+        _center = new Vector3(block.transform.position.x, 0f, block.transform.position.z);
+        _radius.Value = (_center - transform.position).magnitude;
+        _maxRadius = block.transform.localScale.x / 2f;
+
 
         //_maxRadius = Mathf.Abs(transform.localScale.x);
         //_center = center;
