@@ -6,6 +6,12 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     private Block _block = null;
+    private BaseMovement _baseMovement = null;
+
+    private void Awake()
+    {
+        _baseMovement = GameManager.Instance.Base.GetComponent<BaseMovement>();
+    }
     void Start()
     {
         SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
@@ -20,7 +26,7 @@ public class GameController : MonoBehaviour
     private void SpawnBlock(Transform _transform)
     {
         _block = Instantiate(GameManager.Instance.BlockPrefab);
-        _block.transform.SetParent(GameManager.Instance.Base.transform);
+       // _block.transform.SetParent(GameManager.Instance.Base.transform);
 
         // block.transform.position = _transform.position;
         _block.Collision.transform.localScale = _transform.localScale;
@@ -35,8 +41,10 @@ public class GameController : MonoBehaviour
     private void OnNextBlock(BlockCollision block)
     {
         //Vector3.down * (_nexttransform.localScale.y)
-        Debug.Log($"spawn new  scale:{block.transform.localScale} position: {block.transform.position}");
-        GameManager.Instance.Base.transform.position += Vector3.down * block.transform.localScale.y;
+        //Debug.Log($"spawn new  scale:{block.transform.localScale} position: {block.transform.position}");
+        _baseMovement.Target =
+            (GameManager.Instance.Base.transform.position + Vector3.down * block.transform.localScale.y);
+        //GameManager.Instance.Base.transform.position += Vector3.down * block.transform.localScale.y;
         _block.Collision.EventNextBlock -= OnNextBlock;
         _block.Movement.EventExit -= OnExitRound;
         SpawnBlock(block.transform);
@@ -54,6 +62,7 @@ public class GameController : MonoBehaviour
         }
         SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
         GameManager.Instance.Base.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-        GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().IsCollision = true;
+        //GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().IsCollision = true;
+        GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().Collision = BlockCollisionBase.TypeCollision.Second;
     }
 }

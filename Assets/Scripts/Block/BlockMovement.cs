@@ -79,7 +79,7 @@ public class BlockMovement : MonoBehaviour
 
     public void Init(Transform block)
     {
-        Debug.Log($"NEW CENTER: {block.transform.position}");
+       // Debug.Log($"NEW CENTER: {block.transform.position}");
         
         _center = new Vector3(block.transform.position.x, 0f, block.transform.position.z);
         _radius.Value = (_center - transform.position).magnitude;
@@ -107,7 +107,7 @@ public class BlockMovement : MonoBehaviour
 
         if (!run && (transform.position - _center).magnitude >= _maxRadius)
         {
-            transform.Translate((_center - transform.position).normalized * (Time.deltaTime * 10f));
+            transform.Translate((_center - transform.position).normalized * (Time.deltaTime * 5));
             _radius.Value = (_center - transform.position).magnitude;
         }
         else run = true;

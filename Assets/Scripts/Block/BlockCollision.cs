@@ -16,23 +16,36 @@ public class BlockCollision : BlockCollisionBase
 
     private void OnCollisionStay(Collision other)
     {
-        
 
         var blockCollision = other.transform.GetComponent<BlockCollisionBase>();
-        if (blockCollision == null)
+        if (blockCollision == null) 
             return;
 
-        //if(!blockCollision.IsCollision)
-        //    return;
-        
-        if(!IsCollision)
-            return; 
-        
-        Debug.Log($"OnCollisionEnter", transform.gameObject);
 
-        blockCollision.IsCollision = false;
-        //IsCollision = true;
-        IsCollision = false;
+        if (Collision == TypeCollision.First && blockCollision.Collision == TypeCollision.Second)
+        {
+            Collision = TypeCollision.Second;
+            blockCollision.Collision = TypeCollision.Undefibed;
+            transform.SetParent(GameManager.Instance.Base);
+        }
+        else
+        {
+            return;
+        }
+
+
+            //
+        //        if(!blockCollision.IsCollision)
+        //            return;
+
+        //if (!IsCollision)
+        //    return; 
+        
+        Debug.Log($"----------------- OnCollisionEnter -----------------", transform.gameObject);
+
+        //blockCollision.IsCollision = false;
+
+        //IsCollision = false;
 
         var contacts = other.GetContacts(_contactPoints);
 
@@ -47,10 +60,10 @@ public class BlockCollision : BlockCollisionBase
         angles.Add(new Vector2(c.position.x - c.localScale.x / 2, c.position.z - c.localScale.z / 2));
         angles.Add(new Vector2(c.position.x - c.localScale.x / 2, c.position.z + c.localScale.z / 2));
 
-        foreach (var a in angles)
-        {
-            Debug.Log($"angl: {a}");
-        }
+        //foreach (var a in angles)
+        //{
+        //    Debug.Log($"angl: {a}");
+        //}
 
         Vector3 point0 = Vector3.zero;
 
@@ -117,7 +130,8 @@ public class BlockCollision : BlockCollisionBase
         Vector3 position_remainder_2 = Vector3.zero;
 
         var dot = Vector3.Dot(side[0].normalized, transform.forward);
-        
+
+        Debug.Log($"side[0]: {side[0].magnitude} side[1]: {side[1].magnitude}");
         //Debug.Log($"dot: {dot} {Math.Round(dot)}");
         if (Math.Round(dot) == 0f)
         {
@@ -155,14 +169,18 @@ public class BlockCollision : BlockCollisionBase
             position_remainder_2 = new Vector3(transform.position.x, transform.position.y, point0.z + direction_large * (transform.localScale.z - side[0].magnitude)/2f); 
         }
 
+        
+
         Vector3 position = new Vector3(center.x, transform.position.y, center.z);
+
+        Debug.Log($"new scale: {scale} position: {position}");
 
         transform.position = position;
         transform.localScale = scale;
 
         //Destroy(transform.gameObject);
         //GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //go.transform.position = center;
+        //go.transform.position = position;
         //go.transform.localScale = scale;
         //go.transform.SetParent(GameManager.Instance.Base);
 
