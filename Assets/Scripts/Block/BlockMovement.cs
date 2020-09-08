@@ -173,13 +173,14 @@ public class BlockMovement : MonoBehaviour
     {
         _go = false;
         GetComponent<Rigidbody>().useGravity = true;
-        StartCoroutine(ExitRound());
+        StartCoroutine(ExitRound(this.gameObject));
     }
 
-    IEnumerator ExitRound()
+    IEnumerator ExitRound(GameObject obj)
     {
         yield return new WaitForSeconds(_timeExitRound);
         EventExit?.Invoke();
+        //Destroy(obj);
     }
 }
 

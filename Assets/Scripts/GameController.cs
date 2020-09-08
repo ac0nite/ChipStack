@@ -60,8 +60,10 @@ public class GameController : MonoBehaviour
         {
             Destroy(block.gameObject);
         }
+        Destroy(_block.gameObject);
         SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
-        GameManager.Instance.Base.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+        //GameManager.Instance.Base.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+        _baseMovement.Target = Vector3.zero;
         //GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().IsCollision = true;
         GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().Collision = BlockCollisionBase.TypeCollision.Second;
     }
