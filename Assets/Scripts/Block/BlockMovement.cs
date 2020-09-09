@@ -15,7 +15,7 @@ public class BlockMovement : MonoBehaviour
     [SerializeField] private float _amplitudeСircle = 1f;
     [SerializeField] private float _speedAmplitudeСircle = 1f;
 
-    [SerializeField] private Vector3 _center = Vector3.zero;
+   // [SerializeField] private Vector3 _center = Vector3.zero;
     [SerializeField] private float _speedCenter = 2f;
     
     [SerializeField] private float _amplitudeRadius = 2f;
@@ -48,7 +48,7 @@ public class BlockMovement : MonoBehaviour
         
         _nextTarget = RandomNextTarget(_maxRadius);
 
-        _radius.Value = (_center - transform.position).magnitude;
+        _radius.Value = (GameManager.Instance.Center.transform.position - transform.position).magnitude;
         _radius.Amplitude = _amplitudeRadius;
         _radius.Speed = _speedAmplitudeRadius;
         
@@ -81,9 +81,11 @@ public class BlockMovement : MonoBehaviour
     {
        // Debug.Log($"NEW CENTER: {block.transform.position}");
         
-        _center = new Vector3(block.transform.position.x, 0f, block.transform.position.z);
-        _radius.Value = (_center - transform.position).magnitude;
-        _maxRadius = block.transform.localScale.x / 2f;
+        GameManager.Instance.Center.transform.position = new Vector3(block.transform.position.x, 0f, block.transform.position.z);
+        // _radius.Value = (GameManager.Instance.Center.transform.position - transform.position).magnitude;
+        _radius.Value = block.transform.localScale.x / 2;
+        _maxRadius = block.transform.localScale.x/2;
+        _nextTarget = RandomNextTarget(_maxRadius);
 
 
         //_maxRadius = Mathf.Abs(transform.localScale.x);
@@ -105,14 +107,14 @@ public class BlockMovement : MonoBehaviour
                 transform.position = Anticlockwise();
         }
 
-        if (!run && (transform.position - _center).magnitude >= _maxRadius)
+        if (!run && (transform.position - GameManager.Instance.Center.transform.position).magnitude >= _maxRadius)
         {
-            transform.Translate((_center - transform.position).normalized * (Time.deltaTime * 5));
-            _radius.Value = (_center - transform.position).magnitude;
+            transform.Translate((GameManager.Instance.Center.transform.position - transform.position).normalized * (Time.deltaTime * 5));
+            _radius.Value = (GameManager.Instance.Center.transform.position - transform.position).magnitude;
         }
         else run = true;
 
-        if ((_nextTarget - _center).sqrMagnitude < 0.1f)
+        if ((_nextTarget - GameManager.Instance.Center.transform.position).sqrMagnitude < 0.1f)
        {
            _nextTarget = RandomNextTarget(_radius.Value);
        }
@@ -121,10 +123,11 @@ public class BlockMovement : MonoBehaviour
             //_center.Translate((_nextTarget - _center.transform.position).normalized * (Time.deltaTime * _speedCenter));
 
             //_center += (_nextTarget - _center).normalized * (Time.deltaTime * _speedCenter);
-            _center = _center;
+            //GameManager.Instance.Center.transform.position = GameManager.Instance.Center.transform.position;
+            GameManager.Instance.Center.transform.position += (_nextTarget - GameManager.Instance.Center.transform.position).normalized * (Time.deltaTime * _speedCenter);
 
             //_center.Translate((_nextTarget - _center.transform.position).normalized * (Time.deltaTime * _speedCenter));
-       }
+        }
     }
 
     private void OnDestroy()
@@ -153,7 +156,7 @@ public class BlockMovement : MonoBehaviour
         _timerCount += Time.deltaTime * cache_speed;
         var cache_radius = _radius.Value;
 
-        return new Vector3(_center.x + Mathf.Cos(_timerCount) * cache_radius, transform.position.y, _center.z + Mathf.Sin(_timerCount) * cache_radius);
+        return new Vector3(GameManager.Instance.Center.transform.position.x + Mathf.Cos(_timerCount) * cache_radius, transform.position.y, GameManager.Instance.Center.transform.position.z + Mathf.Sin(_timerCount) * cache_radius);
     }
 
     private Vector3 Clockwise()
@@ -166,7 +169,7 @@ public class BlockMovement : MonoBehaviour
         _timerCount += Time.deltaTime * cache_speed;
         var cache_radius = _radius.Value;
 
-        return new Vector3(_center.x + Mathf.Sin(_timerCount) * cache_radius, transform.position.y, _center.z + Mathf.Cos(_timerCount) * cache_radius);
+        return new Vector3(GameManager.Instance.Center.transform.position.x + Mathf.Sin(_timerCount) * cache_radius, transform.position.y, GameManager.Instance.Center.transform.position.z + Mathf.Cos(_timerCount) * cache_radius);
     }
 
     public void Stop()

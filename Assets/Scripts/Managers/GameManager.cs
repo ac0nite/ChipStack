@@ -6,4 +6,6 @@ public class GameManager : SingletoneGameObject<GameManager>
 {
     [SerializeField] public Transform Base = null;
     [SerializeField] public Block BlockPrefab = null;
+    [SerializeField] public Transform Center = null;
+    [SerializeField] public ScoreManager ScoreManager = null;
 }

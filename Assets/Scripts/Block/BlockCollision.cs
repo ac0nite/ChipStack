@@ -82,7 +82,7 @@ public class BlockCollision : BlockCollisionBase
             //Debug.Log($"count: {angles.Find(a => (a.x == contact.point.x && a.y == contact.point.z))}  {contact.point}");
             if (angles.Exists(a => (a.x == contact.point.x && a.y == contact.point.z)))
             {
-                //Debug.Log($"YES!!!");
+                Debug.Log($"YES!!!");
                 point0 = contact.point;
 
                 Debug.DrawRay(contact.point, contact.normal * 5, Color.red, 5);
@@ -91,11 +91,14 @@ public class BlockCollision : BlockCollisionBase
             }
         }
 
+        if (point0 == Vector3.zero)
+            point0 = _contactPoints[0].point;
+
         //Debug.DrawLine(_contactPoints[0].point, _contactPoints[1].point, Color.green, 5f);
         //Debug.DrawLine(_contactPoints[0].point, _contactPoints[2].point, Color.green, 5f);
         //Debug.DrawLine(_contactPoints[0].point, _contactPoints[3].point, Color.green, 5f);
 
-        //search first angle 
+            //search first angle 
         foreach (ContactPoint contact in _contactPoints)
         {
             if(contact.point != point0)
@@ -189,17 +192,17 @@ public class BlockCollision : BlockCollisionBase
 
         //Debug.Log($"scale:{scale}  center:{center}");
 
-        //var remainder = Instantiate(_remainderPrefab);
-        //remainder.Remainder_1.localScale = scale_remainder;
-        //remainder.Remainder_1.position = position_remainder;
-        //remainder.Remainder_2.localScale = scale_remainder_2;
-        //remainder.Remainder_2.position = position_remainder_2;
+        var remainder = Instantiate(_remainderPrefab);
+        remainder.Remainder_1.localScale = scale_remainder;
+        remainder.Remainder_1.position = position_remainder;
+        remainder.Remainder_2.localScale = scale_remainder_2;
+        remainder.Remainder_2.position = position_remainder_2;
 
-        //remainder.Force((remainder.Remainder_2.position - transform.position).normalized);
+        remainder.Force((remainder.Remainder_2.position - transform.position).normalized);
 
         EventNextBlock?.Invoke(this);
        // StartCoroutine(test(transform));
-       // StartCoroutine(DestroyRemainder(remainder));
+        StartCoroutine(DestroyRemainder(remainder));
 
         side.Clear();
 

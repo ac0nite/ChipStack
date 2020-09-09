@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
 
     private void SpawnBlock(Transform _transform)
     {
+        GameManager.Instance.ScoreManager.ModifyScore(+1);
+
         _block = Instantiate(GameManager.Instance.BlockPrefab);
        // _block.transform.SetParent(GameManager.Instance.Base.transform);
 
