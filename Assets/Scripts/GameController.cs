@@ -14,19 +14,16 @@ public class GameController : MonoBehaviour
     }
     void Start()
     {
-        SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
+        //SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Go()
     {
-        
+        SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
     }
 
     private void SpawnBlock(Transform _transform)
     {
-        GameManager.Instance.ScoreManager.ModifyScore(+1);
-
         _block = Instantiate(GameManager.Instance.BlockPrefab);
        // _block.transform.SetParent(GameManager.Instance.Base.transform);
 
@@ -44,6 +41,9 @@ public class GameController : MonoBehaviour
     {
         //Vector3.down * (_nexttransform.localScale.y)
         //Debug.Log($"spawn new  scale:{block.transform.localScale} position: {block.transform.position}");
+
+        GameManager.Instance.ScoreManager.ModifyScore(+1);
+
         _baseMovement.Target =
             (GameManager.Instance.Base.transform.position + Vector3.down * block.transform.localScale.y);
         //GameManager.Instance.Base.transform.position += Vector3.down * block.transform.localScale.y;
@@ -55,6 +55,7 @@ public class GameController : MonoBehaviour
     private void OnExitRound()
     {
         Debug.Log($"OnExitRound");
+        //GameManager.Instance.ScoreManager.ModifyScore(0);
         _block.Collision.EventNextBlock -= OnNextBlock;
         _block.Movement.EventExit -= OnExitRound;
         var blocks = GameManager.Instance.Base.GetComponentsInChildren<Block>().ToList();
@@ -63,10 +64,13 @@ public class GameController : MonoBehaviour
             Destroy(block.gameObject);
         }
         Destroy(_block.gameObject);
-        SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
-        //GameManager.Instance.Base.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+        //SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
+        
         _baseMovement.Target = Vector3.zero;
-        //GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().IsCollision = true;
+        
         GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().Collision = BlockCollisionBase.TypeCollision.Second;
+
+        UIManager.Instance.ShowPanel(UITypePanel.StartScreen);
+        
     }
 }

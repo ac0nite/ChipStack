@@ -13,6 +13,7 @@ public class BlockCollision : BlockCollisionBase
     [SerializeField] private Remainder _remainderPrefab = null;
     public Action<BlockCollision> EventNextBlock;
     private int count = 0;
+    [SerializeField] private AudioSource _cutAudio = null;
 
     private void OnCollisionStay(Collision other)
     {
@@ -34,13 +35,15 @@ public class BlockCollision : BlockCollisionBase
         }
 
 
+        _cutAudio.Play();
+
             //
-        //        if(!blockCollision.IsCollision)
-        //            return;
+            //        if(!blockCollision.IsCollision)
+            //            return;
 
         //if (!IsCollision)
         //    return; 
-        
+
         Debug.Log($"----------------- OnCollisionEnter -----------------", transform.gameObject);
 
         //blockCollision.IsCollision = false;

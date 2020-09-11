@@ -8,4 +8,6 @@ public class GameManager : SingletoneGameObject<GameManager>
     [SerializeField] public Block BlockPrefab = null;
     [SerializeField] public Transform Center = null;
     [SerializeField] public ScoreManager ScoreManager = null;
+    [SerializeField] public GameController GameController = null;
+    [SerializeField] public AudioManager AudioManager = null;
 }

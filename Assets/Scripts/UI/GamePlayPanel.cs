@@ -18,5 +18,6 @@ public class GamePlayPanel : UIBasePanel
     void Update()
     {
         _scoreText.text = GameManager.Instance.ScoreManager.Score.ToString();
+        _bestText.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
     }
 }

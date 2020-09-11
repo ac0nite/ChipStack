@@ -13,7 +13,7 @@ public class InputManager : SingletoneGameObject<InputManager>
     private void Update()
     {
 #if UNITY_EDITOR
-        if(Input.GetMouseButtonUp(0))
+        if(Input.GetMouseButtonDown(0))
             EventTap?.Invoke();
 #else
       if (Input.touchCount > 0)

@@ -21,7 +21,7 @@ public class BlockMovement : MonoBehaviour
     [SerializeField] private float _amplitudeRadius = 2f;
     [SerializeField] private float _speedAmplitudeRadius = 2f;
 
-    [SerializeField] private float _maxRadius = 6f;
+    [SerializeField] private float _maxRadius = 1f;
     private bool run = false;
     private bool _go = false;
 
@@ -75,17 +75,23 @@ public class BlockMovement : MonoBehaviour
         _go = true;
 
         InputManager.Instance.EventTap += Stop;
+        Debug.Log($"BlockMovement Awake()");
     }
 
     public void Init(Transform block)
     {
        // Debug.Log($"NEW CENTER: {block.transform.position}");
-        
+       var size = block.transform.localScale.x >= block.transform.localScale.z
+           ? block.transform.localScale.x
+           : block.transform.localScale.z;
+
+
         GameManager.Instance.Center.transform.position = new Vector3(block.transform.position.x, 0f, block.transform.position.z);
         // _radius.Value = (GameManager.Instance.Center.transform.position - transform.position).magnitude;
-        _radius.Value = block.transform.localScale.x / 2;
-        _maxRadius = block.transform.localScale.x/2;
-        _nextTarget = RandomNextTarget(_maxRadius);
+        _radius.Value = size / 2;
+        _radius.Amplitude = size / 5;
+        _maxRadius = size / 3;
+        _nextTarget = RandomNextTarget(_radius.Value);
 
 
         //_maxRadius = Mathf.Abs(transform.localScale.x);
@@ -114,7 +120,7 @@ public class BlockMovement : MonoBehaviour
         }
         else run = true;
 
-        if ((_nextTarget - GameManager.Instance.Center.transform.position).sqrMagnitude < 0.1f)
+        if (run && (_nextTarget - GameManager.Instance.Center.transform.position).sqrMagnitude < 0.01f)
        {
            _nextTarget = RandomNextTarget(_radius.Value);
        }
@@ -138,10 +144,14 @@ public class BlockMovement : MonoBehaviour
 
     private Vector3 RandomNextTarget(float radius)
     {
+        if (radius > 5f)
+        {
+            Debug.Log($"radius > 5f");
+        } 
         var c = UnityEngine.Random.insideUnitCircle * radius;
         // var t = new Vector3(c.x, transform.position.y, c.y);
         var t = new Vector3(c.x, 0f, c.y);
-       // Debug.Log($"RandomNextTarget: {t}");
+        Debug.Log($"RandomNextTarget: {t} radius: {radius}");
         return t;
     }
 
