@@ -34,14 +34,14 @@ public class UIStartScreen : UIBasePanel
         if (btnText.text == "Sound")
         {
             btnText.text = "No Sound";
-            // GameManager.Instance.AudioManager.StopMusicBackground();
-            GameManager.Instance.AudioManager.NoVolumeSound();
+             GameManager.Instance.AudioManager.StopMusicBackground();
+            //GameManager.Instance.AudioManager.NoVolumeSound();
         }
         else
         {
             btnText.text = "Sound";
-            //GameManager.Instance.AudioManager.StartMusicBackground();
-            GameManager.Instance.AudioManager.YesVolumeSound();
+            GameManager.Instance.AudioManager.StartMusicBackground();
+            //GameManager.Instance.AudioManager.YesVolumeSound();
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     private Block _block = null;
     private BaseMovement _baseMovement = null;
+    public static Action<Vector3> EventBlock;
 
     private void Awake()
     {
@@ -35,6 +37,8 @@ public class GameController : MonoBehaviour
 
         _block.Collision.EventNextBlock += OnNextBlock;
         _block.Movement.EventExit += OnExitRound;
+
+        EventBlock?.Invoke(_transform.position);
     }
 
     private void OnNextBlock(BlockCollision block)
@@ -65,7 +69,14 @@ public class GameController : MonoBehaviour
         }
         Destroy(_block.gameObject);
         //SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
-        
+
+        foreach (var remainder in GameManager.Instance.Remainders)
+        {
+            Destroy(remainder.gameObject);
+        }
+        GameManager.Instance.Remainders.Clear();
+
+
         _baseMovement.Target = Vector3.zero;
         
         GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().Collision = BlockCollisionBase.TypeCollision.Second;

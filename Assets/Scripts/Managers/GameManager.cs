@@ -10,4 +10,6 @@ public class GameManager : SingletoneGameObject<GameManager>
     [SerializeField] public ScoreManager ScoreManager = null;
     [SerializeField] public GameController GameController = null;
     [SerializeField] public AudioManager AudioManager = null;
+    [SerializeField] public GradientManager Gradient = null;
+    public List<Remainder> Remainders = new List<Remainder>();
 }

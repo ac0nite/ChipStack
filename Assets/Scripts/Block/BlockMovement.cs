@@ -15,13 +15,25 @@ public class BlockMovement : MonoBehaviour
     [SerializeField] private float _amplitudeСircle = 1f;
     [SerializeField] private float _speedAmplitudeСircle = 1f;
 
-   // [SerializeField] private Vector3 _center = Vector3.zero;
+    [SerializeField] [Range(1f, 1.5f)] private float percent_part = 1f;
+
+    // [SerializeField] private Vector3 _center = Vector3.zero;
     [SerializeField] private float _speedCenter = 2f;
-    
+    private float _kSpeedCenter = 1f;
+
+    private Vector3 _targetCenter = Vector3.zero;
+    private Vector3 _targetScale = Vector3.zero;
+
     [SerializeField] private float _amplitudeRadius = 2f;
     [SerializeField] private float _speedAmplitudeRadius = 2f;
 
     [SerializeField] private float _maxRadius = 1f;
+
+    [SerializeField] private AudioSource _dropAudio = null;
+
+    [SerializeField] private string _walkAudioName;
+    [SerializeField] private string _cutAudioName;
+
     private bool run = false;
     private bool _go = false;
 
@@ -73,9 +85,14 @@ public class BlockMovement : MonoBehaviour
         //_timerCount = 4.5f;
 
         _go = true;
-
-        InputManager.Instance.EventTap += Stop;
         Debug.Log($"BlockMovement Awake()");
+    }
+
+    private void Start()
+    {
+        InputManager.Instance.EventTap += Stop;
+        _dropAudio.clip = Resources.Load<AudioClip>(("Music/" + _walkAudioName));
+        _dropAudio.Play();
     }
 
     public void Init(Transform block)
@@ -85,13 +102,20 @@ public class BlockMovement : MonoBehaviour
            ? block.transform.localScale.x
            : block.transform.localScale.z;
 
+       _targetScale = block.localScale;
+        _targetCenter = new Vector3(block.transform.position.x, 0f, block.transform.position.z);
+        GameManager.Instance.Center.transform.position = _targetCenter;
 
-        GameManager.Instance.Center.transform.position = new Vector3(block.transform.position.x, 0f, block.transform.position.z);
         // _radius.Value = (GameManager.Instance.Center.transform.position - transform.position).magnitude;
         _radius.Value = size / 2;
         _radius.Amplitude = size / 5;
         _maxRadius = size / 3;
         _nextTarget = RandomNextTarget(_radius.Value);
+
+
+        //_kSpeedCenter = (block.transform.localScale.x * block.transform.localScale.z) / 25f;
+        _kSpeedCenter = Mathf.Clamp((block.transform.localScale.x * block.transform.localScale.z) / 25f, 0.1f, 1f);
+        Debug.Log($"_kSpeedCenter: {_kSpeedCenter}");
 
 
         //_maxRadius = Mathf.Abs(transform.localScale.x);
@@ -129,8 +153,10 @@ public class BlockMovement : MonoBehaviour
             //_center.Translate((_nextTarget - _center.transform.position).normalized * (Time.deltaTime * _speedCenter));
 
             //_center += (_nextTarget - _center).normalized * (Time.deltaTime * _speedCenter);
-            //GameManager.Instance.Center.transform.position = GameManager.Instance.Center.transform.position;
-            GameManager.Instance.Center.transform.position += (_nextTarget - GameManager.Instance.Center.transform.position).normalized * (Time.deltaTime * _speedCenter);
+            // GameManager.Instance.Center.transform.position = GameManager.Instance.Center.transform.position;
+            var look = (_nextTarget - GameManager.Instance.Center.transform.position).normalized;
+            GameManager.Instance.Center.transform.Translate(look * (Time.deltaTime * _speedCenter * _kSpeedCenter));
+            //GameManager.Instance.Center.transform.position += (_nextTarget - GameManager.Instance.Center.transform.position).normalized * (Time.deltaTime * _speedCenter);
 
             //_center.Translate((_nextTarget - _center.transform.position).normalized * (Time.deltaTime * _speedCenter));
         }
@@ -138,21 +164,28 @@ public class BlockMovement : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(InputManager.TryInstance != null)
-            InputManager.Instance.EventTap -= Stop;
     }
 
     private Vector3 RandomNextTarget(float radius)
     {
-        if (radius > 5f)
-        {
-            Debug.Log($"radius > 5f");
-        } 
-        var c = UnityEngine.Random.insideUnitCircle * radius;
-        // var t = new Vector3(c.x, transform.position.y, c.y);
-        var t = new Vector3(c.x, 0f, c.y);
-        Debug.Log($"RandomNextTarget: {t} radius: {radius}");
-        return t;
+        //var c = UnityEngine.Random.insideUnitCircle;
+
+        //// Debug.Log($"c: {c}");
+        //c *= radius;
+
+        //var t = new Vector3(c.x, 0f, c.y);
+
+        //Debug.Log($"RandomNextTarget: {t} radius: {radius}");
+        //return t;
+
+
+        //var x = UnityEngine.Random.Range((_targetCenter.x - _targetScale.x / 2) * percent_part, (_targetCenter.x + _targetScale.x / 2) * percent_part);
+        //var z = UnityEngine.Random.Range((_targetCenter.z + _targetScale.z / 2) * percent_part, (_targetCenter.z - _targetScale.z / 2) * percent_part);
+        var x = UnityEngine.Random.Range((_targetCenter.x - _targetScale.x / 2 - percent_part), (_targetCenter.x + _targetScale.x / 2 + percent_part));
+        var z = UnityEngine.Random.Range((_targetCenter.z + _targetScale.z / 2 + percent_part), (_targetCenter.z - _targetScale.z / 2 - percent_part));
+        return new Vector3(x, 0f, z);
+
+        //return new Vector3(UnityEngine.Random.Range())
     }
 
 
@@ -184,15 +217,27 @@ public class BlockMovement : MonoBehaviour
 
     public void Stop()
     {
+        // Debug.Log($"public void Stop()", transform.gameObject);
         _go = false;
         GetComponent<Rigidbody>().useGravity = true;
         StartCoroutine(ExitRound(this.gameObject));
+        GetComponent<Block>().Collision.RunLighting();
+
+        if (InputManager.TryInstance != null)
+            InputManager.Instance.EventTap -= Stop;
+
+        //InputManager.Instance.EventTap -= Stop;
+
+        _dropAudio.Stop();
+
+        _dropAudio.PlayOneShot(Resources.Load<AudioClip>(("Music/" + _cutAudioName)));
     }
 
     IEnumerator ExitRound(GameObject obj)
     {
         yield return new WaitForSeconds(_timeExitRound);
         EventExit?.Invoke();
+        GetComponent<Block>().Collision.StopLighting();
         //Destroy(obj);
     }
 }

@@ -14,10 +14,38 @@ public class BlockCollision : BlockCollisionBase
     public Action<BlockCollision> EventNextBlock;
     private int count = 0;
     [SerializeField] private AudioSource _cutAudio = null;
+    [SerializeField] private Light _lighting = null;
+    private bool _isLighting = false;
+    [SerializeField] private float _stepIntensityLight = 5f;
+
+    void Update()
+    {
+        //if (_isLighting)
+        //{
+        //    _lighting.intensity += _stepIntensityLight;
+        //}
+    }
+
+    public void RunLighting()
+    {
+        //_isLighting = true;
+        _lighting.intensity = 5f;
+    }
+
+    public void StopLighting()
+    {
+        //_isLighting = false;
+        _lighting.intensity = 0f;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        Debug.Log($"---OnCollisionEnter---");
+        StopLighting();
+    }
 
     private void OnCollisionStay(Collision other)
     {
-
         var blockCollision = other.transform.GetComponent<BlockCollisionBase>();
         if (blockCollision == null) 
             return;
@@ -34,7 +62,7 @@ public class BlockCollision : BlockCollisionBase
             return;
         }
 
-
+        //StopLighting();
         _cutAudio.Play();
 
             //
@@ -85,7 +113,7 @@ public class BlockCollision : BlockCollisionBase
             //Debug.Log($"count: {angles.Find(a => (a.x == contact.point.x && a.y == contact.point.z))}  {contact.point}");
             if (angles.Exists(a => (a.x == contact.point.x && a.y == contact.point.z)))
             {
-                Debug.Log($"YES!!!");
+               // Debug.Log($"YES!!!");
                 point0 = contact.point;
 
                 Debug.DrawRay(contact.point, contact.normal * 5, Color.red, 5);
@@ -195,17 +223,25 @@ public class BlockCollision : BlockCollisionBase
 
         //Debug.Log($"scale:{scale}  center:{center}");
 
+        var color = GetComponent<BlockColor>().Color;
+
         var remainder = Instantiate(_remainderPrefab);
         remainder.Remainder_1.localScale = scale_remainder;
         remainder.Remainder_1.position = position_remainder;
         remainder.Remainder_2.localScale = scale_remainder_2;
         remainder.Remainder_2.position = position_remainder_2;
+        remainder.RemainderColor.Color = color;
 
-        remainder.Force((remainder.Remainder_2.position - transform.position).normalized);
+        var dir = (remainder.Remainder_2.position - transform.position).normalized / 2f;
+        //var dir = Vector3.down;
+        dir.y = -0.1f;
+        //remainder.Force((remainder.Remainder_2.position - transform.position).normalized);
+        remainder.Force(dir);
 
         EventNextBlock?.Invoke(this);
-       // StartCoroutine(test(transform));
-        StartCoroutine(DestroyRemainder(remainder));
+      
+       // StartCoroutine(DestroyRemainder(remainder));
+       GameManager.Instance.Remainders.Add(remainder);
 
         side.Clear();
 
@@ -221,6 +257,6 @@ public class BlockCollision : BlockCollisionBase
     IEnumerator DestroyRemainder(Remainder _remainder)
     {
         yield return new WaitForSeconds(1.5f);
-        Destroy(_remainder.gameObject);
+       // Destroy(_remainder.gameObject);
     }
 }
