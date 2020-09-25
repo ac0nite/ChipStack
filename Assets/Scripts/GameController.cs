@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     public void Go()
     {
         SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
+        GameManager.Instance.AudioManager.StartMusicBackgroundPlaying();
     }
 
     private void SpawnBlock(Transform _transform)
@@ -75,13 +76,16 @@ public class GameController : MonoBehaviour
             Destroy(remainder.gameObject);
         }
         GameManager.Instance.Remainders.Clear();
-
-
         _baseMovement.Target = Vector3.zero;
         
         GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().Collision = BlockCollisionBase.TypeCollision.Second;
 
+        GameManager.Instance.Gradient.GenerateGradient();
+        GameManager.Instance.Base.GetComponentInChildren<BlockColor>().NextColor();
+        GameManager.Instance.Base.GetComponentInChildren<BackGroundPlaneColor>().NextColor();
+
         UIManager.Instance.ShowPanel(UITypePanel.StartScreen);
-        
+
+        GameManager.Instance.AudioManager.StartMusicBackground();
     }
 }

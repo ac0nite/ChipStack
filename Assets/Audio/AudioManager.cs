@@ -7,15 +7,16 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField] [Range(0.0f, 1.0f)] private float _volume = 1f;
     [SerializeField] private AudioSource _backgrountAudioSource = null;
-    [SerializeField] private string _backgrountAudioName;
+    [SerializeField] private string _backgrountAudioPlaying = null;
+    [SerializeField] private string _backgrountAudioStart = null;
     [SerializeField] public bool IsSound = false;
 
     // Start is called before the first frame update
     void Start()
     {
         AudioListener.volume = _volume;
-        if(IsSound)
-            StartMusicBackground();
+        //if(IsSound)
+        //    StartMusicBackground();
     }
 
     // Update is called once per frame
@@ -24,9 +25,17 @@ public class AudioManager : MonoBehaviour
         
     }
 
+    public void StartMusicBackgroundPlaying()
+    {
+        StopMusicBackground();
+        AudioClip clip = Resources.Load<AudioClip>(("Music/" + _backgrountAudioPlaying));
+        _backgrountAudioSource.clip = clip;
+        _backgrountAudioSource.Play();
+    }
     public void StartMusicBackground()
     {
-        AudioClip clip = Resources.Load<AudioClip>(("Music/" + _backgrountAudioName));
+        StopMusicBackground();
+        AudioClip clip = Resources.Load<AudioClip>(("Music/" + _backgrountAudioStart));
         _backgrountAudioSource.clip = clip;
         _backgrountAudioSource.Play();
     }

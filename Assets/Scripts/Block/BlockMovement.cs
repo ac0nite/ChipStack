@@ -15,7 +15,7 @@ public class BlockMovement : MonoBehaviour
     [SerializeField] private float _amplitudeСircle = 1f;
     [SerializeField] private float _speedAmplitudeСircle = 1f;
 
-    [SerializeField] [Range(1f, 1.5f)] private float percent_part = 1f;
+    [SerializeField] [Range(0f, 0.8f)] private float percent_part = 1f;
 
     // [SerializeField] private Vector3 _center = Vector3.zero;
     [SerializeField] private float _speedCenter = 2f;

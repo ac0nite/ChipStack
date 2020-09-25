@@ -11,14 +11,18 @@ public class UIStartScreen : UIBasePanel
 
     void Start()
     {
-        _best.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
-        _score.text = GameManager.Instance.ScoreManager.Score.ToString();
+        OnEnable();
     }
 
     void OnEnable()
     {
         _best.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
         _score.text = GameManager.Instance.ScoreManager.Score.ToString();
+        if(GameManager.Instance.AudioManager.IsSound)
+            _soundButton.GetComponentInChildren<Text>().text = "Sound";
+        else
+            _soundButton.GetComponentInChildren<Text>().text = "No Sound";
+
     }
 
     public void TapToStartButton()
@@ -34,14 +38,14 @@ public class UIStartScreen : UIBasePanel
         if (btnText.text == "Sound")
         {
             btnText.text = "No Sound";
-             GameManager.Instance.AudioManager.StopMusicBackground();
-            //GameManager.Instance.AudioManager.NoVolumeSound();
+             //GameManager.Instance.AudioManager.StopMusicBackground();
+            GameManager.Instance.AudioManager.NoVolumeSound();
         }
         else
         {
             btnText.text = "Sound";
-            GameManager.Instance.AudioManager.StartMusicBackground();
-            //GameManager.Instance.AudioManager.YesVolumeSound();
+            //GameManager.Instance.AudioManager.StartMusicBackground();
+            GameManager.Instance.AudioManager.YesVolumeSound();
         }
     }
 

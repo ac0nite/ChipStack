@@ -15,6 +15,9 @@ public class InputManager : SingletoneGameObject<InputManager>
 #if UNITY_EDITOR
         if(Input.GetMouseButtonDown(0))
             EventTap?.Invoke();
+#elif UNITY_STANDALONE_WIN
+        if(Input.GetMouseButtonDown(0))
+            EventTap?.Invoke();
 #else
       if (Input.touchCount > 0)
         {

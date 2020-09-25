@@ -8,6 +8,7 @@ public class LogoScreenPanel : UIBasePanel
     {
         Debug.Log("LogoScreenEndAnimation");
         UIManager.Instance.ShowPanel(UITypePanel.StartScreen);
+        GameManager.Instance.AudioManager.StartMusicBackground();
     }
 }
 
