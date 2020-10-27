@@ -33,6 +33,7 @@ public class BlockMovement : MonoBehaviour
 
     [SerializeField] private string _walkAudioName;
     [SerializeField] private string _cutAudioName;
+    [SerializeField] private HelperLineRenderer _helperLineRenderer;
 
     private bool run = false;
     private bool _go = false;
@@ -231,6 +232,8 @@ public class BlockMovement : MonoBehaviour
         _dropAudio.Stop();
 
         _dropAudio.PlayOneShot(Resources.Load<AudioClip>(("Music/" + _cutAudioName)));
+
+        _helperLineRenderer.DisableHelper();
     }
 
     IEnumerator ExitRound(GameObject obj)
