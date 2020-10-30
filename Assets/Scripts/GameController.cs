@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Imphenzia;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -9,6 +10,9 @@ public class GameController : MonoBehaviour
     private Block _block = null;
     private BaseMovement _baseMovement = null;
     public static Action<Vector3> EventBlock;
+    private Gradient _backgroundGradientColor = null;
+
+    [SerializeField] private GradientSkyCamera _gradientSkyCamera;
 
     private void Awake()
     {
@@ -17,12 +21,36 @@ public class GameController : MonoBehaviour
     void Start()
     {
         //SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
+        _backgroundGradientColor = new Gradient();
+        GameManager.Instance.Gradient.GenerateGradient();
+//        _backgroundGradientColor = GameManager.Instance.Gradient.getGradient();
+        _backgroundGradientColor.SetKeys(GameManager.Instance.Gradient.getGradient().colorKeys, GameManager.Instance.Gradient.getGradient().alphaKeys);
     }
 
     public void Go()
     {
         SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
         GameManager.Instance.AudioManager.StartMusicBackgroundPlaying();
+
+        GameManager.Instance.Gradient.GenerateGradient();
+        //_backgroundGradientColor = GameManager.Instance.Gradient.getGradient();
+        _backgroundGradientColor.SetKeys(GameManager.Instance.Gradient.getGradient().colorKeys, GameManager.Instance.Gradient.getGradient().alphaKeys);
+
+        //_gradientSkyCamera.SetGradient(GameManager.Instance.Gradient.getGradient().colorKeys, GameManager.Instance.Gradient.getGradient().alphaKeys);
+
+        //public void SetGradient(GradientColorKey[] colorKey, GradientAlphaKey[] alphaKey)
+        //{
+        //    gradient.SetKeys(colorKey, alphaKey);
+        //}
+
+        GameManager.Instance.Gradient.GenerateGradient();
+        GameManager.Instance.Base.GetComponentInChildren<BlockColor>().NextColor();
+    }
+
+    private void Update()
+    {
+        _gradientSkyCamera.gradient = GameManager.Instance.Gradient.Lerp(_gradientSkyCamera.gradient,
+            _backgroundGradientColor, Time.deltaTime * 0.5f);
     }
 
     private void SpawnBlock(Transform _transform)
@@ -59,7 +87,7 @@ public class GameController : MonoBehaviour
 
     private void OnExitRound()
     {
-        Debug.Log($"OnExitRound");
+       // Debug.Log($"OnExitRound");
         //GameManager.Instance.ScoreManager.ModifyScore(0);
         _block.Collision.EventNextBlock -= OnNextBlock;
         _block.Movement.EventExit -= OnExitRound;
@@ -80,9 +108,9 @@ public class GameController : MonoBehaviour
         
         GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().Collision = BlockCollisionBase.TypeCollision.Second;
 
-        GameManager.Instance.Gradient.GenerateGradient();
-        GameManager.Instance.Base.GetComponentInChildren<BlockColor>().NextColor();
-        GameManager.Instance.Base.GetComponentInChildren<BackGroundPlaneColor>().NextColor();
+        //GameManager.Instance.Gradient.GenerateGradient();
+        //GameManager.Instance.Base.GetComponentInChildren<BlockColor>().NextColor(); 
+        //GameManager.Instance.Base.GetComponentInChildren<BackGroundPlaneColor>().NextColor();
 
         UIManager.Instance.ShowPanel(UITypePanel.StartScreen);
 

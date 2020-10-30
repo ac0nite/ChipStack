@@ -13,6 +13,16 @@ namespace Imphenzia
         // Declare a public gradient - change this gradient in the inspector to change the gradient sky
         public Gradient gradient = null;
 
+        public void SetGradient(GradientColorKey[] colorKey, GradientAlphaKey[] alphaKey)
+        {
+            gradient.SetKeys(colorKey, alphaKey);
+        }
+
+        public void SetGradient(Gradient newGradient)
+        {
+            gradient = newGradient;
+        }
+
         // Declare a cached gradient to detect if any changes have been made so the mesh can be updated
         // Hide in inspector - we don't need to see it there (it can't be set to private/protected since those are not serialzied and
         // kept between play/edit mode).

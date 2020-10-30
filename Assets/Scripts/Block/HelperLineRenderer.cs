@@ -37,7 +37,7 @@ public class HelperLineRenderer : MonoBehaviour
 
         for (int i=0; i < _points.Length; i++)
         {
-            _endPoint = new Vector3(_points[i].x, _points[i].y - 1.3f, _points[i].z);
+            _endPoint = new Vector3(_points[i].x, _points[i].y - 1.0f, _points[i].z);
             if (Physics.Linecast(_points[i], _endPoint, out _hitInfo))
             {
                 _lines[i].enabled = true;

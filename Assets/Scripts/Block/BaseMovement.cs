@@ -9,7 +9,11 @@ public class BaseMovement : MonoBehaviour
 
     public Vector3 Target
     {
-        set { _target = value; }
+        set
+        {
+            _target = value;
+            Debug.Log($"_target={_target}");
+        }
     }
 
     private void Awake()
