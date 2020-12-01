@@ -14,6 +14,12 @@ public class HelperLineRenderer : MonoBehaviour
         //_point = new Vector3(transform.position.x - transform.localScale.x / 2f, transform.position.y - transform.localScale.y / 2f, transform.position.z - transform.localScale.z / 2f);
         // _lines = new LineRenderer[3];
         _points = new Vector3[4];
+
+
+        foreach (var line in _lines)
+        {
+            line.enabled = false;
+        }
     }
 
     public void DisableHelper()

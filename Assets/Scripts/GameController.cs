@@ -43,6 +43,8 @@ public class GameController : MonoBehaviour
         //    gradient.SetKeys(colorKey, alphaKey);
         //}
 
+        GameManager.Instance.BackgroundGroundFX.Play();
+
         GameManager.Instance.Gradient.GenerateGradient();
         GameManager.Instance.Base.GetComponentInChildren<BlockColor>().NextColor();
     }
@@ -115,5 +117,7 @@ public class GameController : MonoBehaviour
         UIManager.Instance.ShowPanel(UITypePanel.StartScreen);
 
         GameManager.Instance.AudioManager.StartMusicBackground();
+
+        GameManager.Instance.BackgroundGroundFX.Stop();
     }
 }
