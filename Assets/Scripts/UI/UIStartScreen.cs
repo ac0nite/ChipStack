@@ -12,7 +12,7 @@ public class UIStartScreen : UIBasePanel
 
     void Start()
     {
-       // OnEnable();
+        // OnEnable();
     }
 
     void OnEnable()

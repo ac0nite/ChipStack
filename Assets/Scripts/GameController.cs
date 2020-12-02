@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
         GameManager.Instance.Gradient.GenerateGradient();
 //        _backgroundGradientColor = GameManager.Instance.Gradient.getGradient();
         _backgroundGradientColor.SetKeys(GameManager.Instance.Gradient.getGradient().colorKeys, GameManager.Instance.Gradient.getGradient().alphaKeys);
+
+        //GameManager.Instance.BackgroundGroundFX.Play();
     }
 
     public void Go()
