@@ -8,7 +8,9 @@ public class UIStartScreen : UIBasePanel
 {
     [SerializeField] private Text _best = null;
     [SerializeField] private Text _score = null;
+    [SerializeField] private Text _total = null;
     [SerializeField] private Button _soundButton = null;
+    [SerializeField] private Text _message = null;
 
     void Start()
     {
@@ -32,6 +34,10 @@ public class UIStartScreen : UIBasePanel
             _soundButton.GetComponentInChildren<Text>().text = "Sound";
         else
             _soundButton.GetComponentInChildren<Text>().text = "No Sound";
+
+        _message.text = "- next Stage " + GameManager.Instance.ScoreManager.Stage.ToString() + " -";
+
+        _total.text = "Total: " + GameManager.Instance.ScoreManager.Total.ToString();
 
         InputManager.Instance.EventTap += OnTap;
     }

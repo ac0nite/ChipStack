@@ -11,22 +11,28 @@ public class BlockMovement : MonoBehaviour
 {
     public Action EventExit;
     [SerializeField] private float _timeExitRound = 2f;
-    [SerializeField] public float SpeedСircle = 5f;
+
+    [Header("Вращение по окружности")]
+    [SerializeField] private float _speedСircle = 5f;
     [SerializeField] private float _amplitudeСircle = 1f;
     [SerializeField] private float _speedAmplitudeСircle = 1f;
 
-    [SerializeField] [Range(0f, 0.8f)] private float percent_part = 1f;
+    [Header("Максимальное положение от края")]
+    [SerializeField] [Range(0f, 1f)] private float _scatterFromEdge = 1f;
 
     // [SerializeField] private Vector3 _center = Vector3.zero;
+    [Header("Скорость движение центральной координаты")]
     [SerializeField] private float _speedCenter = 2f;
     private float _kSpeedCenter = 1f;
 
     private Vector3 _targetCenter = Vector3.zero;
     private Vector3 _targetScale = Vector3.zero;
 
+    [Header("Движение по радиусу")]
     [SerializeField] private float _amplitudeRadius = 2f;
     [SerializeField] private float _speedAmplitudeRadius = 2f;
 
+    [Header("Начальные параметры")]
     [SerializeField] private float _maxRadius = 1f;
 
     [SerializeField] private AudioSource _dropAudio = null;
@@ -54,18 +60,17 @@ public class BlockMovement : MonoBehaviour
 
     private void Awake()
     {
-        //_center.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-        
-        //var radius = (_center.position - transform.position).magnitude;
-       // _center.y = 0.5f;
-        
+        //инициализация в зависимости от уровней
+        InitStage(GameManager.Instance.Property[GameManager.Instance.ScoreManager.Stage-1]);
+        Debug.Log($"Stages: {GameManager.Instance.ScoreManager.Stage}");
+
         _nextTarget = RandomNextTarget(_maxRadius);
 
         _radius.Value = (GameManager.Instance.Center.transform.position - transform.position).magnitude;
         _radius.Amplitude = _amplitudeRadius;
         _radius.Speed = _speedAmplitudeRadius;
         
-        _current_speed.Value = SpeedСircle;
+        _current_speed.Value = _speedСircle;
         _current_speed.Amplitude = _amplitudeСircle;
         _current_speed.Speed = _speedAmplitudeСircle;
 
@@ -96,6 +101,20 @@ public class BlockMovement : MonoBehaviour
         _dropAudio.Play();
     }
 
+    private void InitStage(PropertyStage property)
+    {
+        _speedСircle = property.SpeedCircle;
+        _amplitudeСircle = property.AmplitudeCircle;
+        _speedAmplitudeСircle = property.SpeedAmplitudeCircle;
+
+        _scatterFromEdge = property.ScatterForEdge;
+
+        _speedCenter = property.SpeedCenter;
+
+        _amplitudeRadius = property.AmplitudeRadius;
+        _speedAmplitudeRadius = property.SpeedAmplitudeRadius;
+    }
+
     public void Init(Transform block)
     {
        // Debug.Log($"NEW CENTER: {block.transform.position}");
@@ -116,7 +135,7 @@ public class BlockMovement : MonoBehaviour
 
         //_kSpeedCenter = (block.transform.localScale.x * block.transform.localScale.z) / 25f;
         _kSpeedCenter = Mathf.Clamp((block.transform.localScale.x * block.transform.localScale.z) / 25f, 0.1f, 1f);
-        Debug.Log($"_kSpeedCenter: {_kSpeedCenter}");
+        //Debug.Log($"_kSpeedCenter: {_kSpeedCenter}");
 
 
         //_maxRadius = Mathf.Abs(transform.localScale.x);
@@ -163,10 +182,6 @@ public class BlockMovement : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-    }
-
     private Vector3 RandomNextTarget(float radius)
     {
         //var c = UnityEngine.Random.insideUnitCircle;
@@ -180,19 +195,18 @@ public class BlockMovement : MonoBehaviour
         //return t;
 
 
-        //var x = UnityEngine.Random.Range((_targetCenter.x - _targetScale.x / 2) * percent_part, (_targetCenter.x + _targetScale.x / 2) * percent_part);
-        //var z = UnityEngine.Random.Range((_targetCenter.z + _targetScale.z / 2) * percent_part, (_targetCenter.z - _targetScale.z / 2) * percent_part);
-        var x = UnityEngine.Random.Range((_targetCenter.x - _targetScale.x / 2 - percent_part), (_targetCenter.x + _targetScale.x / 2 + percent_part));
-        var z = UnityEngine.Random.Range((_targetCenter.z + _targetScale.z / 2 + percent_part), (_targetCenter.z - _targetScale.z / 2 - percent_part));
+        //var x = UnityEngine.Random.Range((_targetCenter.x - _targetScale.x / 2) * _scatterFromEdge, (_targetCenter.x + _targetScale.x / 2) * _scatterFromEdge);
+        //var z = UnityEngine.Random.Range((_targetCenter.z + _targetScale.z / 2) * _scatterFromEdge, (_targetCenter.z - _targetScale.z / 2) * _scatterFromEdge);
+        var x = UnityEngine.Random.Range((_targetCenter.x - _targetScale.x / 2 - _scatterFromEdge), (_targetCenter.x + _targetScale.x / 2 + _scatterFromEdge));
+        var z = UnityEngine.Random.Range((_targetCenter.z + _targetScale.z / 2 + _scatterFromEdge), (_targetCenter.z - _targetScale.z / 2 - _scatterFromEdge));
         return new Vector3(x, 0f, z);
 
         //return new Vector3(UnityEngine.Random.Range())
     }
 
-
     private Vector3 Anticlockwise()
     {
-        //_current_speed.Value = SpeedСircle;
+        //_current_speed.Value = _speedСircle;
         
         var cache_speed = _current_speed.Value;
         //Debug.Log($"cache_speed: {cache_speed}");
@@ -205,7 +219,7 @@ public class BlockMovement : MonoBehaviour
 
     private Vector3 Clockwise()
     {
-        //_current_speed.Value = SpeedСircle;
+        //_current_speed.Value = _speedСircle;
         
         var cache_speed = _current_speed.Value;
         //Debug.Log($"cache_speed: {cache_speed}");

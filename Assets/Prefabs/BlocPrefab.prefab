@@ -67,11 +67,15 @@ MonoBehaviour:
   "Speed\u0421ircle": 1
   "_amplitude\u0421ircle": 1
   "_speedAmplitude\u0421ircle": 1
-  _center: {x: 0, y: 0, z: 0}
+  _scatterFromEdge: 1
   _speedCenter: 1
   _amplitudeRadius: 1
   _speedAmplitudeRadius: 1
-  _maxRadius: 2
+  _maxRadius: 1
+  _dropAudio: {fileID: 0}
+  _walkAudioName: 
+  _cutAudioName: 
+  _helperLineRenderer: {fileID: 0}
 --- !u!114 &4368564857216314485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,14 +89,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isCollision: 1
-  Angles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Block: {fileID: 4368564858762946678}
+  _collision: 0
   _remainderPrefab: {fileID: 7590861073006618975, guid: db95e9ce2deb0514facaa76ff9683b74,
     type: 3}
+  _cutAudio: {fileID: 0}
+  _lighting: {fileID: 0}
+  _stepIntensityLight: 5
 --- !u!114 &4368564857216314442
 MonoBehaviour:
   m_ObjectHideFlags: 0

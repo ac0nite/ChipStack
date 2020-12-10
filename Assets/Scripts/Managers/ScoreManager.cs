@@ -7,15 +7,30 @@ public class ScoreManager : MonoBehaviour
 {
     private int _score = 0;
     private int _best = 0;
+    private int _total = 0;
+    private int _stage = 1;
+    private int _maxStages = 0;
+
+    void Start()
+    {
+        _best = PlayerPrefs.GetInt("BestScore", 0);
+        _maxStages = GameManager.Instance.Property.Count;
+    }
+    
+    public int Stage
+    {
+        get { return _stage; }
+        set { _stage = (_stage + value) % (_maxStages + 1) == 0 ? 1 : (_stage + value); }
+    }
 
     public int Score
     {
         get { return _score; }
     }
 
-    void Start()
+    public int Total
     {
-        _best = PlayerPrefs.GetInt("BestScore", 0);
+        get { return _total; }
     }
 
     // Update is called once per frame
@@ -36,6 +51,14 @@ public class ScoreManager : MonoBehaviour
         }
 
         _score = (int) Mathf.Clamp(_score + points, 0f, float.MaxValue);
+    }
+
+    public void ModifyScore(int points, float area)
+    {
+        ModifyScore(points);
+        
+        //TODO как то изменить
+        _total += Mathf.RoundToInt(area * _stage);
     }
 
     private void OnChangeScoreRecord()

@@ -58,7 +58,7 @@ public class GradientManager1 : MonoBehaviour
         return _grLerp;
     }
 
-    private Color RandomColor()
+    public Color RandomColor()
     {
         return new Color(Gen(), Gen(), Gen());
     }

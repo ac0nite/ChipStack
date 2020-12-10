@@ -20,13 +20,18 @@ public class GameController : MonoBehaviour
     }
     void Start()
     {
-        //SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
         _backgroundGradientColor = new Gradient();
         GameManager.Instance.Gradient.GenerateGradient();
-//        _backgroundGradientColor = GameManager.Instance.Gradient.getGradient();
         _backgroundGradientColor.SetKeys(GameManager.Instance.Gradient.getGradient().colorKeys, GameManager.Instance.Gradient.getGradient().alphaKeys);
 
+        GameManager.Instance.Gradient.GenerateGradient();
+
+        //GameManager.Instance.FogColor.FogColor = Camera.main.backgroundColor;
+        GameManager.Instance.FogColor.FogColor = GameManager.Instance.Gradient.getGradient().colorKeys[1].color;
+
+        //для скриншота на иконку
         //GameManager.Instance.BackgroundGroundFX.Play();
+        //GameManager.Instance.FogColor.FogColor = new Color();
     }
 
     public void Go()
@@ -35,15 +40,9 @@ public class GameController : MonoBehaviour
         GameManager.Instance.AudioManager.StartMusicBackgroundPlaying();
 
         GameManager.Instance.Gradient.GenerateGradient();
-        //_backgroundGradientColor = GameManager.Instance.Gradient.getGradient();
+       
         _backgroundGradientColor.SetKeys(GameManager.Instance.Gradient.getGradient().colorKeys, GameManager.Instance.Gradient.getGradient().alphaKeys);
-
-        //_gradientSkyCamera.SetGradient(GameManager.Instance.Gradient.getGradient().colorKeys, GameManager.Instance.Gradient.getGradient().alphaKeys);
-
-        //public void SetGradient(GradientColorKey[] colorKey, GradientAlphaKey[] alphaKey)
-        //{
-        //    gradient.SetKeys(colorKey, alphaKey);
-        //}
+        GameManager.Instance.FogColor.FogColor = GameManager.Instance.Gradient.getGradient().colorKeys[1].color;
 
         GameManager.Instance.BackgroundGroundFX.Play();
 
@@ -53,20 +52,16 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        _gradientSkyCamera.gradient = GameManager.Instance.Gradient.Lerp(_gradientSkyCamera.gradient,
-            _backgroundGradientColor, Time.deltaTime * 0.5f);
+        _gradientSkyCamera.gradient = GameManager.Instance.Gradient.Lerp(_gradientSkyCamera.gradient,_backgroundGradientColor, Time.deltaTime * 0.5f);
     }
 
     private void SpawnBlock(Transform _transform)
     {
         _block = Instantiate(GameManager.Instance.BlockPrefab);
-       // _block.transform.SetParent(GameManager.Instance.Base.transform);
 
-        // block.transform.position = _transform.position;
         _block.Collision.transform.localScale = _transform.localScale;
 
         _block.Movement.Init(_transform);
-
 
         _block.Collision.EventNextBlock += OnNextBlock;
         _block.Movement.EventExit += OnExitRound;
@@ -76,50 +71,62 @@ public class GameController : MonoBehaviour
 
     private void OnNextBlock(BlockCollision block)
     {
-        //Vector3.down * (_nexttransform.localScale.y)
-        //Debug.Log($"spawn new  scale:{block.transform.localScale} position: {block.transform.position}");
+        GameManager.Instance.ScoreManager.ModifyScore(+1, block.transform.localScale.x * block.transform.localScale.z);
 
-        GameManager.Instance.ScoreManager.ModifyScore(+1);
+        //if (GameManager.Instance.ScoreManager.Score != 0 && GameManager.Instance.ScoreManager.Score % 2 == 0)
+        //    GameManager.Instance.FogColor.FogColor = GameManager.Instance.Gradient.RandomColor();
 
         _baseMovement.Target =
             (GameManager.Instance.Base.transform.position + Vector3.down * block.transform.localScale.y);
-        //GameManager.Instance.Base.transform.position += Vector3.down * block.transform.localScale.y;
+
         _block.Collision.EventNextBlock -= OnNextBlock;
         _block.Movement.EventExit -= OnExitRound;
+
         SpawnBlock(block.transform);
     }
 
     private void OnExitRound()
     {
-       // Debug.Log($"OnExitRound");
-        //GameManager.Instance.ScoreManager.ModifyScore(0);
         _block.Collision.EventNextBlock -= OnNextBlock;
         _block.Movement.EventExit -= OnExitRound;
+        //var blocks = GameManager.Instance.Base.GetComponentsInChildren<Block>().ToList();
+        //foreach (var block in blocks)
+        //{
+        //    Destroy(block.gameObject);
+        //}
+        //Destroy(_block.gameObject);
+
+        foreach (var remainder in GameManager.Instance.Remainders)
+        {
+            Destroy(remainder.gameObject);
+        }
+
+        GameManager.Instance.Remainders.Clear();
+
+        _baseMovement.Target = Vector3.zero;
+
+        //GameManager.Instance.FogColor.FogColor = GameManager.Instance.Gradient.RandomColor();
+
+        GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().Collision = BlockCollisionBase.TypeCollision.Second;
+        //UIManager.Instance.ShowPanel(UITypePanel.StartScreen);
+        //GameManager.Instance.AudioManager.StartMusicBackground();
+        GameManager.Instance.BackgroundGroundFX.Stop();
+
+        StartCoroutine(WaitDel());
+    }
+
+    private IEnumerator WaitDel()
+    {
+        yield return new WaitForSeconds(1f);
+
         var blocks = GameManager.Instance.Base.GetComponentsInChildren<Block>().ToList();
         foreach (var block in blocks)
         {
             Destroy(block.gameObject);
         }
         Destroy(_block.gameObject);
-        //SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
-
-        foreach (var remainder in GameManager.Instance.Remainders)
-        {
-            Destroy(remainder.gameObject);
-        }
-        GameManager.Instance.Remainders.Clear();
-        _baseMovement.Target = Vector3.zero;
-        
-        GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().Collision = BlockCollisionBase.TypeCollision.Second;
-
-        //GameManager.Instance.Gradient.GenerateGradient();
-        //GameManager.Instance.Base.GetComponentInChildren<BlockColor>().NextColor(); 
-        //GameManager.Instance.Base.GetComponentInChildren<BackGroundPlaneColor>().NextColor();
 
         UIManager.Instance.ShowPanel(UITypePanel.StartScreen);
-
         GameManager.Instance.AudioManager.StartMusicBackground();
-
-        GameManager.Instance.BackgroundGroundFX.Stop();
     }
 }

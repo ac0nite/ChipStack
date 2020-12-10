@@ -4,9 +4,15 @@ using Debug = System.Diagnostics.Debug;
 
     public class ChangeParam
     {
+        //по сути, когда присваиваем _value занчение тем самым инициализируем минимальное значение скорости
         private float _value = 0f;
+
         private float _counter = 0f;
+
+        // максимальное значение 
         private float _amplitude = 1f;
+
+        // задаём коэффиуиент для вичисления cos(time * speed), по сути задаётся частота дискретности
         private float _speed = 1f;
 
         public float Amplitude
@@ -16,6 +22,7 @@ using Debug = System.Diagnostics.Debug;
                 _amplitude = value / 2f;
             }
         }
+
 
         public float Value
         {

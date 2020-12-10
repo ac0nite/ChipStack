@@ -895,7 +895,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6c9c790530d0b6c4f91e2fabc12cc4e0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -991,14 +991,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeExitRound: 2
-  "Speed\u0421ircle": 2
-  "_amplitude\u0421ircle": 2
-  "_speedAmplitude\u0421ircle": 2
-  percent_part: 0.5
-  _speedCenter: 2
+  "_speed\u0421ircle": 0
+  "_amplitude\u0421ircle": 1
+  "_speedAmplitude\u0421ircle": 0.5
+  _scatterFromEdge: 0
+  _speedCenter: 1
   _amplitudeRadius: 2
-  _speedAmplitudeRadius: 1
-  _maxRadius: 1
+  _speedAmplitudeRadius: 2
+  _maxRadius: 2
   _dropAudio: {fileID: 8655521412253432271}
   _walkAudioName: walk__ericstrausser__mtrk-internal-hard-drive-defrag-clicks-clanks-2-fsp4824
   _cutAudioName: cut__yummie__game-background-music-loop-short

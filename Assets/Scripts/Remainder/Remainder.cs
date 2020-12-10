@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class Remainder : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class Remainder : MonoBehaviour
     [SerializeField] public RemainderColor RemainderColor = null;
     [SerializeField] private List<string> _listAudio = new List<string>();
     [SerializeField] private AudioSource _audio = null;
+
+    public void Update()
+    {
+        if(transform.position.y < -20f)
+            Destroy(this.gameObject);
+    }
 
     public void Force(Vector3 direction)
     {

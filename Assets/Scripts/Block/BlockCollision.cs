@@ -237,15 +237,11 @@ public class BlockCollision : BlockCollisionBase
         dir.y = -0.1f;
         //remainder.Force((remainder.Remainder_2.position - transform.position).normalized);
         remainder.Force(dir);
-
         EventNextBlock?.Invoke(this);
-      
-       // StartCoroutine(DestroyRemainder(remainder));
-       GameManager.Instance.Remainders.Add(remainder);
-
-        side.Clear();
-
         
+       //GameManager.Instance.Remainders.Add(remainder); 
+
+       side.Clear();
     }
 
     IEnumerator test(Transform t)
