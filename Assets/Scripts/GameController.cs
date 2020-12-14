@@ -73,6 +73,13 @@ public class GameController : MonoBehaviour
     {
         GameManager.Instance.ScoreManager.ModifyScore(+1, block.transform.localScale.x * block.transform.localScale.z);
 
+        if (GameManager.Instance.ScoreManager.Score == GameManager.Instance.ScoreManager.LimitBlocksInRound)
+        {
+            OnExitRound();
+            GameManager.Instance.ScoreManager.Stage += 1;
+            return;
+        }
+
         //if (GameManager.Instance.ScoreManager.Score != 0 && GameManager.Instance.ScoreManager.Score % 2 == 0)
         //    GameManager.Instance.FogColor.FogColor = GameManager.Instance.Gradient.RandomColor();
 
@@ -87,6 +94,8 @@ public class GameController : MonoBehaviour
 
     private void OnExitRound()
     {
+        Debug.Log("OnExitRound");
+
         _block.Collision.EventNextBlock -= OnNextBlock;
         _block.Movement.EventExit -= OnExitRound;
         //var blocks = GameManager.Instance.Base.GetComponentsInChildren<Block>().ToList();

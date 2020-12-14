@@ -19,14 +19,10 @@ public class UIStartScreen : UIBasePanel
 
     void OnEnable()
     {
-        //PlayerPrefs.SetInt("BestScore", 0);
-        //PlayerPrefs.Save();
-
-        //Debug.Log($"OnEnable()");
-        if (GameManager.Instance.ScoreManager.Score > PlayerPrefs.GetInt("BestScore", 0))
-            _best.text = GameManager.Instance.ScoreManager.Score.ToString();
+        if (GameManager.Instance.ScoreManager.Total > PlayerPrefs.GetInt("BestScore", 0))
+            _best.text = "Best: " + GameManager.Instance.ScoreManager.Total.ToString();
         else
-            _best.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
+            _best.text = "Best: " + PlayerPrefs.GetInt("BestScore", 0).ToString();
 
         _score.text = GameManager.Instance.ScoreManager.Score.ToString();
 

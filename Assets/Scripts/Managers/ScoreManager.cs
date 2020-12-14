@@ -10,6 +10,7 @@ public class ScoreManager : MonoBehaviour
     private int _total = 0;
     private int _stage = 1;
     private int _maxStages = 0;
+    [SerializeField] public int LimitBlocksInRound = 4;
 
     void Start()
     {
@@ -20,7 +21,10 @@ public class ScoreManager : MonoBehaviour
     public int Stage
     {
         get { return _stage; }
-        set { _stage = (_stage + value) % (_maxStages + 1) == 0 ? 1 : (_stage + value); }
+        set
+        {
+            _stage = (value % (_maxStages + 1)) == 0 ? 1 : (value);
+        }
     }
 
     public int Score
@@ -63,7 +67,7 @@ public class ScoreManager : MonoBehaviour
 
     private void OnChangeScoreRecord()
     {
-        _best = Mathf.Clamp(_score, _best, Int32.MaxValue);
+        _best = Mathf.Clamp(_total, _best, Int32.MaxValue);
         PlayerPrefs.SetInt("BestScore", _best);
         PlayerPrefs.Save();
     }
