@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class GamePlayPanel : UIBasePanel
 {
     [SerializeField] private Text _scoreText = null;
-    [SerializeField] private Text _scoreTotalText = null;
+    //[SerializeField] private Text _scoreTotalText = null;
+    [SerializeField] private ChangeScoreTxtUI _changeScore = null;
 
     //void Awake()
     //{
@@ -19,7 +20,8 @@ public class GamePlayPanel : UIBasePanel
     void Update()
     {
         _scoreText.text = GameManager.Instance.ScoreManager.Score.ToString();
-        _scoreTotalText.text = "Total: " + GameManager.Instance.ScoreManager.Total.ToString();
+        _changeScore.ChangeParam(GameManager.Instance.ScoreManager.Total);
+        //_scoreTotalText.text = "Total: " + GameManager.Instance.ScoreManager.Total.ToString();
         //_scoreTotalText.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
     }
 }

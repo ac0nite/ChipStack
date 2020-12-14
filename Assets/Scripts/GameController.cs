@@ -126,14 +126,28 @@ public class GameController : MonoBehaviour
 
     private IEnumerator WaitDel()
     {
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(1f);
 
         var blocks = GameManager.Instance.Base.GetComponentsInChildren<Block>().ToList();
-        foreach (var block in blocks)
+        for (int i = blocks.Count-1; i >= 0; i--)
         {
-            Destroy(block.gameObject);
+            yield return new WaitForSeconds(0.3f);
+            // yield return null;
+            // yield return null;
+            // yield return null;
+            // yield return null;
+            // yield return null;
+            // yield return null;
+            Destroy(blocks[i].gameObject);
         }
-        Destroy(_block.gameObject);
+        // foreach (var block in blocks)
+        // {
+        //     yield return null;
+        //     Destroy(block.gameObject);
+        // }
+        //Destroy(_block.gameObject);
+        
+        yield return new WaitForSeconds(1f);
 
         UIManager.Instance.ShowPanel(UITypePanel.StartScreen);
         GameManager.Instance.AudioManager.StartMusicBackground();

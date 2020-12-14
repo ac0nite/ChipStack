@@ -62,7 +62,7 @@ public class ScoreManager : MonoBehaviour
         ModifyScore(points);
         
         //TODO как то изменить
-        _total += Mathf.RoundToInt(area * _stage);
+        _total += Mathf.RoundToInt(area * _stage * 100f);
     }
 
     private void OnChangeScoreRecord()

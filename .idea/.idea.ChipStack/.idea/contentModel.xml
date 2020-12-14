@@ -6,23 +6,70 @@
     <e p="D:\unity\ChipStack" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="Remainder.cs" t="Include" />
+        <e p="Audio" t="Include">
+          <e p="AudioManager.cs" t="Include" />
+        </e>
+        <e p="Imphenzia" t="Include">
+          <e p="GradientSky" t="Include">
+            <e p="ReadMe - GradientSky.txt" t="Include" />
+            <e p="Scripts" t="Include">
+              <e p="Common" t="Include">
+                <e p="GradientSkyCommon.cs" t="Include" />
+              </e>
+              <e p="GradientSkyCamera.cs" t="Include" />
+              <e p="GradientSkyObject.cs" t="Include" />
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="VertexColorCamera.shader" t="Include" />
+              <e p="VertexColorObject.shader" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="PropertyStage.cs" t="Include" />
+        <e p="Resources" t="Include">
+          <e p="Tmp" t="Include">
+            <e p="fog.shader" t="Include" />
+          </e>
+        </e>
         <e p="Scripts" t="Include">
           <e p="Block" t="Include">
+            <e p="BackGroundPlaneColor.cs" t="Include" />
             <e p="BaseMovement.cs" t="Include" />
             <e p="Block.cs" t="Include" />
             <e p="BlockCollision.cs" t="Include" />
             <e p="BlockCollisionBase.cs" t="Include" />
+            <e p="BlockColor.cs" t="Include" />
             <e p="BlockMovement.cs" t="Include" />
+            <e p="HelperLineRenderer.cs" t="Include" />
           </e>
+          <e p="CameraController.cs" t="Include" />
           <e p="ChangeParam.cs" t="Include" />
+          <e p="Common" t="Include">
+            <e p="GradientManager.cs" t="Include" />
+            <e p="GradientManager1.cs" t="Include" />
+          </e>
           <e p="GameController.cs" t="Include" />
           <e p="InputManager.cs" t="Include" />
           <e p="Managers" t="Include">
             <e p="GameManager.cs" t="Include" />
+            <e p="ScoreManager.cs" t="Include" />
             <e p="SingletoneGameObject.cs" t="Include" />
           </e>
+          <e p="Remainder" t="Include">
+            <e p="Remainder.cs" t="Include" />
+            <e p="RemainderColor.cs" t="Include" />
+          </e>
+          <e p="UI" t="Include">
+            <e p="ChangeScoreTxtUI.cs" t="Include" />
+            <e p="GamePlayPanel.cs" t="Include" />
+            <e p="LogoScreenPanel.cs" t="Include" />
+            <e p="UIBasePanel.cs" t="Include" />
+            <e p="UIManager.cs" t="Include" />
+            <e p="UIStartScreen.cs" t="Include" />
+            <e p="UITypePanel.cs" t="Include" />
+          </e>
         </e>
+        <e p="UpdateFogColor.cs" t="Include" />
       </e>
       <e p="ChipStack.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
