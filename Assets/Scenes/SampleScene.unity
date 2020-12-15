@@ -1145,6 +1145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Collision: {fileID: 568516843}
   Movement: {fileID: 568516842}
+  _fxForDestroy: {fileID: 0}
 --- !u!65 &568516845
 BoxCollider:
   m_ObjectHideFlags: 0

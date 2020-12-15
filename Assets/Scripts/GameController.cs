@@ -26,7 +26,6 @@ public class GameController : MonoBehaviour
 
         GameManager.Instance.Gradient.GenerateGradient();
 
-        //GameManager.Instance.FogColor.FogColor = Camera.main.backgroundColor;
         GameManager.Instance.FogColor.FogColor = GameManager.Instance.Gradient.getGradient().colorKeys[1].color;
 
         //для скриншота на иконку
@@ -98,12 +97,6 @@ public class GameController : MonoBehaviour
 
         _block.Collision.EventNextBlock -= OnNextBlock;
         _block.Movement.EventExit -= OnExitRound;
-        //var blocks = GameManager.Instance.Base.GetComponentsInChildren<Block>().ToList();
-        //foreach (var block in blocks)
-        //{
-        //    Destroy(block.gameObject);
-        //}
-        //Destroy(_block.gameObject);
 
         foreach (var remainder in GameManager.Instance.Remainders)
         {
@@ -112,13 +105,8 @@ public class GameController : MonoBehaviour
 
         GameManager.Instance.Remainders.Clear();
 
-        _baseMovement.Target = Vector3.zero;
-
-        //GameManager.Instance.FogColor.FogColor = GameManager.Instance.Gradient.RandomColor();
-
         GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().Collision = BlockCollisionBase.TypeCollision.Second;
-        //UIManager.Instance.ShowPanel(UITypePanel.StartScreen);
-        //GameManager.Instance.AudioManager.StartMusicBackground();
+        
         GameManager.Instance.BackgroundGroundFX.Stop();
 
         StartCoroutine(WaitDel());
@@ -126,28 +114,16 @@ public class GameController : MonoBehaviour
 
     private IEnumerator WaitDel()
     {
-        //yield return new WaitForSeconds(1f);
-
         var blocks = GameManager.Instance.Base.GetComponentsInChildren<Block>().ToList();
         for (int i = blocks.Count-1; i >= 0; i--)
         {
-            yield return new WaitForSeconds(0.3f);
-            // yield return null;
-            // yield return null;
-            // yield return null;
-            // yield return null;
-            // yield return null;
-            // yield return null;
             Destroy(blocks[i].gameObject);
+            yield return new WaitForSeconds(1f);
         }
-        // foreach (var block in blocks)
-        // {
-        //     yield return null;
-        //     Destroy(block.gameObject);
-        // }
-        //Destroy(_block.gameObject);
         
-        yield return new WaitForSeconds(1f);
+        _baseMovement.Target = Vector3.zero;
+
+        yield return new WaitForSeconds(0.5f);
 
         UIManager.Instance.ShowPanel(UITypePanel.StartScreen);
         GameManager.Instance.AudioManager.StartMusicBackground();

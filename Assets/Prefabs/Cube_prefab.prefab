@@ -959,6 +959,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Collision: {fileID: 7476946508061357143}
   Movement: {fileID: 7476946508061357142}
+  _fxForDestroy: {fileID: 1903434823164569896, guid: 089f00ca3809acf4cb9ca4764bd3906b,
+    type: 3}
 --- !u!114 &7476946508061357143
 MonoBehaviour:
   m_ObjectHideFlags: 0

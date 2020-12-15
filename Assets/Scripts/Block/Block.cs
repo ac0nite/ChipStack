@@ -6,15 +6,11 @@ public class Block : MonoBehaviour
 {
     [SerializeField] public BlockCollision Collision = null;
     [SerializeField] public BlockMovement Movement = null;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] public GameObject _fxForDestroy = null;
+
+    private void OnDestroy()
     {
-        
+        Instantiate(_fxForDestroy, transform.position, Quaternion.identity, GameManager.Instance.transform);
     }
 }
