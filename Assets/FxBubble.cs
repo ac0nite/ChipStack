@@ -6,6 +6,8 @@ public class FxBubble : MonoBehaviour
 {
     private AudioSource _audio = null;
     private ParticleSystem _fx = null;
+    [SerializeField] private AudioClip _destroyClip = null;
+    [SerializeField] private AudioClip _bubbleClip = null;
 
     private void Awake()
     {
@@ -17,8 +19,8 @@ public class FxBubble : MonoBehaviour
     void Start()
     {
         _fx.randomSeed = (uint)UnityEngine.Random.Range(float.MinValue, float.MaxValue);
-        _audio.pitch = Random.Range(0.9f, 1.2f);
-
+        _audio.pitch = Random.Range(0.8f, 1.2f);
+        _audio.clip = _destroyClip;
         _fx.Play();
         _audio.Play();
 
@@ -27,7 +29,9 @@ public class FxBubble : MonoBehaviour
 
     IEnumerator DestroyObject()
     {
-        yield return null;
+        yield return new WaitForSeconds(_audio.clip.length);
+        _audio.clip = _bubbleClip;
+        _audio.Play();
         Destroy(this.gameObject, _fx.main.duration);
     }
 }

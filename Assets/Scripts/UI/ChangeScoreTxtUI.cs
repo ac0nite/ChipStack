@@ -17,6 +17,7 @@ public class ChangeScoreTxtUI : MonoBehaviour
     private void Awake()
     {
         _win = GetComponent<AudioSource>();
+        _scoreTxt.text = _prefix + _from.ToString();
     }
 
     public void ChangeParam(int toParam)

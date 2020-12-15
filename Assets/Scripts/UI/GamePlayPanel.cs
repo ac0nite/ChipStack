@@ -24,4 +24,10 @@ public class GamePlayPanel : UIBasePanel
         //_scoreTotalText.text = "Total: " + GameManager.Instance.ScoreManager.Total.ToString();
         //_scoreTotalText.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
     }
+
+    public void TapToResetButton()
+    {
+        Debug.Log("Reset()");
+        GameManager.Instance.GameController.Reset();
+    }
 }

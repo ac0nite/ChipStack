@@ -18,7 +18,6 @@
       <Path>.idea</Path>
       <Path>Icon</Path>
       <Path>Library</Path>
-      <Path>Temp</Path>
       <Path>apk</Path>
       <Path>obj</Path>
     </explicitExcludes>

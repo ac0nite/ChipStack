@@ -6,9 +6,19 @@
     <e p="D:\unity\ChipStack" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="Asset" t="Include">
+          <e p="Jiggly Bubble Free" t="Include">
+            <e p="readme_Jiggly_Bubble_Free.txt" t="Include" />
+            <e p="Shaders" t="Include">
+              <e p="Particle Alpha Blended Cubemap Skybox.shader" t="Include" />
+              <e p="Particle Alpha Blended Cubemap.shader" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="Audio" t="Include">
           <e p="AudioManager.cs" t="Include" />
         </e>
+        <e p="FxBubble.cs" t="Include" />
         <e p="Imphenzia" t="Include">
           <e p="GradientSky" t="Include">
             <e p="ReadMe - GradientSky.txt" t="Include" />

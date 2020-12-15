@@ -51,7 +51,7 @@ ParticleSystem:
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
-  autoRandomSeed: 0
+  autoRandomSeed: 1
   useRigidbodyForVelocity: 1
   startDelay:
     serializedVersion: 2
@@ -109,7 +109,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1509735152
+  randomSeed: 0
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -9549,6 +9549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a119a610b02f44cb4ceaa8c484e664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyClip: {fileID: 8300000, guid: c52f664d4eddf8c47ae3edc93f1e3bc1, type: 3}
+  _bubbleClip: {fileID: 8300000, guid: af4a2abfea099b24099f542476754aa5, type: 3}
 --- !u!1 &2954761549006975891
 GameObject:
   m_ObjectHideFlags: 0
@@ -9590,7 +9592,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: af4a2abfea099b24099f542476754aa5, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

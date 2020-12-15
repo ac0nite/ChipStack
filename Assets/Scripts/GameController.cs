@@ -91,7 +91,7 @@ public class GameController : MonoBehaviour
         SpawnBlock(block.transform);
     }
 
-    private void OnExitRound()
+    public void OnExitRound()
     {
         Debug.Log("OnExitRound");
 
@@ -108,22 +108,40 @@ public class GameController : MonoBehaviour
         GameManager.Instance.Base.GetComponentInChildren<BlockCollisionBase>().Collision = BlockCollisionBase.TypeCollision.Second;
         
         GameManager.Instance.BackgroundGroundFX.Stop();
+        
+        if(GameManager.Instance.ScoreManager.Score != GameManager.Instance.ScoreManager.LimitBlocksInRound)
+            Destroy(_block.gameObject);
 
         StartCoroutine(WaitDel());
     }
 
+    public void Reset()
+    {
+        _block.Movement.Stop();
+        GameManager.Instance.ScoreManager.Stage = 1;
+        OnExitRound();
+    }
     private IEnumerator WaitDel()
     {
+        yield return new WaitForSeconds(0.7f);
+        
+        var movBase = GameManager.Instance.Base.GetComponent<BaseMovement>();
+        var casheSpeedLerp = movBase.SpeedLerp;
+        movBase.SpeedLerp = 0.4f;
+        _baseMovement.Target = Vector3.zero;
+        
         var blocks = GameManager.Instance.Base.GetComponentsInChildren<Block>().ToList();
         for (int i = blocks.Count-1; i >= 0; i--)
         {
             Destroy(blocks[i].gameObject);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.8f);
         }
         
-        _baseMovement.Target = Vector3.zero;
-
         yield return new WaitForSeconds(0.5f);
+
+        movBase.SpeedLerp = casheSpeedLerp;
+        
+        //_baseMovement.Target = Vector3.zero;
 
         UIManager.Instance.ShowPanel(UITypePanel.StartScreen);
         GameManager.Instance.AudioManager.StartMusicBackground();

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BaseMovement : MonoBehaviour
 {
     private Vector3 _target = Vector3.zero;
-    [SerializeField] private float _speed = 10f;
+    [SerializeField] public float SpeedLerp = 10f;
 
     public Vector3 Target
     {
@@ -23,6 +23,6 @@ public class BaseMovement : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, _target, _speed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, _target, SpeedLerp * Time.deltaTime);
     }
 }

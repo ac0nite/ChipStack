@@ -11,24 +11,32 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9202CBF1-9591-499D-8BBB-DCD8ACB92428/11/cf988599/AudioSource.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/ScoreManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/UIStartScreen.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/InputManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/ChangeScoreTxtUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/GamePlayPanel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Block/BlockCollisionBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Block/BlockMovement.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/ScoreManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Block/BlockCollision.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/FxBubble.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Block/BaseMovement.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/ChangeScoreTxtUI.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/GamePlayPanel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Audio/AudioManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/Block/BlockMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/FxBubble.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/ChangeScoreTxtUI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Block/BaseMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/GamePlayPanel.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/ScoreManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/ChangeScoreTxtUI.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
       </list>
     </option>
   </component>
@@ -70,6 +78,7 @@
       <updated>1599593329686</updated>
       <workItem from="1599593576183" duration="663000" />
       <workItem from="1607975898806" duration="3077000" />
+      <workItem from="1608058320566" duration="8215000" />
     </task>
     <servers />
   </component>
@@ -80,5 +89,11 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="868" y="297" width="646" height="530" key="find.popup" timestamp="1608064142780">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="868" y="297" width="646" height="530" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1608064142780" />
   </component>
 </project>
