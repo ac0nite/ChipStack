@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour
     private Gradient _backgroundGradientColor = null;
 
     [SerializeField] private GradientSkyCamera _gradientSkyCamera;
+    [SerializeField] private ParticleSystem _fxWin = null;
+    [SerializeField] private AudioSource _audioWin = null;
 
     private void Awake()
     {
@@ -74,6 +76,8 @@ public class GameController : MonoBehaviour
 
         if (GameManager.Instance.ScoreManager.Score == GameManager.Instance.ScoreManager.LimitBlocksInRound)
         {
+            _fxWin.Play();
+            _audioWin.Play();
             OnExitRound();
             GameManager.Instance.ScoreManager.Stage += 1;
             return;
@@ -93,7 +97,8 @@ public class GameController : MonoBehaviour
 
     public void OnExitRound()
     {
-        Debug.Log("OnExitRound");
+        if (GameManager.Instance.ScoreManager.Score != GameManager.Instance.ScoreManager.LimitBlocksInRound)
+            GameManager.Instance.ScoreManager.Stage = 1;
 
         _block.Collision.EventNextBlock -= OnNextBlock;
         _block.Movement.EventExit -= OnExitRound;
@@ -118,28 +123,29 @@ public class GameController : MonoBehaviour
     public void Reset()
     {
         _block.Movement.Stop();
-        GameManager.Instance.ScoreManager.Stage = 1;
+        //GameManager.Instance.ScoreManager.Stage = 1;
         OnExitRound();
     }
+
     private IEnumerator WaitDel()
     {
         yield return new WaitForSeconds(0.7f);
         
         var movBase = GameManager.Instance.Base.GetComponent<BaseMovement>();
-        var casheSpeedLerp = movBase.SpeedLerp;
-        movBase.SpeedLerp = 0.4f;
+        var caсheSpeedLerp = movBase.SpeedLerp;
+        movBase.SpeedLerp = 0.8f;
         _baseMovement.Target = Vector3.zero;
         
         var blocks = GameManager.Instance.Base.GetComponentsInChildren<Block>().ToList();
         for (int i = blocks.Count-1; i >= 0; i--)
         {
             Destroy(blocks[i].gameObject);
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(0.25f);
         }
         
         yield return new WaitForSeconds(0.5f);
 
-        movBase.SpeedLerp = casheSpeedLerp;
+        movBase.SpeedLerp = caсheSpeedLerp;
         
         //_baseMovement.Target = Vector3.zero;
 

@@ -18,7 +18,7 @@ public class FxBubble : MonoBehaviour
 
     void Start()
     {
-        _fx.randomSeed = (uint)UnityEngine.Random.Range(float.MinValue, float.MaxValue);
+        //_fx.randomSeed = (uint)UnityEngine.Random.Range(float.MinValue, float.MaxValue);
         _audio.pitch = Random.Range(0.8f, 1.2f);
         _audio.clip = _destroyClip;
         _fx.Play();
@@ -32,6 +32,7 @@ public class FxBubble : MonoBehaviour
         yield return new WaitForSeconds(_audio.clip.length);
         _audio.clip = _bubbleClip;
         _audio.Play();
-        Destroy(this.gameObject, _fx.main.duration);
+        // Destroy(this.gameObject, _fx.main.duration);
+        Destroy(this.gameObject, _audio.clip.length);
     }
 }
