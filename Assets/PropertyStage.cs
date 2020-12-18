@@ -20,5 +20,5 @@ public class PropertyStage
     [Range(0f, 10f)] public float SpeedAmplitudeRadius = 0.5f;
 
     [Header("Максимальное положение от края")]
-    [Range(0f, 1.1f)] public float ScatterForEdge = 0f;
+    [Range(0f, 5f)] public float ScatterForEdge = 0f;
 }

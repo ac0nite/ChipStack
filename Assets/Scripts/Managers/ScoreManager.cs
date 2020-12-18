@@ -35,6 +35,7 @@ public class ScoreManager : MonoBehaviour
     public int Total
     {
         get { return _total; }
+        set { _total = value; }
     }
 
     // Update is called once per frame

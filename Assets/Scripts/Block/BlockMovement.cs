@@ -117,8 +117,7 @@ public class BlockMovement : MonoBehaviour
 
     public void Init(Transform block)
     {
-       // Debug.Log($"NEW CENTER: {block.transform.position}");
-       var size = block.transform.localScale.x >= block.transform.localScale.z
+        var size = block.transform.localScale.x >= block.transform.localScale.z
            ? block.transform.localScale.x
            : block.transform.localScale.z;
 
@@ -126,22 +125,12 @@ public class BlockMovement : MonoBehaviour
         _targetCenter = new Vector3(block.transform.position.x, 0f, block.transform.position.z);
         GameManager.Instance.Center.transform.position = _targetCenter;
 
-        // _radius.Value = (GameManager.Instance.Center.transform.position - transform.position).magnitude;
         _radius.Value = size / 2;
         _radius.Amplitude = size / 5;
         _maxRadius = size / 3;
         _nextTarget = RandomNextTarget(_radius.Value);
 
-
-        //_kSpeedCenter = (block.transform.localScale.x * block.transform.localScale.z) / 25f;
         _kSpeedCenter = Mathf.Clamp((block.transform.localScale.x * block.transform.localScale.z) / 25f, 0.1f, 1f);
-        //Debug.Log($"_kSpeedCenter: {_kSpeedCenter}");
-
-
-        //_maxRadius = Mathf.Abs(transform.localScale.x);
-        //_center = center;
-        //Debug.DrawLine(center.normalized, Vector3.up, Color.blue, 3f);
-        //_maxRadius = transform.localScale.x;
     }
 
     private void Update()
@@ -159,10 +148,12 @@ public class BlockMovement : MonoBehaviour
 
         if (!run && (transform.position - GameManager.Instance.Center.transform.position).magnitude >= _maxRadius)
         {
+            //это когда блок движется в сторону центра прямо
             transform.Translate((GameManager.Instance.Center.transform.position - transform.position).normalized * (Time.deltaTime * 5));
             _radius.Value = (GameManager.Instance.Center.transform.position - transform.position).magnitude;
         }
-        else run = true;
+        else 
+            run = true;
 
         if (run && (_nextTarget - GameManager.Instance.Center.transform.position).sqrMagnitude < 0.01f)
        {
@@ -170,47 +161,23 @@ public class BlockMovement : MonoBehaviour
        }
        else 
        {
-            //_center.Translate((_nextTarget - _center.transform.position).normalized * (Time.deltaTime * _speedCenter));
-
-            //_center += (_nextTarget - _center).normalized * (Time.deltaTime * _speedCenter);
-            // GameManager.Instance.Center.transform.position = GameManager.Instance.Center.transform.position;
-            var look = (_nextTarget - GameManager.Instance.Center.transform.position).normalized;
-            GameManager.Instance.Center.transform.Translate(look * (Time.deltaTime * _speedCenter * _kSpeedCenter));
-            //GameManager.Instance.Center.transform.position += (_nextTarget - GameManager.Instance.Center.transform.position).normalized * (Time.deltaTime * _speedCenter);
-
-            //_center.Translate((_nextTarget - _center.transform.position).normalized * (Time.deltaTime * _speedCenter));
-        }
+           //движение центральной координаты
+           var look = (_nextTarget - GameManager.Instance.Center.transform.position).normalized;
+           GameManager.Instance.Center.transform.Translate(look * (Time.deltaTime * _speedCenter * _kSpeedCenter));
+       }
     }
 
     private Vector3 RandomNextTarget(float radius)
     {
-        //var c = UnityEngine.Random.insideUnitCircle;
-
-        //// Debug.Log($"c: {c}");
-        //c *= radius;
-
-        //var t = new Vector3(c.x, 0f, c.y);
-
-        //Debug.Log($"RandomNextTarget: {t} radius: {radius}");
-        //return t;
-
-
-        //var x = UnityEngine.Random.Range((_targetCenter.x - _targetScale.x / 2) * _scatterFromEdge, (_targetCenter.x + _targetScale.x / 2) * _scatterFromEdge);
-        //var z = UnityEngine.Random.Range((_targetCenter.z + _targetScale.z / 2) * _scatterFromEdge, (_targetCenter.z - _targetScale.z / 2) * _scatterFromEdge);
         var x = UnityEngine.Random.Range((_targetCenter.x - _targetScale.x / 2 - _scatterFromEdge), (_targetCenter.x + _targetScale.x / 2 + _scatterFromEdge));
         var z = UnityEngine.Random.Range((_targetCenter.z + _targetScale.z / 2 + _scatterFromEdge), (_targetCenter.z - _targetScale.z / 2 - _scatterFromEdge));
         return new Vector3(x, 0f, z);
-
-        //return new Vector3(UnityEngine.Random.Range())
     }
 
     private Vector3 Anticlockwise()
     {
-        //_current_speed.Value = _speedСircle;
-        
         var cache_speed = _current_speed.Value;
-        //Debug.Log($"cache_speed: {cache_speed}");
-        
+
         _timerCount += Time.deltaTime * cache_speed;
         var cache_radius = _radius.Value;
 
@@ -219,11 +186,8 @@ public class BlockMovement : MonoBehaviour
 
     private Vector3 Clockwise()
     {
-        //_current_speed.Value = _speedСircle;
-        
         var cache_speed = _current_speed.Value;
-        //Debug.Log($"cache_speed: {cache_speed}");
-        
+
         _timerCount += Time.deltaTime * cache_speed;
         var cache_radius = _radius.Value;
 
@@ -232,7 +196,6 @@ public class BlockMovement : MonoBehaviour
 
     public void Stop()
     {
-        // Debug.Log($"public void Stop()", transform.gameObject);
         _go = false;
         GetComponent<Rigidbody>().useGravity = true;
         StartCoroutine(ExitRound(this.gameObject));
@@ -240,8 +203,6 @@ public class BlockMovement : MonoBehaviour
 
         if (InputManager.TryInstance != null)
             InputManager.Instance.EventTap -= Stop;
-
-        //InputManager.Instance.EventTap -= Stop;
 
         _dropAudio.Stop();
 
@@ -255,7 +216,6 @@ public class BlockMovement : MonoBehaviour
         yield return new WaitForSeconds(_timeExitRound);
         EventExit?.Invoke();
         GetComponent<Block>().Collision.StopLighting();
-        //Destroy(obj);
     }
 }
 

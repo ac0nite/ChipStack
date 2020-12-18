@@ -41,9 +41,10 @@ public class GameController : MonoBehaviour
         GameManager.Instance.AudioManager.StartMusicBackgroundPlaying();
 
         GameManager.Instance.Gradient.GenerateGradient();
-       
         _backgroundGradientColor.SetKeys(GameManager.Instance.Gradient.getGradient().colorKeys, GameManager.Instance.Gradient.getGradient().alphaKeys);
-        GameManager.Instance.FogColor.FogColor = GameManager.Instance.Gradient.getGradient().colorKeys[1].color;
+        //GameManager.Instance.FogColor.FogColor = GameManager.Instance.Gradient.getGradient().colorKeys[1].color;
+        GameManager.Instance.FogColor.FogColor = GameManager.Instance.Gradient.RandomColor();
+        Debug.Log($"Color: {GameManager.Instance.FogColor.FogColor}");
 
         GameManager.Instance.BackgroundGroundFX.Play();
 
@@ -98,7 +99,10 @@ public class GameController : MonoBehaviour
     public void OnExitRound()
     {
         if (GameManager.Instance.ScoreManager.Score != GameManager.Instance.ScoreManager.LimitBlocksInRound)
+        {
             GameManager.Instance.ScoreManager.Stage = 1;
+            GameManager.Instance.ScoreManager.Total = 0;
+        }
 
         _block.Collision.EventNextBlock -= OnNextBlock;
         _block.Movement.EventExit -= OnExitRound;
@@ -141,6 +145,10 @@ public class GameController : MonoBehaviour
         {
             Destroy(blocks[i].gameObject);
             yield return new WaitForSeconds(0.25f);
+            if (GameManager.Instance.ScoreManager.Score > 0 && GameManager.Instance.ScoreManager.Stage == 1)
+            {
+                _fxWin.Play();
+            }
         }
         
         yield return new WaitForSeconds(0.5f);

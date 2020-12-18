@@ -1963,76 +1963,76 @@ MonoBehaviour:
   BackgroundGroundFX: {fileID: 1366724277}
   FogColor: {fileID: 963194230}
   Property:
-  - SpeedCircle: 1
-    AmplitudeCircle: 2
-    SpeedAmplitudeCircle: 1
+  - SpeedCircle: 1.5
+    AmplitudeCircle: 1.5
+    SpeedAmplitudeCircle: 1.5
     SpeedCenter: 0.5
     AmplitudeRadius: 2
-    SpeedAmplitudeRadius: 1.5
-    ScatterForEdge: 0
-  - SpeedCircle: 1
-    AmplitudeCircle: 3
-    SpeedAmplitudeCircle: 1
+    SpeedAmplitudeRadius: 1
+    ScatterForEdge: 1
+  - SpeedCircle: 1.5
+    AmplitudeCircle: 1.8
+    SpeedAmplitudeCircle: 1.6
     SpeedCenter: 0.6
-    AmplitudeRadius: 3
-    SpeedAmplitudeRadius: 1.7
-    ScatterForEdge: 0.1
-  - SpeedCircle: 2
-    AmplitudeCircle: 3
-    SpeedAmplitudeCircle: 1.1
-    SpeedCenter: 0.7
-    AmplitudeRadius: 3
-    SpeedAmplitudeRadius: 2
-    ScatterForEdge: 0.2
-  - SpeedCircle: 2
-    AmplitudeCircle: 4
-    SpeedAmplitudeCircle: 1.1
-    SpeedCenter: 0.7
-    AmplitudeRadius: 3
-    SpeedAmplitudeRadius: 2.2
-    ScatterForEdge: 0.3
-  - SpeedCircle: 2
-    AmplitudeCircle: 5
-    SpeedAmplitudeCircle: 1.1
-    SpeedCenter: 0.8
-    AmplitudeRadius: 3.1
-    SpeedAmplitudeRadius: 2.4
-    ScatterForEdge: 0.5
-  - SpeedCircle: 3
-    AmplitudeCircle: 5
-    SpeedAmplitudeCircle: 1.2
-    SpeedCenter: 0.9
-    AmplitudeRadius: 3.2
-    SpeedAmplitudeRadius: 2.6
-    ScatterForEdge: 0.6
-  - SpeedCircle: 3
-    AmplitudeCircle: 6
-    SpeedAmplitudeCircle: 1.2
-    SpeedCenter: 1
-    AmplitudeRadius: 3.5
-    SpeedAmplitudeRadius: 2.8
-    ScatterForEdge: 0.7
-  - SpeedCircle: 3
-    AmplitudeCircle: 7
-    SpeedAmplitudeCircle: 1.3
-    SpeedCenter: 1.2
-    AmplitudeRadius: 3.6
-    SpeedAmplitudeRadius: 3
-    ScatterForEdge: 0.8
-  - SpeedCircle: 4
-    AmplitudeCircle: 7
-    SpeedAmplitudeCircle: 1.3
-    SpeedCenter: 1.3
-    AmplitudeRadius: 3.8
-    SpeedAmplitudeRadius: 3.2
-    ScatterForEdge: 0.95
-  - SpeedCircle: 5
-    AmplitudeCircle: 7
-    SpeedAmplitudeCircle: 1.3
-    SpeedCenter: 1.4
-    AmplitudeRadius: 3.9
-    SpeedAmplitudeRadius: 3.2
+    AmplitudeRadius: 2.1
+    SpeedAmplitudeRadius: 1.1
     ScatterForEdge: 1.1
+  - SpeedCircle: 1.8
+    AmplitudeCircle: 2.1
+    SpeedAmplitudeCircle: 1.7
+    SpeedCenter: 0.7
+    AmplitudeRadius: 2.2
+    SpeedAmplitudeRadius: 1.2
+    ScatterForEdge: 1.2
+  - SpeedCircle: 2
+    AmplitudeCircle: 2.5
+    SpeedAmplitudeCircle: 1.8
+    SpeedCenter: 0.8
+    AmplitudeRadius: 2.3
+    SpeedAmplitudeRadius: 1.3
+    ScatterForEdge: 1.3
+  - SpeedCircle: 2.3
+    AmplitudeCircle: 2.8
+    SpeedAmplitudeCircle: 1.9
+    SpeedCenter: 0.9
+    AmplitudeRadius: 2.4
+    SpeedAmplitudeRadius: 1.4
+    ScatterForEdge: 1.4
+  - SpeedCircle: 2.8
+    AmplitudeCircle: 3.2
+    SpeedAmplitudeCircle: 2
+    SpeedCenter: 1
+    AmplitudeRadius: 2.5
+    SpeedAmplitudeRadius: 1.5
+    ScatterForEdge: 1.5
+  - SpeedCircle: 3
+    AmplitudeCircle: 3.6
+    SpeedAmplitudeCircle: 2.1
+    SpeedCenter: 1.1
+    AmplitudeRadius: 2.6
+    SpeedAmplitudeRadius: 1.6
+    ScatterForEdge: 1.6
+  - SpeedCircle: 3.2
+    AmplitudeCircle: 3.9
+    SpeedAmplitudeCircle: 2.2
+    SpeedCenter: 1.2
+    AmplitudeRadius: 2.7
+    SpeedAmplitudeRadius: 1.7
+    ScatterForEdge: 1.7
+  - SpeedCircle: 3.5
+    AmplitudeCircle: 4.2
+    SpeedAmplitudeCircle: 2.3
+    SpeedCenter: 1.3
+    AmplitudeRadius: 2.8
+    SpeedAmplitudeRadius: 1.8
+    ScatterForEdge: 1.8
+  - SpeedCircle: 4
+    AmplitudeCircle: 5
+    SpeedAmplitudeCircle: 2.4
+    SpeedCenter: 1.5
+    AmplitudeRadius: 2.9
+    SpeedAmplitudeRadius: 1.9
+    ScatterForEdge: 1.9
 --- !u!114 &759411936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2622,7 +2622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77db94b7312cb741a41cf2c72a46a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedLerp: 1
+  SpeedLerp: 0.5
 --- !u!1 &994350110
 GameObject:
   m_ObjectHideFlags: 0
@@ -3243,7 +3243,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 0.6
   m_Text: 
 --- !u!222 &1310575748
 CanvasRenderer:

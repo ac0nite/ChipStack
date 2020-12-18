@@ -12,10 +12,12 @@ public class BlockColor : MonoBehaviour
 
     private void Awake()
     {
+        _render = GetComponent<Renderer>();
         FogColor = Camera.main.backgroundColor;
         GameManager.Instance.FogColor.EventUpdateFogColor += OnUpdateFogColor;
         //Camera.main.GetComponent<UpdateFogColor>().EventUpdateFogColor += OnUpdateFogColor;
     }
+
 
     private void OnDestroy()
     {
@@ -27,7 +29,6 @@ public class BlockColor : MonoBehaviour
 
     void Start()
     {
-        _render = GetComponent<Renderer>();
         NextColor();
     }
 
