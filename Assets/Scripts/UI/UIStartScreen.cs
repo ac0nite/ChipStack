@@ -31,7 +31,7 @@ public class UIStartScreen : UIBasePanel
         else
             _soundButton.GetComponentInChildren<Text>().text = "No Sound";
 
-        if(GameManager.Instance.ScoreManager.Stage == 1 && GameManager.Instance.ScoreManager.Score > 0)
+        if(GameManager.Instance.GameController.State == StateGame.WIN_STATE)
             _message.text = "- next Stage " + GameManager.Instance.ScoreManager.Stage.ToString() + " -\nYou win! Try again...";
         else
             _message.text = "- next Stage " + GameManager.Instance.ScoreManager.Stage.ToString() + " -"; ;

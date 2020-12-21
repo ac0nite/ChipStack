@@ -40,7 +40,7 @@ public class BlockCollision : BlockCollisionBase
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log($"---OnCollisionEnter---");
+  //      Debug.Log($"---OnCollisionEnter---");
         StopLighting();
     }
 
@@ -72,7 +72,7 @@ public class BlockCollision : BlockCollisionBase
         //if (!IsCollision)
         //    return; 
 
-        Debug.Log($"----------------- OnCollisionEnter -----------------", transform.gameObject);
+   //     Debug.Log($"----------------- OnCollisionEnter -----------------", transform.gameObject);
 
         //blockCollision.IsCollision = false;
 
@@ -165,11 +165,11 @@ public class BlockCollision : BlockCollisionBase
 
         var dot = Vector3.Dot(side[0].normalized, transform.forward);
 
-        Debug.Log($"side[0]: {side[0].magnitude} side[1]: {side[1].magnitude}");
+     //   Debug.Log($"side[0]: {side[0].magnitude} side[1]: {side[1].magnitude}");
         //Debug.Log($"dot: {dot} {Math.Round(dot)}");
         if (Math.Round(dot) == 0f)
         {
-            Debug.Log($"-1-");
+        //    Debug.Log($"-1-");
             scale = new Vector3(side[0].magnitude, transform.localScale.y, side[1].magnitude);
         
             var direction_litle = Vector3.Dot(side[1].normalized, Vector3.forward);
@@ -207,7 +207,7 @@ public class BlockCollision : BlockCollisionBase
 
         Vector3 position = new Vector3(center.x, transform.position.y, center.z);
 
-        Debug.Log($"new scale: {scale} position: {position}");
+//        Debug.Log($"new scale: {scale} position: {position}");
 
         transform.position = position;
         transform.localScale = scale;

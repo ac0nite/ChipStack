@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\andrew\AppData\Local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\andrew\AppData\Local\JetBrains\Rider2020.1\resharper-host\Local\Transient\ReSharperHost\v201\SolutionCaches\_ChipStack.-827591799.00" t="ExcludeRecursive" />
-    <e p="D:\unity\ChipStack" t="IncludeRecursive">
+    <e p="C:\Users\asach\AppData\Local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\asach\AppData\Local\JetBrains\Rider2020.1\resharper-host\Local\Transient\ReSharperHost\v201\SolutionCaches\_ChipStack.1457271656.00" t="ExcludeRecursive" />
+    <e p="E:\unity\ChipStack" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Asset" t="Include">
+          <e p="Imphenzia" t="Include">
+            <e p="GradientSky" t="Include">
+              <e p="ReadMe - GradientSky.txt" t="Include" />
+              <e p="Scripts" t="Include">
+                <e p="Common" t="Include">
+                  <e p="GradientSkyCommon.cs" t="Include" />
+                </e>
+                <e p="GradientSkyCamera.cs" t="Include" />
+                <e p="GradientSkyObject.cs" t="Include" />
+              </e>
+              <e p="Shaders" t="Include">
+                <e p="VertexColorCamera.shader" t="Include" />
+                <e p="VertexColorObject.shader" t="Include" />
+              </e>
+            </e>
+          </e>
           <e p="Jiggly Bubble Free" t="Include">
             <e p="readme_Jiggly_Bubble_Free.txt" t="Include" />
             <e p="Shaders" t="Include">
@@ -18,24 +34,6 @@
         <e p="Audio" t="Include">
           <e p="AudioManager.cs" t="Include" />
         </e>
-        <e p="FxBubble.cs" t="Include" />
-        <e p="Imphenzia" t="Include">
-          <e p="GradientSky" t="Include">
-            <e p="ReadMe - GradientSky.txt" t="Include" />
-            <e p="Scripts" t="Include">
-              <e p="Common" t="Include">
-                <e p="GradientSkyCommon.cs" t="Include" />
-              </e>
-              <e p="GradientSkyCamera.cs" t="Include" />
-              <e p="GradientSkyObject.cs" t="Include" />
-            </e>
-            <e p="Shaders" t="Include">
-              <e p="VertexColorCamera.shader" t="Include" />
-              <e p="VertexColorObject.shader" t="Include" />
-            </e>
-          </e>
-        </e>
-        <e p="PropertyStage.cs" t="Include" />
         <e p="Resources" t="Include">
           <e p="Tmp" t="Include">
             <e p="fog.shader" t="Include" />
@@ -58,6 +56,7 @@
             <e p="GradientManager.cs" t="Include" />
             <e p="GradientManager1.cs" t="Include" />
           </e>
+          <e p="FxBubble.cs" t="Include" />
           <e p="GameController.cs" t="Include" />
           <e p="InputManager.cs" t="Include" />
           <e p="Managers" t="Include">
@@ -65,6 +64,7 @@
             <e p="ScoreManager.cs" t="Include" />
             <e p="SingletoneGameObject.cs" t="Include" />
           </e>
+          <e p="PropertyStage.cs" t="Include" />
           <e p="Remainder" t="Include">
             <e p="Remainder.cs" t="Include" />
             <e p="RemainderColor.cs" t="Include" />
@@ -78,8 +78,13 @@
             <e p="UIStartScreen.cs" t="Include" />
             <e p="UITypePanel.cs" t="Include" />
           </e>
+          <e p="UpdateFogColor.cs" t="Include" />
         </e>
-        <e p="UpdateFogColor.cs" t="Include" />
+        <e p="SimpleFX" t="Include">
+          <e p="Materials" t="Include">
+            <e p="UnlitVertexColour_Alpha.shader" t="Include" />
+          </e>
+        </e>
       </e>
       <e p="ChipStack.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />

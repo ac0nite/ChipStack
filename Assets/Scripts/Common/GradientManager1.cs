@@ -63,7 +63,7 @@ public class GradientManager1 : MonoBehaviour
         return new Color(Gen(), Gen(), Gen());
     }
 
-    public void GenerateGradient()
+    private void GenerateGradient()
     {
         _evalute = 0f;
         //float steps = 2 - 1f;
@@ -75,6 +75,9 @@ public class GradientManager1 : MonoBehaviour
         //    alphaKeys[i].alpha = 0.0F;
         //    alphaKeys[i].time = step;
         //}
+        
+        //_firstColor = RandomColor();
+        //_secondColor = RandomColor();
 
         colorKeys[0].color = _firstColor;
         colorKeys[0].time = 0f;

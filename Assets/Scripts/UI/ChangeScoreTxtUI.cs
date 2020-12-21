@@ -46,6 +46,12 @@ public class ChangeScoreTxtUI : MonoBehaviour
             _from += _step;
         }
 
+        if (_to == 0)
+        {
+            _scoreTxt.text = _prefix + "0";
+            _from = _to = 0;
+        }
+
         _scoreTxt.fontStyle = FontStyle.Bold;
         _scoreTxt.fontSize += 3;
         yield return null;

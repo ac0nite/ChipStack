@@ -21,6 +21,7 @@ public class GamePlayPanel : UIBasePanel
     {
         _scoreText.text = GameManager.Instance.ScoreManager.Score.ToString();
         _changeScore.ChangeParam(GameManager.Instance.ScoreManager.Total);
+        Debug.Log($"{GameManager.Instance.ScoreManager.Total}");
         //_scoreTotalText.text = "Total: " + GameManager.Instance.ScoreManager.Total.ToString();
         //_scoreTotalText.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
     }

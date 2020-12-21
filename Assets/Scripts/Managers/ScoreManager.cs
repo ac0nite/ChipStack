@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -9,13 +10,14 @@ public class ScoreManager : MonoBehaviour
     private int _best = 0;
     private int _total = 0;
     private int _stage = 1;
-    private int _maxStages = 0;
+    [SerializeField] public int MaxStages = 0;
     [SerializeField] public int LimitBlocksInRound = 4;
 
     void Start()
     {
         _best = PlayerPrefs.GetInt("BestScore", 0);
-        _maxStages = GameManager.Instance.Property.Count;
+        if (MaxStages > GameManager.Instance.Property.Count)
+            MaxStages = GameManager.Instance.Property.Count;
     }
     
     public int Stage
@@ -23,7 +25,7 @@ public class ScoreManager : MonoBehaviour
         get { return _stage; }
         set
         {
-            _stage = (value % (_maxStages + 1)) == 0 ? 1 : (value);
+            _stage = (value % (MaxStages + 1)) == 0 ? 1 : (value);
         }
     }
 
