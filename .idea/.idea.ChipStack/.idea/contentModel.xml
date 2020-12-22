@@ -79,6 +79,7 @@
             <e p="UITypePanel.cs" t="Include" />
           </e>
           <e p="UpdateFogColor.cs" t="Include" />
+          <e p="Vibration.cs" t="Include" />
         </e>
         <e p="SimpleFX" t="Include">
           <e p="Materials" t="Include">

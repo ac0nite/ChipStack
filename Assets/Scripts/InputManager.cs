@@ -15,7 +15,11 @@ public class InputManager : SingletoneGameObject<InputManager>
     {
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        {
             EventTap?.Invoke();
+            //Vibration.Vibrate();
+        }
+
 #elif UNITY_STANDALONE_WIN
                 if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                     EventTap?.Invoke();
@@ -26,8 +30,10 @@ public class InputManager : SingletoneGameObject<InputManager>
                     if (_touch.phase == TouchPhase.Began)
                     {
                         EventTap?.Invoke();
+                        //Vibration.Vibrate();
+                        //Vibration.Vibrate(1000);
                     }
-                }  
+                }
 #endif
 
 

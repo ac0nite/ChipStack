@@ -68,6 +68,35 @@ public class GameController : MonoBehaviour
         State = StateGame.NEXT_STAGE;
     }
 
+    private void OnGUI()
+    {
+        if (GUI.Button(new Rect(0, 100, 300, 100), "Vibrate1!"))
+        { Vibration.Vibrate(10);}
+
+        if (GUI.Button(new Rect(0, 200, 300, 100), "Vibrate2!"))
+        { Vibration.Vibrate(40);}
+        if (GUI.Button(new Rect(0, 300, 300, 100), "Vibrate3!"))
+        { Vibration.Vibrate(50);}
+
+        if (GUI.Button(new Rect(0, 400, 300, 100), "Vibrate4!"))
+        {
+            long[] pattern = {200, 150, 150, 1000};
+            Vibration.Vibrate(pattern, -1);
+        }
+
+        if (GUI.Button(new Rect(0, 500, 300, 100), "Vibrate5!"))
+        {
+            long[] pattern = {300, 150, 150, 1000};
+            Vibration.Vibrate(pattern, -1);
+        }
+
+        if (GUI.Button(new Rect(0, 600, 300, 100), "Vibrate6!"))
+        {
+            long[] pattern = {300, 200, 200, 1500};
+            Vibration.Vibrate(pattern, -1);
+        }
+    }
+
     private void Update()
     {
         _gradientSkyCamera.gradient = GameManager.Instance.Gradient.Lerp(_gradientSkyCamera.gradient,_backgroundGradientColor, Time.deltaTime * 0.5f);

@@ -21,6 +21,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/InputManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Block/BlockMovement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Vibration.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/29AD182F-AA3F-478C-9310-D6A2E7143C15/bd/56243e7d/Handheld.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Audio/AudioManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Block/BlockColor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -38,9 +40,12 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Block/BlockCollision.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Common/GradientManager1.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/UIStartScreen.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/GamePlayPanel.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/ChangeScoreTxtUI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/InputManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Vibration.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
       </list>
     </option>
   </component>
@@ -66,10 +71,10 @@
       <option name="pid" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="2584">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="2584" />
+      <option name="pid" />
       <method v="2" />
     </configuration>
   </component>
@@ -89,6 +94,7 @@
       <workItem from="1608325948253" duration="70000" />
       <workItem from="1608326444980" duration="9000" />
       <workItem from="1608577007413" duration="8373000" />
+      <workItem from="1608664068664" duration="4864000" />
     </task>
     <servers />
   </component>
@@ -177,19 +183,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/GameController.cs</url>
-          <line>50</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" initialLine="50">
-            <startOffsets>
-              <option value="1611" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1655" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Managers/ScoreManager.cs</url>
           <line>39</line>
