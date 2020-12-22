@@ -42,7 +42,8 @@ public class GameController : MonoBehaviour
 
         //для скриншота на иконку
         //GameManager.Instance.BackgroundGroundFX.Play();
-        //GameManager.Instance.FogColor.FogColor = new Color();
+        //GameManager.Instance.FogColor.FogColor = new Color(111f/255f, 111f / 255f, 119f / 255f);
+        //GameManager.Instance.Base.GetComponentInChildren<BlockColor>().SetColor(new Color(192f / 255f, 183f / 255f, 160f / 255f));
     }
 
     public void Go()
@@ -120,11 +121,13 @@ public class GameController : MonoBehaviour
 
     public void OnExitRound()
     {
-        // if (GameManager.Instance.ScoreManager.Score != GameManager.Instance.ScoreManager.LimitBlocksInRound-1)
-        // {
-        //     GameManager.Instance.ScoreManager.Stage = 1;
-        //     State = StateGame.LOSE_ROUND;
-        // }
+        if (GameManager.Instance.ScoreManager.Score != GameManager.Instance.ScoreManager.LimitBlocksInRound && State != StateGame.WIN_STATE)
+        {
+            GameManager.Instance.ScoreManager.Stage = 1;
+            State = StateGame.LOSE_ROUND;
+        }
+
+
 
         _block.Collision.EventNextBlock -= OnNextBlock;
         _block.Movement.EventExit -= OnExitRound;

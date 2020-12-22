@@ -7,7 +7,7 @@ public class BlockColor : MonoBehaviour
 {
     private Renderer _render = null;
     private Material _material = null;
-    public Color Color { get; private set; }
+    public Color Color { get; set; }
     public Color FogColor { get;  private set; }
 
     private void Awake()
@@ -42,8 +42,12 @@ public class BlockColor : MonoBehaviour
 
     public void NextColor()
     {
-        Color = GameManager.Instance.Gradient.GetColor();
-        //var renderer = GetComponent<Renderer>();
+        SetColor(GameManager.Instance.Gradient.GetColor());
+    }
+
+    public void SetColor(Color color)
+    {
+        Color = color;
         _material = _render.material;
         _material.SetColor("_Color", Color);
         _render.material = _material;
