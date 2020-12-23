@@ -51,6 +51,24 @@ public static class Vibration
             vibrator.Call("cancel");
     }
 
+    public static void Win()
+    {
+        long[] pattern = { 200, 150, 150, 1000 };
+        Vibration.Vibrate(pattern, -1);
+    }
+
+    public static void WinStage()
+    {
+        long[] pattern = { 150, 700 };
+        Vibration.Vibrate(pattern, -1);
+    }
+
+    public static void Lose()
+    {
+        long[] pattern = { 200, 150, 500 };
+        Vibration.Vibrate(pattern, -1);
+    }
+
     private static bool isAndroid()
     {
 #if UNITY_ANDROID && !UNITY_EDITOR

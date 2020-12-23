@@ -68,34 +68,34 @@ public class GameController : MonoBehaviour
         State = StateGame.NEXT_STAGE;
     }
 
-    private void OnGUI()
-    {
-        if (GUI.Button(new Rect(0, 100, 300, 100), "Vibrate1!"))
-        { Vibration.Vibrate(10);}
+    //private void OnGUI()
+    //{
+    //    if (GUI.Button(new Rect(0, 100, 300, 100), "Vibrate1!"))
+    //    { Vibration.Vibrate(10);}
 
-        if (GUI.Button(new Rect(0, 200, 300, 100), "Vibrate2!"))
-        { Vibration.Vibrate(40);}
-        if (GUI.Button(new Rect(0, 300, 300, 100), "Vibrate3!"))
-        { Vibration.Vibrate(50);}
+    //    if (GUI.Button(new Rect(0, 200, 300, 100), "Vibrate2!"))
+    //    { Vibration.Vibrate(40);}
+    //    if (GUI.Button(new Rect(0, 300, 300, 100), "Vibrate3!"))
+    //    { Vibration.Vibrate(50);}
 
-        if (GUI.Button(new Rect(0, 400, 300, 100), "Vibrate4!"))
-        {
-            long[] pattern = {200, 150, 150, 1000};
-            Vibration.Vibrate(pattern, -1);
-        }
+    //    if (GUI.Button(new Rect(0, 400, 300, 100), "Vibrate4!"))
+    //    {
+    //        long[] pattern = {200, 150, 150, 1000};
+    //        Vibration.Vibrate(pattern, -1);
+    //    }
 
-        if (GUI.Button(new Rect(0, 500, 300, 100), "Vibrate5!"))
-        {
-            long[] pattern = {300, 150, 150, 1000};
-            Vibration.Vibrate(pattern, -1);
-        }
+    //    if (GUI.Button(new Rect(0, 500, 300, 100), "Vibrate5!"))
+    //    {
+    //        long[] pattern = {300, 150, 150, 1000};
+    //        Vibration.Vibrate(pattern, -1);
+    //    }
 
-        if (GUI.Button(new Rect(0, 600, 300, 100), "Vibrate6!"))
-        {
-            long[] pattern = {300, 200, 200, 1500};
-            Vibration.Vibrate(pattern, -1);
-        }
-    }
+    //    if (GUI.Button(new Rect(0, 600, 300, 100), "Vibrate6!"))
+    //    {
+    //        long[] pattern = {300, 200, 200, 1500};
+    //        Vibration.Vibrate(pattern, -1);
+    //    }
+    //}
 
     private void Update()
     {
@@ -154,9 +154,9 @@ public class GameController : MonoBehaviour
         {
             GameManager.Instance.ScoreManager.Stage = 1;
             State = StateGame.LOSE_ROUND;
+
+            Vibration.Lose();
         }
-
-
 
         _block.Collision.EventNextBlock -= OnNextBlock;
         _block.Movement.EventExit -= OnExitRound;
@@ -196,6 +196,9 @@ public class GameController : MonoBehaviour
         _baseMovement.Target = Vector3.zero;
         
         var blocks = GameManager.Instance.Base.GetComponentsInChildren<Block>().ToList();
+        if (State == StateGame.NEXT_STAGE) Vibration.WinStage();
+        else if (State == StateGame.WIN_STATE) Vibration.Win();
+
         for (int i = blocks.Count-1; i >= 0; i--)
         {
             Destroy(blocks[i].gameObject);

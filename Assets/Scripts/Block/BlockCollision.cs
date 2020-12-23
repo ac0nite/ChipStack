@@ -42,6 +42,7 @@ public class BlockCollision : BlockCollisionBase
     {
   //      Debug.Log($"---OnCollisionEnter---");
         StopLighting();
+        Vibration.Vibrate(40);
     }
 
     private void OnCollisionStay(Collision other)
@@ -186,7 +187,7 @@ public class BlockCollision : BlockCollisionBase
         }
         else
         {
-            Debug.Log($"-2-");
+         //   Debug.Log($"-2-");
             scale = new Vector3(side[1].magnitude, transform.localScale.y, side[0].magnitude);
 
            // direction = dot == 1 ? -1 : 1;

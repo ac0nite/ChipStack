@@ -91,7 +91,7 @@ public class BlockMovement : MonoBehaviour
         //_timerCount = 4.5f;
 
         _go = true;
-        Debug.Log($"BlockMovement Awake()");
+       // Debug.Log($"BlockMovement Awake()");
     }
 
     private void Start()
