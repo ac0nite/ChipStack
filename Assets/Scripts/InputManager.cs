@@ -17,7 +17,6 @@ public class InputManager : SingletoneGameObject<InputManager>
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             EventTap?.Invoke();
-            //Vibration.Vibrate();
         }
 
 #elif UNITY_STANDALONE_WIN
@@ -35,29 +34,5 @@ public class InputManager : SingletoneGameObject<InputManager>
                     }
                 }
 #endif
-
-
-        //if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
-        //{
-        //    Debug.Log("UI is touched");
-        //}
-
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    if (!EventSystem.current.IsPointerOverGameObject())
-        //    {
-        //        Debug.Log("no button");
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("button");
-        //    }
-        //    //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //    //RaycastHit hit;
-        //    //if (Physics.Raycast(ray, out hit))
-        //    //{
-        //    //    hit.
-        //    //}
-        //}
     }
 }

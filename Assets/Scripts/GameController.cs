@@ -193,11 +193,15 @@ public class GameController : MonoBehaviour
         var movBase = GameManager.Instance.Base.GetComponent<BaseMovement>();
         var caсheSpeedLerp = movBase.SpeedLerp;
         movBase.SpeedLerp = 0.8f;
+
+        //тем самым указываем двигаться платформу вверх
         _baseMovement.Target = Vector3.zero;
         
-        var blocks = GameManager.Instance.Base.GetComponentsInChildren<Block>().ToList();
-        if (State == StateGame.NEXT_STAGE) Vibration.WinStage();
-        else if (State == StateGame.WIN_STATE) Vibration.Win();
+        var blocks = GameManager.Instance.Base.GetComponentsInChildren<Block>().ToList(); 
+
+        //if (State == StateGame.NEXT_STAGE) Vibration.WinStage();
+
+        if (State == StateGame.WIN_STATE) Vibration.Win();
 
         for (int i = blocks.Count-1; i >= 0; i--)
         {
@@ -210,8 +214,6 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         movBase.SpeedLerp = caсheSpeedLerp;
-        
-        //_baseMovement.Target = Vector3.zero;
 
         UIManager.Instance.ShowPanel(UITypePanel.StartScreen);
         GameManager.Instance.AudioManager.StartMusicBackground();

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UIStartScreen : UIBasePanel
 {
     [SerializeField] private Text _best = null;
-    [SerializeField] private Text _score = null;
+    //[SerializeField] private Text _score = null;
     [SerializeField] private Text _total = null;
     [SerializeField] private Button _soundButton = null;
     [SerializeField] private Text _message = null;
@@ -24,7 +24,7 @@ public class UIStartScreen : UIBasePanel
         else
             _best.text = "Best: " + PlayerPrefs.GetInt("BestScore", 0).ToString();
 
-        _score.text = GameManager.Instance.ScoreManager.Score.ToString();
+        //_score.text = GameManager.Instance.ScoreManager.Score.ToString();
 
         if (GameManager.Instance.AudioManager.IsSound)
             _soundButton.GetComponentInChildren<Text>().text = "Sound";
