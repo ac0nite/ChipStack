@@ -12,7 +12,6 @@ public class BaseMovement : MonoBehaviour
         set
         {
             _target = value;
-            //Debug.Log($"_target={_target}");
         }
     }
 

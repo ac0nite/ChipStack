@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class ChangeScoreTxtUI : MonoBehaviour
 {
     [SerializeField] private Text _scoreTxt = null;
-    [SerializeField] private String _prefix;
+    [SerializeField] private String _prefix = null;
     private int _from = 0;
     private int _to = 0;
     private int _step = 1;

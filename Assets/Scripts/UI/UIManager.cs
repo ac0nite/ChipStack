@@ -11,10 +11,8 @@ public class UIManager : SingletoneGameObject<UIManager>
     {
         base.Awake();
         _panels = GetComponentsInChildren<UIBasePanel>().ToList();
-        Debug.Log($"panels: {_panels.Count}");
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         ShowPanel(UITypePanel.LogoScreen);
@@ -24,7 +22,6 @@ public class UIManager : SingletoneGameObject<UIManager>
     {
         foreach (var panel in _panels)
         {
-           // if (panel.panel == UITypePanel.Message) continue;
             panel.gameObject.SetActive(panel.panel == type);
         }
     }

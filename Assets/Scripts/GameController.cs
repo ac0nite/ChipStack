@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
     public static Action<Vector3> EventBlock;
     private Gradient _backgroundGradientColor = null;
 
-    [SerializeField] private GradientSkyCamera _gradientSkyCamera;
+    [SerializeField] private GradientSkyCamera _gradientSkyCamera = null;
     [SerializeField] private ParticleSystem _fxWin = null;
     [SerializeField] private AudioSource _audioWin = null;
     [HideInInspector] public bool IsWin = false;
@@ -54,15 +54,11 @@ public class GameController : MonoBehaviour
         SpawnBlock(GameManager.Instance.BlockPrefab.Collision.transform);
         GameManager.Instance.AudioManager.StartMusicBackgroundPlaying();
 
-        //GameManager.Instance.Gradient.GenerateGradient();
         _backgroundGradientColor.SetKeys(GameManager.Instance.Gradient.getGradient().colorKeys, GameManager.Instance.Gradient.getGradient().alphaKeys);
-        //GameManager.Instance.FogColor.FogColor = GameManager.Instance.Gradient.getGradient().colorKeys[1].color;
         GameManager.Instance.FogColor.FogColor = GameManager.Instance.Gradient.RandomColor();
-        //Debug.Log($"Fog Color: {GameManager.Instance.FogColor.FogColor}");
 
         GameManager.Instance.BackgroundGroundFX.Play();
 
-        //GameManager.Instance.Gradient.GenerateGradient();
         GameManager.Instance.Base.GetComponentInChildren<BlockColor>().NextColor();
 
         State = StateGame.NEXT_STAGE;
@@ -197,9 +193,7 @@ public class GameController : MonoBehaviour
         //тем самым указываем двигаться платформу вверх
         _baseMovement.Target = Vector3.zero;
         
-        var blocks = GameManager.Instance.Base.GetComponentsInChildren<Block>().ToList(); 
-
-        //if (State == StateGame.NEXT_STAGE) Vibration.WinStage();
+        var blocks = GameManager.Instance.Base.GetComponentsInChildren<Block>().ToList();
 
         if (State == StateGame.WIN_STATE) Vibration.Win();
 

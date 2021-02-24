@@ -9,22 +9,13 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _backgrountAudioSource = null;
     [SerializeField] private string _backgrountAudioPlaying = null;
     [SerializeField] private string _backgrountAudioStart = null;
-    [SerializeField] private string _backgrountAudioLogo = null;
     [SerializeField] public bool IsSound = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         AudioListener.volume = _volume;
-        //if(IsSound)
-        //    StartMusicBackground();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void StartMusicBackgroundPlaying()
     {

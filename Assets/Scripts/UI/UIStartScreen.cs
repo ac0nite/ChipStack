@@ -7,15 +7,9 @@ using UnityEngine.UI;
 public class UIStartScreen : UIBasePanel
 {
     [SerializeField] private Text _best = null;
-    //[SerializeField] private Text _score = null;
     [SerializeField] private Text _total = null;
     [SerializeField] private Button _soundButton = null;
     [SerializeField] private Text _message = null;
-
-    void Start()
-    {
-        // OnEnable();
-    }
 
     void OnEnable()
     {
@@ -24,7 +18,6 @@ public class UIStartScreen : UIBasePanel
         else
             _best.text = "Best: " + PlayerPrefs.GetInt("BestScore", 0).ToString();
 
-        //_score.text = GameManager.Instance.ScoreManager.Score.ToString();
 
         if (GameManager.Instance.AudioManager.IsSound)
             _soundButton.GetComponentInChildren<Text>().text = "Sound";
@@ -43,15 +36,12 @@ public class UIStartScreen : UIBasePanel
 
     void OnDisable()
     {
-        //Debug.Log($"OnDisable()");
         InputManager.Instance.EventTap -= OnTap;
     }
 
     public void OnTap()
     {
-        //Debug.Log($"OnTap()");
         TapToStartButton();
-        //InputManager.Instance.EventTap -= OnTap;
     }
 
     public void TapToStartButton()
@@ -67,13 +57,11 @@ public class UIStartScreen : UIBasePanel
         if (btnText.text == "Sound")
         {
             btnText.text = "No Sound";
-             //GameManager.Instance.AudioManager.StopMusicBackground();
             GameManager.Instance.AudioManager.NoVolumeSound();
         }
         else
         {
             btnText.text = "Sound";
-            //GameManager.Instance.AudioManager.StartMusicBackground();
             GameManager.Instance.AudioManager.YesVolumeSound();
         }
     }

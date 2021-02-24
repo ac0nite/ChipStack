@@ -20,7 +20,6 @@ public class BlockMovement : MonoBehaviour
     [Header("Максимальное положение от края")]
     [SerializeField] [Range(0f, 1f)] private float _scatterFromEdge = 1f;
 
-    // [SerializeField] private Vector3 _center = Vector3.zero;
     [Header("Скорость движение центральной координаты")]
     [SerializeField] private float _speedCenter = 2f;
     private float _kSpeedCenter = 1f;
@@ -37,9 +36,9 @@ public class BlockMovement : MonoBehaviour
 
     [SerializeField] private AudioSource _dropAudio = null;
 
-    [SerializeField] private string _walkAudioName;
-    [SerializeField] private string _cutAudioName;
-    [SerializeField] private HelperLineRenderer _helperLineRenderer;
+    [SerializeField] private string _walkAudioName = null;
+    [SerializeField] private string _cutAudioName = null;
+    [SerializeField] private HelperLineRenderer _helperLineRenderer = null;
 
     private bool run = false;
     private bool _go = false;
@@ -62,7 +61,6 @@ public class BlockMovement : MonoBehaviour
     {
         //инициализация в зависимости от уровней
         InitStage(GameManager.Instance.Property[GameManager.Instance.ScoreManager.Stage-1]);
-        Debug.Log($"Stages: {GameManager.Instance.ScoreManager.Stage}");
 
         _nextTarget = RandomNextTarget(_maxRadius);
 
@@ -75,7 +73,7 @@ public class BlockMovement : MonoBehaviour
         _current_speed.Speed = _speedAmplitudeСircle;
 
         _direction = (CLOCK_DIRECTION)UnityEngine.Random.Range(1,3);
-        //Debug.Log($"{_direction}");
+       
         if (_direction == CLOCK_DIRECTION.Clock_Wise)
         {
             transform.position = new Vector3(-13f, 0f, 0f);
@@ -87,16 +85,13 @@ public class BlockMovement : MonoBehaviour
             _timerCount = 4.8f;
         }
 
-        //0 1.6 3.1 4.5   
-        //_timerCount = 4.5f;
-
         _go = true;
-       // Debug.Log($"BlockMovement Awake()");
+
+        InputManager.Instance.EventTap += Stop;
     }
 
     private void Start()
     {
-        InputManager.Instance.EventTap += Stop;
         _dropAudio.clip = Resources.Load<AudioClip>(("Music/" + _walkAudioName));
         _dropAudio.Play();
     }
@@ -216,6 +211,12 @@ public class BlockMovement : MonoBehaviour
         yield return new WaitForSeconds(_timeExitRound);
         EventExit?.Invoke();
         GetComponent<Block>().Collision.StopLighting();
+    }
+
+    private void OnDestroy()
+    {
+        if (InputManager.TryInstance != null)
+            InputManager.Instance.EventTap -= Stop;
     }
 }
 

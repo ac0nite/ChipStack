@@ -38,7 +38,6 @@ public class GradientManager : MonoBehaviour
 
     public void GenerateGradient()
     {
-        //Debug.Log($"first: {_firstColor}  second: {_secondColor}");
         _evalute = 0f;
         float steps = 6 - 1f;
         for (int i = 0; i < 6; i++)

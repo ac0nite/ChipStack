@@ -23,8 +23,6 @@ public class BlockColor : MonoBehaviour
     {
         if (GameManager.TryInstance != null)
             GameManager.Instance.FogColor.EventUpdateFogColor -= OnUpdateFogColor;
-        //GameManager.Instance.FogColor.EventUpdateFogColor -= OnUpdateFogColor;
-        //Camera.main.GetComponent<UpdateFogColor>().EventUpdateFogColor -= OnUpdateFogColor;
     }
 
     void Start()
