@@ -1,22 +1,23 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using Core.Singleton;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.PlayerLoop;
-using UnityEngine.UI;
 
 public class InputManager : SingletoneGameObject<InputManager>
 {
-    public Action EventTap;
+    public Action TapEvent;
     private string _tap;
     private Touch _touch;
+    private bool _isLocked;
+
     private void Update()
     {
+        if(_isLocked) return;
+        
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            EventTap?.Invoke();
+            TapEvent?.Invoke();
         }
 
 #elif UNITY_STANDALONE_WIN
@@ -35,4 +36,7 @@ public class InputManager : SingletoneGameObject<InputManager>
                 }
 #endif
     }
+
+    public void Locked() => _isLocked = true;
+    public void UnLocked() => _isLocked = false;
 }

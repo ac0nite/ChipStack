@@ -1,0 +1,33 @@
+﻿using System;
+using Core.Pool;
+
+namespace Blocks
+{
+    public class BlockSpawner : SpawnerBase<BlockView, Block>
+    {
+        public BlockSpawner(BlockView prefab, int capacity, Func<BlockView, Block> factory) : base(prefab, capacity, factory)
+        {
+        }
+
+        protected override BlockView InternalInstantiate(BlockView view)
+        {
+            view.Component.SetTransformDefault();
+            view.Component.DisablePhysics();
+            view.Component.DisableActive();
+        
+            return base.InternalInstantiate(view);
+        }
+
+        protected override Block Initialise(Block presenter)
+        {
+            presenter.Enable();
+            return presenter;
+        }
+
+        protected override Block Clear(Block presenter)
+        {
+            presenter.ClearAndDisable();
+            return presenter;
+        }
+    }
+}

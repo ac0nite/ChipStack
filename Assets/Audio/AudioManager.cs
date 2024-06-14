@@ -1,15 +1,21 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] [Range(0.0f, 1.0f)] private float _volume = 1f;
-    [SerializeField] private AudioSource _backgrountAudioSource = null;
+    [SerializeField] private AudioSource _primaryAudioSource = null;
+    [SerializeField] private AudioSource _secondaryAudioSource;
     [SerializeField] private string _backgrountAudioPlaying = null;
     [SerializeField] private string _backgrountAudioStart = null;
     [SerializeField] public bool IsSound = false;
+    private static AudioManager _instance;
+
+    private void Awake()
+    {
+        _instance = this;
+    }
 
     void Start()
     {
@@ -21,20 +27,15 @@ public class AudioManager : MonoBehaviour
     {
         StopMusicBackground();
         AudioClip clip = Resources.Load<AudioClip>(("Music/" + _backgrountAudioPlaying));
-        _backgrountAudioSource.clip = clip;
-        _backgrountAudioSource.Play();
+        _primaryAudioSource.clip = clip;
+        _primaryAudioSource.Play();
     }
     public void StartMusicBackground()
     {
         StopMusicBackground();
         AudioClip clip = Resources.Load<AudioClip>(("Music/" + _backgrountAudioStart));
-        _backgrountAudioSource.clip = clip;
-        _backgrountAudioSource.Play();
-    }
-
-    public void StopMusicBackground()
-    {
-        _backgrountAudioSource.Stop();
+        _primaryAudioSource.clip = clip;
+        _primaryAudioSource.Play();
     }
 
     public void NoVolumeSound()
@@ -47,5 +48,32 @@ public class AudioManager : MonoBehaviour
     {
         _volume = 1f;
         AudioListener.volume = _volume;
+    }
+    
+    public static void PlayOneShot(string clipName)
+    {
+        _instance._secondaryAudioSource.PlayOneShot(Resources.Load<AudioClip>($"Music/{clipName}"));
+    }
+    
+    public static void Play(string clipName)
+    {
+        _instance._secondaryAudioSource.clip = Resources.Load<AudioClip>($"Music/{clipName}");
+        _instance._secondaryAudioSource.Play();
+    }
+
+    public static void Stop()
+    {
+        _instance._secondaryAudioSource.Stop();
+    }
+
+    private void StopMusicBackground()
+    {
+        _primaryAudioSource.Stop();
+    }
+
+    public static void Mute(bool onSound)
+    {
+        _instance._primaryAudioSource.mute = onSound;
+        _instance._secondaryAudioSource.mute = onSound;
     }
 }

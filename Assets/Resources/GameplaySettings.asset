@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ecb51e492d45d78fd123826907f669, type: 3}
+  m_Name: GameplaySettings
+  m_EditorClassIdentifier: 
+  ScreensSettings:
+    LoadingScreen:
+      ShowFadeDuration: 1
+      HideFadeDuration: 0.5
+      HideEaseType: 2
+  MovementSettings:
+    Center:
+      Speed: 0.8
+      ShiftFromEdge: 0.5
+      ShiftFromUp: 0.2
+    Line:
+      Speed: 8
+      StartPosition: -13
+      CompletedDistance: 0.01
+    Circle:
+      Type: 2
+      Radius:
+        Amplitude: 2
+        Min: 1
+        Speed: 0.3
+      Speed:
+        Amplitude: 2.86
+        Min: 0.79
+        Speed: 1
+    MoveAnimation:
+      Duration: 0.2
+      Ease: 5
+  CameraSettings:
+    Ratio: 0
+    Offset: 0
+  GradientSettings:
+    Step: 0.03
+    GradientArray: []
+  CameraMovementSettings:
+    RotateDuration: 30
+    RotateEase: 1
+    MoveDuration: 2
+    MoveEase: 10
+    ResetDuration: 3
+    ResetEase: 5
+  BlockModelSettings:
+    BlockPrefab: {fileID: 7476946508061357136, guid: 8854dead60aa32e47af29c3cc5566fed,
+      type: 3}
+    BlockPoolCapacity: 30
+    DefaultBlockSize: {x: 5, y: 1, z: 5}
+    RemainderPrefab: {fileID: 7590861073006618975, guid: db95e9ce2deb0514facaa76ff9683b74,
+      type: 3}
+    RemainderPoolCapacity: 3
+  PreparingGameplay:
+    StartPosition: {x: 0, y: 15, z: 0}
+    MoveDuration: 1
+    MoveEase: 11
+    ElasticScale: 1.1
+    ElasticDuration: 0.18
+    ElasticEase: 9
+  RewardSettings:
+    AdditionalPercentForStack: 3
+    NumberOfStackLevelsToReward: 4
+    AdditionalPercentForRound: 3
+  RoundSettings:
+    MultiplicityBlocksToUpCamera: 2
+    CameraUpPosition: {x: 0, y: 1.45, z: 0}
