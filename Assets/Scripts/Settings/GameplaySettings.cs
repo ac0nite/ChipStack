@@ -2,11 +2,9 @@
 using CameraComponent;
 using ColorComponent;
 using Core.Utils;
-using FSM.States;
 using Gameplay;
 using UI.Screens;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Settings
 {

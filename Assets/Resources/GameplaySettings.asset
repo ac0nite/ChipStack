@@ -19,9 +19,9 @@ MonoBehaviour:
       HideEaseType: 2
   MovementSettings:
     Center:
-      Speed: 0.8
+      Speed: 0.5
       ShiftFromEdge: 0.5
-      ShiftFromUp: 0.2
+      ShiftFromUp: 0.4
     Line:
       Speed: 8
       StartPosition: -13
@@ -37,7 +37,7 @@ MonoBehaviour:
         Min: 0.79
         Speed: 1
     MoveAnimation:
-      Duration: 0.2
+      Duration: 0.5
       Ease: 5
   CameraSettings:
     Ratio: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   CameraMovementSettings:
     RotateDuration: 30
     RotateEase: 1
-    MoveDuration: 2
+    MoveDuration: 3
     MoveEase: 10
     ResetDuration: 3
     ResetEase: 5
@@ -60,6 +60,8 @@ MonoBehaviour:
     RemainderPrefab: {fileID: 7590861073006618975, guid: db95e9ce2deb0514facaa76ff9683b74,
       type: 3}
     RemainderPoolCapacity: 3
+    IntersectionSettings:
+      MinSize: 0.25
   PreparingGameplay:
     StartPosition: {x: 0, y: 15, z: 0}
     MoveDuration: 1

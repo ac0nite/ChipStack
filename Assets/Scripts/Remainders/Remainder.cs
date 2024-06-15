@@ -3,6 +3,7 @@ using Core.Pool;
 using Intersections;
 using MEC;
 using Remainders;
+using UnityEngine;
 
 public class Remainder : IPresenter<RemainderView>
 {
@@ -22,6 +23,9 @@ public class Remainder : IPresenter<RemainderView>
         intersection.one.ApplyTo(View.OneRemainder);
         intersection.two.ApplyTo(View.TwoRemainder);
         
+        View.OneRemainder.gameObject.SetActive(intersection.one.IsValid);
+        View.TwoRemainder.gameObject.SetActive(intersection.two.IsValid);
+
         View.Component.EnableRenderers();
         View.Component.EnablePhysics();
         

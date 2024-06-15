@@ -52,6 +52,7 @@ namespace Gameplay
             var previewBlock = _blockFacade.LastBlockSpawned;
             var movableBlock = _blockFacade.BlockSpawn();
             movableBlock.Size = previewBlock.Size;
+
             _movement.Play(movableBlock, previewBlock, _defaultSettings);
             Timing.CallDelayed(1f, _input.UnLocked);
             OnNextBlockEvent?.Invoke();
@@ -67,7 +68,7 @@ namespace Gameplay
 
             if (_intersection.HasIntersect)
             {
-                _animation.Play(UpdateAnimationParam, () => 
+                _animation.Play(CreateAnimationParam(), () => 
                 {
                     var intersection = _intersection.AreaOfIntersection;
                     var remainderIntersection = _intersection.AreaOfRemaindersIntersection;
@@ -84,8 +85,8 @@ namespace Gameplay
                 OnExitRoundEvent?.Invoke();
             }
         }
-        private TweenAnimation.MoveObject UpdateAnimationParam =>
-            new TweenAnimation.MoveObject(_blockFacade.LastBlockSpawned, new Vector3(_blockFacade.LastBlockSpawned.Position.x, _blockFacade.CenterPosition.y, _blockFacade.LastBlockSpawned.Position.z));
+        private TweenAnimation.MoveObject CreateAnimationParam() =>
+            new (_blockFacade.LastBlockSpawned, new Vector3(_blockFacade.LastBlockSpawned.Position.x, _blockFacade.CenterPosition.y, _blockFacade.LastBlockSpawned.Position.z));
         
         private IComponent CreateCenterComponent()
         {

@@ -30,6 +30,7 @@ namespace Blocks
             _remainderSpawner = new RemainderSpawner(settings.RemainderPrefab, settings.RemainderPoolCapacity, view => new Remainder(view));
             _stepPosition = Vector3.up * settings.BlockPrefab.transform.lossyScale.y;
             
+            Intersection = new BlocksIntersection(settings.IntersectionSettings);
             CenterPosition = _defaultPosition = -_stepPosition * 0.5f;
         }
     
@@ -45,7 +46,7 @@ namespace Blocks
         public Block LastBlockSpawned { get; private set; }
 
         public Remainder RemainderSpawn() => _remainderSpawner.Spawn();
-        public BlocksIntersection Intersection { get; } = new();
+        public BlocksIntersection Intersection { get; private set; }
 
         public void Clear()
         {
@@ -65,6 +66,7 @@ namespace Blocks
             public Vector3 DefaultBlockSize;
             public RemainderView RemainderPrefab;
             public int RemainderPoolCapacity;
+            public BlocksIntersection.Settings IntersectionSettings;
         }
     }
 }

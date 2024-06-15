@@ -34,6 +34,17 @@ namespace Core.Helper
                 [Range(0f, 20f)] public float Amplitude;
                 [Range(0f, 20f)] public float Min;
                 [Range(0f, 20f)] public float Speed;
+                
+                public void UpdateAmplitude(float value) => Amplitude = value;
+                public void UpdateMin(float value) => Min = value;
+                public void UpdateSpeed(float value) => Speed = value;
+
+                public Settings Clone() => new Settings()
+                {
+                    Amplitude = Amplitude,
+                    Min = Min,
+                    Speed = Speed
+                };
             }
         }
     }

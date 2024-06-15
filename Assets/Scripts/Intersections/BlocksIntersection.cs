@@ -1,4 +1,5 @@
-﻿using Components;
+﻿using System;
+using Components;
 using UnityEngine;
 
 namespace Intersections
@@ -10,7 +11,16 @@ namespace Intersections
         private Rect? _intersection;
         private (Rect oneRemainder, Rect otherRemainder) _remainders;
     
-        private static readonly Intersection IntersectionZero = Intersection.Zero;
+        private readonly Intersection IntersectionZero = Intersection.Zero;
+        private readonly Settings _settings;
+
+        public BlocksIntersection(Settings settings)
+        {
+            _settings = settings;
+            _bottom = null;
+            _top = null;
+            _intersection = null;
+        }
 
         public void Add(IComponent block)
         {
@@ -42,8 +52,10 @@ namespace Intersections
                 var bottomRect = GetRect(_bottom);
                 var topRect = GetRect(_top);
 
-                if ((_intersection = GetIntersection(bottomRect, topRect)) != null)
+                if ((_intersection = GetIntersectionWithClamp(bottomRect, topRect, _settings.MinSize)) != null)
+                {
                     _remainders = GetTopRemainderIntersection(_intersection.Value);
+                }
             
                 return _intersection != null;    
             }
@@ -54,7 +66,6 @@ namespace Intersections
         public (Intersection One, Intersection Two) AreaOfRemaindersIntersection => 
             (ConvertRectToIntersectionTransform(_remainders.oneRemainder, _top), 
                 ConvertRectToIntersectionTransform(_remainders.otherRemainder, _top));
-
         private Rect GetRect(IComponent block)
         {
             var pos = block.Position;
@@ -77,6 +88,36 @@ namespace Intersections
             if (x1 < x2 && y1 < y2)
             {
                 return new Rect(x1, y1, x2 - x1, y2 - y1);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        
+        private Rect? GetIntersectionWithClamp(Rect a, Rect b, float min)
+        {
+            var x1 = Mathf.Max(a.xMin, b.xMin);
+            var y1 = Mathf.Max(a.yMin, b.yMin);
+            var x2 = Mathf.Min(a.xMax, b.xMax);
+            var y2 = Mathf.Min(a.yMax, b.yMax);
+
+            if (x1 < x2 && y1 < y2)
+            {
+                var width = x2 - x1;
+                var height = y2 - y1;
+                if (b.width - width < min)
+                {
+                    width = b.width;
+                    x1 = a.xMin;
+                }
+                
+                if (b.height - height < min)
+                {
+                    height = b.height;
+                    y1 = a.yMin;
+                }
+                return new Rect(x1, y1, width, height);
             }
             else
             {
@@ -118,6 +159,12 @@ namespace Intersections
 
             return (new Rect(remOnePos.x, remOnePos.y, width, topScale.z), 
                 new Rect(remTwoPos.x, remTwoPos.y, intersection.width, height));
+        }
+        
+        [Serializable]
+        public struct Settings
+        {
+            [Min(0)] public float MinSize;
         }
     }
 }

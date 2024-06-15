@@ -18,6 +18,7 @@ namespace Blocks.Movements
         private readonly Random _random;
         private float _samplingRate;
         private IComponent _movable;
+        private CustomMath.CosExtended.Settings _cashedRadiusSettings;
 
         public CircleMovement(IComponent centerPoint)
         {
@@ -31,12 +32,14 @@ namespace Blocks.Movements
             _radius.SetSettings(settings.Radius);
             _speed.SetSettings(settings.Speed);
             _samplingRate = 0f;
+            
+            _cashedRadiusSettings = settings.Radius.Clone();
         }
 
         public void AssignMoving(IComponent component)
         {
             _movable = component;
-            
+            // _cashedRadiusSettings.UpdateAmplitude();
             UpdatePosition(0);
             ApplyPosition();
         }
@@ -70,7 +73,7 @@ namespace Blocks.Movements
         [Serializable]
         public struct Settings
         {
-            public CircleMovement.CircleType Type;
+            public CircleType Type;
             public CustomMath.CosExtended.Settings Radius;
             public CustomMath.CosExtended.Settings Speed;
         }

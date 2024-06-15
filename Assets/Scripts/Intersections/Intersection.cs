@@ -19,6 +19,7 @@ namespace Intersections
             applyToTransform.position = _position;
             applyToTransform.localScale = _scale;
         }
+        public bool IsValid => _scale.x > 0 && _scale.z > 0;
         
         public int Area => (int)(_scale.x * _scale.z);
     
@@ -28,6 +29,7 @@ namespace Intersections
             _scale = Vector3.zero
         };
 
-        public override string ToString() => $"Position:{_position} Scale:{_scale}";
+        //public override string ToString() => $"Position:{_position} Scale:{_scale}";
+        public override string ToString() => $"Scale:{_scale.x} {_scale.z}";
     }
 }
