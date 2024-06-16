@@ -10,9 +10,16 @@
             _view.OnDisposeEvent += ViewDisposeHandler;
         }
 
+        public bool IsModal => _view.IsModal;
+
+        public void UpdateOrder(int order = 0)
+        {
+            _view.ChangeOrder(order);
+        }
+
         public virtual void Show()
         {
-            if(!_view.IsVisible) 
+            if (!_view.IsVisible)
                 _view.Show();
         }
 

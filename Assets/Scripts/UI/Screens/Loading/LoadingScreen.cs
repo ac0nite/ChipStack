@@ -15,7 +15,7 @@ namespace UI.Screens.Loading
 
         protected override void Subscribe()
         {
-            _settings = GameplaySettings.Instance.ScreensSettings.LoadingScreen;
+            _settings = GameplaySettings.Instance.ScreensSettings.Loading;
         }
 
         protected override void UnSubscribe()

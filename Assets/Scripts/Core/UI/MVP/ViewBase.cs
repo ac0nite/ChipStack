@@ -5,9 +5,13 @@ namespace Core.UI.MVP
 {
     public abstract class ViewBase : MonoBehaviour, IView
     {
-        protected Canvas _canvas;
-        public virtual bool IsVisible => _canvas.enabled;
+        [SerializeField] private bool _isModal = false;
+        
+        private Canvas _canvas;
         public event Action OnDisposeEvent;
+        
+        public virtual bool IsVisible => _canvas.enabled;
+        public bool IsModal => _isModal;
 
         protected virtual void Awake()
         {

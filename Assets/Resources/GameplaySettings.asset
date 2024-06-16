@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: GameplaySettings
   m_EditorClassIdentifier: 
   ScreensSettings:
-    LoadingScreen:
-      ShowFadeDuration: 1
-      HideFadeDuration: 0.5
-      HideEaseType: 2
+    Shading:
+      FadeDuration: 1
+      FadeEase: 4
+      BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5686275}
+    Loading:
+      ShowFadeDuration: 0
+      HideFadeDuration: 0
+      HideEaseType: 0
   MovementSettings:
     Center:
       Speed: 0.5
@@ -37,7 +41,7 @@ MonoBehaviour:
         Min: 0.79
         Speed: 1
     MoveAnimation:
-      Duration: 0.5
+      Duration: 0.2
       Ease: 5
   CameraSettings:
     Ratio: 0
@@ -61,7 +65,7 @@ MonoBehaviour:
       type: 3}
     RemainderPoolCapacity: 3
     IntersectionSettings:
-      MinSize: 0.25
+      MinSize: 0.2
   PreparingGameplay:
     StartPosition: {x: 0, y: 15, z: 0}
     MoveDuration: 1

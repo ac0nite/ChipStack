@@ -1,4 +1,5 @@
-﻿using Core.UI.MVP;
+﻿using Core.UI.Behaviour;
+using Core.UI.MVP;
 
 namespace Core.UI
 {
@@ -6,12 +7,10 @@ namespace Core.UI
     {
         void Initialise(IScreenViewKeeper keeper);
 
-        void Register<TPresenter, TView>(params object[] objects)
+        TPresenter Register<TPresenter, TView>(params object[] objects)
             where TPresenter : ScreenPresenterBase<TView>
             where TView : ViewBase;
 
-        void ShowScreen<TView>() where TView : ViewBase;
-        void HideScreen<TView>() where TView : ViewBase;
-        void CloseCurrentScreen();
+        IScreenBehaviour Behaviour { get; set; }
     }
 }

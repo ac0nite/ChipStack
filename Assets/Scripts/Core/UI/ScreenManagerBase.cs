@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.UI.Behaviour;
 using Core.UI.MVP;
 
 namespace Core.UI
@@ -9,13 +10,12 @@ namespace Core.UI
         protected IScreenViewKeeper viewKeeper;
         protected Dictionary<Type, IScreenPresenter> presenters = new();
         protected PresenterFactory factory = new();
-        protected Type currentScreenType = null;
 
         public virtual void Initialise(IScreenViewKeeper keeper)
         {
             viewKeeper = keeper;
         }
-        public void Register<TPresenter, TView>(params object[] model)
+        public TPresenter Register<TPresenter, TView>(params object[] model)
             where TPresenter : ScreenPresenterBase<TView>
             where TView : ViewBase
         {
@@ -23,24 +23,23 @@ namespace Core.UI
             var view = viewKeeper.GetView<TView>();
             var presenter = factory.Create<TPresenter, TView>(view, model);
             presenters.Add(type, presenter);
+            return presenter;
         }
+
+        public IScreenBehaviour Behaviour { get; set; }
+
         public void ShowScreen<Tview>() where Tview : ViewBase
         {
-            CloseCurrentScreen();
-            currentScreenType = TypeScreenValidate<Tview>();
-            presenters[currentScreenType].Show();
+            var screenType = TypeScreenValidate<Tview>();
+            var presenter = presenters[screenType];
+            Behaviour.Show(presenter);
         }
 
         public void HideScreen<Tview>() where Tview : ViewBase
         {
-            var type = TypeScreenValidate<Tview>();
-            presenters[type].Hide();
-        }
-        public void CloseCurrentScreen()
-        {
-            if(currentScreenType == null) return;
-            presenters[currentScreenType].Hide();
-            currentScreenType = null;
+            var screenType = TypeScreenValidate<Tview>();
+            var presenter = presenters[screenType];
+            Behaviour.Hide(presenter);
         }
         protected Type TypeScreenExists<TView>() where TView : ViewBase
         {

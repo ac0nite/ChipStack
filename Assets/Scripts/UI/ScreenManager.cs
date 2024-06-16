@@ -1,11 +1,13 @@
-﻿using System;
-using Core.UI;
+﻿using Core.UI;
+using Core.UI.Behaviour;
 using Core.UI.MVP;
 using Cysharp.Threading.Tasks;
+using UI.Popups;
 using UI.Screens.Gameplay;
 using UI.Screens.Loading;
 using UI.Screens.PreGameplay;
 using UI.Screens.Result;
+using UI.Screens.Shading;
 
 namespace UI
 {
@@ -17,10 +19,17 @@ namespace UI
         public static void Create(IScreenViewKeeper keeper, GameplayContext context)
         {
             _instance.Initialise(keeper);
+            
             _instance.Register<LoadingScreenPresenter, LoadingScreen>();
             _instance.Register<PreGameplayScreenPresenter, PreGameplayScreen>(context.StatesMachineModel);
             _instance.Register<GameplayScreenPresenter, GameplayScreen>(context.Currency.ScoreModelGetter);
             _instance.Register<ResultScreenPresenter, ResultScreen>(context.Currency.ScoreModelGetter, context.StatesMachineModel);
+
+            _instance.Register<ModifyScreenPopupPresenter, ModifyScreenPopup>();
+            
+            var shading = _instance.Register<ShadingScreenPresenter, ShadingScreen>();
+            
+            _instance.Behaviour = new ScreensBehaviour(1, new ScreenBehaviour(), new ModalScreenBehaviour(shading));
         }
         
         public static void Show<Tview>() where Tview : ViewBase
@@ -31,11 +40,6 @@ namespace UI
         public static void Hide<Tview>() where Tview : ViewBase
         {
             _instance.HideScreen<Tview>();
-        }
-        
-        public static void CloseOpeningScreen()
-        {
-            _instance.CloseCurrentScreen();
         }
 
         #region LOADING

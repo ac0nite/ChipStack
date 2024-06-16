@@ -1,6 +1,7 @@
 ﻿using CameraComponent;
 using Gameplay;
 using UI;
+using UI.Popups;
 using UI.Screens.Gameplay;
 
 namespace FSM.States
@@ -21,6 +22,7 @@ namespace FSM.States
         public override void Enter()
         {
             ScreenManager.Show<GameplayScreen>();
+            ScreenManager.Show<ModifyScreenPopup>();
             
             _cameraMover.Rotate();
             _roundHandler.Subscribe();
