@@ -40,9 +40,19 @@ namespace Blocks.Movements
         {
             _movable = component;
             // _cashedRadiusSettings.UpdateAmplitude();
+
+            var min = Mathf.Min(_movable.Size.x, _movable.Size.z) * 0.4f;
+            var amplitude = Mathf.Max(_movable.Size.x, _movable.Size.z) * 0.4f;
+            
+            _cashedRadiusSettings.UpdateMin(min);
+            _cashedRadiusSettings.UpdateAmplitude(amplitude);
+
+            _radius.SetSettings(_cashedRadiusSettings);
+            
             UpdatePosition(0);
             ApplyPosition();
         }
+        
 
         public void UpdatePosition(float deltaTime)
         {
@@ -59,8 +69,10 @@ namespace Blocks.Movements
                 CircleType.random => throw new InvalidEnumArgumentException("Random type not supported"),
                 _ => throw new ArgumentOutOfRangeException()
             };
-        
+#if UNITY_EDITOR
+            // Debug.Log($"Radius: {Vector3.Distance(center, _movable.Position)} Min:{_cashedRadiusSettings.Min} Amp:{_cashedRadiusSettings.Amplitude}");
             Debug.DrawLine(center, _movable.Position, Color.red);
+#endif
         }
 
         public Vector3 Position { get; private set; }
