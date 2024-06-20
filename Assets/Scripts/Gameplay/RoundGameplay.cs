@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Numerics;
 using Animations;
 using Blocks;
 using Components;
+using DG.Tweening;
 using Intersections;
 using MEC;
+using TMPro;
 using UnityEngine;
+using RectTransform = Intersections.RectTransform;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Gameplay
 {
@@ -15,8 +21,11 @@ namespace Gameplay
         private readonly InputManager _input;
         private readonly BlocksIntersection _intersection;
         private readonly Movement.Settings _defaultSettings;
-        private readonly TweenAnimation _animation;
-        
+        private readonly TweenAnimation _blockAnimation;
+        private readonly TweenAnimation _remainderAnimation;
+        private Block _movableBlock;
+        private Remainder _remainder;
+
         public event Action OnEnterRoundEvent;
         public event Action OnNextBlockEvent;
         public event Action OnDownBlockEvent;
@@ -31,7 +40,9 @@ namespace Gameplay
             _movement = new Movement(CreateCenterComponent());
             _input = InputManager.Instance;
             _intersection = _blockFacade.Intersection;
-            _animation = TweenAnimation.CreateMoveAnimation(defaultSettings.MoveAnimation);
+            
+            _blockAnimation = TweenAnimation.CreateMoveDownAnimation(defaultSettings.DownBlockMoveAnimation);
+            _remainderAnimation = TweenAnimation.CreateMoveRemainderAnimation(defaultSettings.RemainderMoveAnimation, defaultSettings.RemainderElasticAnimation);
         }
 
         public void Run()
@@ -50,10 +61,10 @@ namespace Gameplay
         private void MoveNextBlock()
         {
             var previewBlock = _blockFacade.LastBlockSpawned;
-            var movableBlock = _blockFacade.BlockSpawn();
-            movableBlock.Size = previewBlock.Size;
+            _movableBlock = _blockFacade.BlockSpawn();
+            _movableBlock.Size = previewBlock.Size;
 
-            _movement.Play(movableBlock, previewBlock, _defaultSettings);
+            _movement.Play(_movableBlock, previewBlock, _defaultSettings);
             Timing.CallDelayed(1f, _input.UnLocked);
             OnNextBlockEvent?.Invoke();
         }
@@ -63,34 +74,67 @@ namespace Gameplay
             OnDownBlockEvent?.Invoke();
             _movement.Stop();
             _input.Locked();
-            
-            var lastBlock = _blockFacade.LastBlockSpawned;
 
             if (_intersection.HasIntersect)
             {
-                _animation.Play(CreateAnimationParam(), () => 
+                UpdateDownAnimationParam(_intersection.Offset);
+
+                _blockAnimation.Play(() =>
                 {
-                    var intersection = _intersection.AreaOfIntersection;
-                    var remainderIntersection = _intersection.AreaOfRemaindersIntersection;
-                    _blockFacade.LastBlockSpawned.ChangeTransform(intersection);
-                    _blockFacade.RemainderSpawn().Initialise(remainderIntersection).Enable();
-                    OnIntersectionAreaEvent?.Invoke(intersection.Area);
+                    var v1 = _movableBlock.Position;
+                    
+                    var generalRectTransform = _intersection.GeneralRect.ToRectTransform(_movableBlock.Position.y, _movableBlock.Size.y);
+                    var remaindersRectTransform = _intersection.RemaindersRect.ToRectTransform(_movableBlock.Position.y, _movableBlock.Size.y);
+                    
+                    _movableBlock.ChangeTransform(generalRectTransform);
+
+                    var v0 = _movableBlock.Position;
+                    _remainder = _blockFacade.RemainderSpawn().Initialise(remaindersRectTransform);
+                    _remainder.Enable();
+                    UpdateRemainderAnimationParam(remaindersRectTransform, v1 - v0);
+                    _remainderAnimation.Play(null);
+                    OnIntersectionAreaEvent?.Invoke(generalRectTransform.Area);
                     MoveNextBlock();
                 });
             }
             else
             {
-                Debug.LogWarning($"Block has no intersection", lastBlock.View);
-                lastBlock.View.Component.EnablePhysics();
+                Debug.LogWarning($"Block has no intersection", _movableBlock.View);
+                _movableBlock.View.Component.EnablePhysics();
                 OnExitRoundEvent?.Invoke();
             }
         }
-        private TweenAnimation.MoveObject CreateAnimationParam() =>
-            new (_blockFacade.LastBlockSpawned, new Vector3(_blockFacade.LastBlockSpawned.Position.x, _blockFacade.CenterPosition.y, _blockFacade.LastBlockSpawned.Position.z));
-        
-        private IComponent CreateCenterComponent()
+
+        private void UpdateDownAnimationParam(Vector2 offset)
         {
-            return new GameObject("Center").AddComponent<BaseComponent>();
+            // if (offset != Vector2.zero)
+            // {
+            //     Debug.Log($"offset: {offset}");
+            //     UnityEditor.EditorApplication.isPaused = true;
+            // }
+            
+            _blockAnimation.MoveParam.UpdateParams(
+                _movableBlock,
+                new Vector3(_movableBlock.Position.x + offset.x, _blockFacade.BaseHeight, _movableBlock.Position.z + offset.y));
         }
+
+        private void UpdateRemainderAnimationParam((RectTransform one, RectTransform two) remainders, Vector3 direction)
+        {
+            var remOneIsValid = remainders.one.IsValid;
+            var remTwoIsValid = remainders.two.IsValid;
+
+            if (remOneIsValid && !remTwoIsValid)
+                direction.z = 0;
+            else if(!remOneIsValid && remTwoIsValid)
+                direction.x = 0;
+
+            var move1 = _remainder.Position + direction.normalized * 2f;
+            var move2 = new Vector3(move1.x, -10, move1.z);
+            var elastic = new Vector3(_remainder.Size.x * 1.1f, _remainder.Size.y, _remainder.Size.z * 1.1f);
+            _remainderAnimation.MoveParam.UpdateParams(_remainder, move1, move2);
+            _remainderAnimation.SizeParam.UpdateParams(_remainder, elastic);
+        }
+
+        private IComponent CreateCenterComponent() => new GameObject("Center").AddComponent<BaseComponent>();
     }
 }

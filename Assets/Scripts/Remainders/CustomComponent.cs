@@ -58,5 +58,10 @@ namespace Remainders
 
         public void EnableActive() => _transform.gameObject.SetActive(true);
         public void DisableActive() => _transform.gameObject.SetActive(false);
+
+        public void AddForce(Vector3 direction)
+        {
+            _rigidbody.AddForce(direction, ForceMode.Impulse);
+        }
     }
 }

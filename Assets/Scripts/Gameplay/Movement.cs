@@ -78,7 +78,9 @@ namespace Gameplay
             public CenterMovement.Settings Center;
             public LineMovement.Settings Line;
             public CircleMovement.Settings Circle;
-            public TweenAnimation.Settings MoveAnimation;
+            public TweenAnimation.Settings DownBlockMoveAnimation;
+            public TweenAnimation.Settings RemainderMoveAnimation;
+            public TweenAnimation.Settings RemainderElasticAnimation;
         }
     }
 }

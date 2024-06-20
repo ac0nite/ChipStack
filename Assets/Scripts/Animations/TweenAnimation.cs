@@ -1,52 +1,127 @@
 ﻿using System;
+using System.Collections.Generic;
 using Components;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Animations
 {
     public class TweenAnimation
     {
-        private Sequence _sequence;
-        private MoveObject _moveObject = null;
+        private Sequence sequence;
+        public AnimationParam MoveParam { get; set; } = new(component => component.Position);
+        public AnimationParam SizeParam { get; set; } = new(component => component.Size);
 
-        public static TweenAnimation CreateMoveAnimation(Settings settings)
+        public static TweenAnimation CreateMoveDownAnimation(Settings settings)
         {
             var tween = new TweenAnimation();
-            tween.CreateSequence(tween.CreateMoveTween(settings));
+            tween.AppendSequence(tween.CreateMoveTween(settings));
             return tween;
         }
 
-        public void Play(MoveObject moveObject, Action callback)
+        public static TweenAnimation CreateMoveRemainderAnimation(Settings move, Settings elastic)
         {
-            _moveObject = moveObject;
-            _sequence?.OnComplete(() => callback?.Invoke()).Restart(false);
+            var tween = new TweenAnimation();
+            tween.AppendSequence(tween.CreateMoveTween(move).OnComplete(tween.MoveParam.NextParam));
+            tween.JoinSequence(tween.CreateSizeElasticTween(elastic));
+            tween.AppendSequence(tween.CreateMoveTween(move));
+            return tween;
         }
 
-        private Tweener CreateMoveTween(Settings settings) => DOVirtual.Float(0f, 1f, settings.Duration, TweenMoveUpdate).SetEase(settings.Ease);
+        public void Play(Action callback)
+        {
+            sequence
+                ?.OnComplete(() => callback?.Invoke())
+                .Restart(false);
+        }
+
+        private Tweener CreateMoveTween(Settings settings) => DOVirtual
+            .Float(0f, 1f, settings.Duration, TweenMoveUpdate)
+            .SetEase(settings.Ease);
+        
+        private Tweener CreateSizeElasticTween(Settings settings) => DOVirtual
+            .Float(0f, 1f, settings.Duration, TweenSizeElasticUpdate)
+            .SetEase(settings.Ease)
+            .SetLoops(2, LoopType.Yoyo);
 
         private void TweenMoveUpdate(float value)
         {
-            _moveObject.Component.Position = Vector3.Lerp(_moveObject.Component.Position, _moveObject.EndPosition, value);
-        }
-
-        private void CreateSequence(params Tween[] tweens)
-        {
-            _sequence = DOTween.Sequence();
-            foreach (var tween in tweens)
-                _sequence.Append(tween);
-            _sequence.SetAutoKill(false).SetRecyclable(true).Pause();
+            MoveParam.Component.Position = Vector3.Lerp(MoveParam.From, MoveParam.To, value);
         }
         
-        public class MoveObject
+        private void TweenSizeElasticUpdate(float value)
         {
-            public MoveObject(IComponent component, Vector3 endPosition)
+            SizeParam.Component.Size = Vector3.Lerp(SizeParam.From, SizeParam.To, value);
+        }
+
+        private void UpdateTarget()
+        {
+            MoveParam.NextParam();
+        }
+
+        private void AppendSequence(params Tween[] tweens)
+        {
+            sequence ??= DOTween.Sequence();
+            
+            foreach (var tween in tweens)
+                sequence.Append(tween);
+            
+            sequence
+                .SetAutoKill(false)
+                .SetRecyclable(true)
+                .Pause();
+        }
+        
+        private void JoinSequence(params Tween[] tweens)
+        {
+            sequence ??= DOTween.Sequence();
+            
+            foreach (var tween in tweens)
+                sequence.Join(tween);
+            
+            sequence
+                .SetAutoKill(false)
+                .SetRecyclable(true)
+                .Pause();
+        }
+        
+
+        public class AnimationParam
+        {
+            private int index;
+            private List<Vector3> available = new(3);
+
+            public delegate Vector3 GetValueDelegate(IComponent component);
+
+            private GetValueDelegate GetValue;
+            public AnimationParam(GetValueDelegate getValue)
+            {
+                GetValue = getValue;
+            }
+            public void UpdateParams(IComponent component, params Vector3[] data)
             {
                 Component = component;
-                EndPosition = endPosition;
+//                Debug.Log(Component.Position);
+                
+                available.Clear();
+                available.AddRange(data);
+                
+                index = 0;
+                From = GetValue(Component);
+                To = available[index];
             }
-            public IComponent Component { get; }
-            public Vector3 EndPosition { get; }
+
+            public void NextParam()
+            {
+                index++;
+                From = GetValue(Component);
+                To = available[index];
+                Debug.Log($"Next param: {From} => {To}");
+            }
+            public IComponent Component { get; private set; }
+            public Vector3 From { get; private set; }
+            public Vector3 To { get; private set; }
         }
         
         [Serializable]
@@ -54,6 +129,7 @@ namespace Animations
         {
             public float Duration;
             public Ease Ease;
+            public float Delay;
         }
     }
 }

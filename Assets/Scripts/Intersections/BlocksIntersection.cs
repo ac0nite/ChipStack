@@ -8,10 +8,11 @@ namespace Intersections
     {
         private IComponent _bottom;
         private IComponent _top;
-        private Rect? _intersection;
-        private (Rect oneRemainder, Rect otherRemainder) _remainders;
+        
+        private Rect _general;
+        private (Rect one, Rect two) _remainders;
     
-        private readonly Intersection IntersectionZero = Intersection.Zero;
+        private readonly RectTransform _rectTransformZero = RectTransform.Zero;
         private readonly Settings _settings;
 
         public BlocksIntersection(Settings settings)
@@ -19,7 +20,6 @@ namespace Intersections
             _settings = settings;
             _bottom = null;
             _top = null;
-            _intersection = null;
         }
 
         public void Add(IComponent block)
@@ -39,7 +39,6 @@ namespace Intersections
         {
             _bottom = null;
             _top = null;
-            _intersection = null;
         }
 
         public bool HasIntersect
@@ -52,30 +51,18 @@ namespace Intersections
                 var bottomRect = GetRect(_bottom);
                 var topRect = GetRect(_top);
 
-                if ((_intersection = GetIntersectionWithClamp(bottomRect, topRect, _settings.MinSize)) != null)
-                {
-                    _remainders = GetTopRemainderIntersection(_intersection.Value);
-                }
-            
-                return _intersection != null;    
+                return HasIntersectionWithClamp(bottomRect, topRect, _settings.MinSize);    
             }
         }
 
-        public Intersection AreaOfIntersection => ConvertRectToIntersectionTransform(_intersection, _top);
-    
-        public (Intersection One, Intersection Two) AreaOfRemaindersIntersection => 
-            (ConvertRectToIntersectionTransform(_remainders.oneRemainder, _top), 
-                ConvertRectToIntersectionTransform(_remainders.otherRemainder, _top));
+        public Rect GeneralRect => _general;
+        public (Rect one, Rect two) RemaindersRect => CalculateTopRemaindersRect(_general);
+        
         private Rect GetRect(IComponent block)
         {
             var pos = block.Position;
             var scale = block.Size;
             return new Rect(pos.x - scale.x / 2, pos.z - scale.z / 2, scale.x, scale.z);
-        }
-
-        private Intersection ConvertRectToIntersectionTransform(Rect? intersection, IComponent original)
-        {
-            return intersection == null ? IntersectionZero : new Intersection(intersection.Value, original);
         }
 
         private Rect? GetIntersection(Rect a, Rect b)
@@ -94,38 +81,52 @@ namespace Intersections
                 return null;
             }
         }
-        
-        private Rect? GetIntersectionWithClamp(Rect a, Rect b, float min)
+
+        public Vector2 Offset { get; private set; }
+
+        private bool HasIntersectionWithClamp(Rect a, Rect b, float min)
         {
             var x1 = Mathf.Max(a.xMin, b.xMin);
             var y1 = Mathf.Max(a.yMin, b.yMin);
             var x2 = Mathf.Min(a.xMax, b.xMax);
             var y2 = Mathf.Min(a.yMax, b.yMax);
+            Offset = Vector3.zero;
 
             if (x1 < x2 && y1 < y2)
             {
+                var x1d = x1;
+                var y1d = y1;
+                
                 var width = x2 - x1;
                 var height = y2 - y1;
                 if (b.width - width < min)
                 {
+                    Offset = new Vector2(x1 - a.xMin, 0);
                     width = b.width;
                     x1 = a.xMin;
                 }
                 
                 if (b.height - height < min)
                 {
+                    Offset = new Vector2(Offset.x, y1 - a.yMin);
                     height = b.height;
                     y1 = a.yMin;
                 }
-                return new Rect(x1, y1, width, height);
+                
+                // Debug.Log($"{x1d + Offset.x} {y1d + Offset.y} == {x1} {y1}");
+                
+                _general = new Rect(x1, y1, width, height);
+
+                return true;
             }
             else
             {
-                return null;
+                _general = Rect.zero;
+                return false;
             }
         }
 
-        private (Rect, Rect) GetTopRemainderIntersection(Rect intersection)
+        private (Rect, Rect) CalculateTopRemaindersRect(Rect intersection)
         {
             var topScale = _top.Size;
 

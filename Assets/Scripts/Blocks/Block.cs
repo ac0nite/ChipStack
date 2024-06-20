@@ -2,6 +2,7 @@
 using Core.Pool;
 using Intersections;
 using UnityEngine;
+using RectTransform = Intersections.RectTransform;
 
 namespace Blocks
 {
@@ -46,9 +47,9 @@ namespace Blocks
             View.Component.DisableActive();
         }
 
-        public void ChangeTransform(Intersection intersection)
+        public void ChangeTransform(RectTransform rectTransform)
         {
-            intersection.ApplyTo(View.transform);
+            rectTransform.ApplyTo(View.transform);
             View.Component.EnablePhysics();
         }
 

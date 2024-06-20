@@ -11,7 +11,7 @@ namespace Blocks
         Block LastBlockSpawned { get; }
         Remainder RemainderSpawn();
         BlocksIntersection Intersection { get; }
-        Vector3 CenterPosition { get; }
+        float BaseHeight { get; }
         void Clear();
     }
 
@@ -19,7 +19,7 @@ namespace Blocks
     {
         private readonly BlockSpawner _blockSpawner;
         private readonly RemainderSpawner _remainderSpawner;
-        private readonly Vector3 _stepPosition;
+        private readonly float _stepHeight;
         private readonly Vector3 _defaultPosition;
         private readonly Vector3 _defaultBlockSize;
 
@@ -28,10 +28,12 @@ namespace Blocks
             _defaultBlockSize = settings.DefaultBlockSize;
             _blockSpawner = new BlockSpawner(settings.BlockPrefab, settings.BlockPoolCapacity, view => new Block(view));
             _remainderSpawner = new RemainderSpawner(settings.RemainderPrefab, settings.RemainderPoolCapacity, view => new Remainder(view));
-            _stepPosition = Vector3.up * settings.BlockPrefab.transform.lossyScale.y;
-            
+
             Intersection = new BlocksIntersection(settings.IntersectionSettings);
-            CenterPosition = _defaultPosition = -_stepPosition * 0.5f;
+            
+            _stepHeight = settings.BlockPrefab.transform.lossyScale.y;
+            BaseHeight = -_stepHeight * 0.5f;
+            _defaultPosition = Vector3.up * BaseHeight;
         }
     
         public Block BlockSpawn()
@@ -39,7 +41,7 @@ namespace Blocks
             LastBlockSpawned = _blockSpawner.Spawn();
             LastBlockSpawned.Size = _defaultBlockSize;
             Intersection.Add(LastBlockSpawned);
-            CenterPosition += _stepPosition;
+            BaseHeight += _stepHeight;
             return LastBlockSpawned;
         }
 
@@ -53,10 +55,10 @@ namespace Blocks
             Intersection.Clear();
             _blockSpawner.DespawnAll();
             _remainderSpawner.DespawnAll();
-            CenterPosition = _defaultPosition;
+            BaseHeight = _defaultPosition.y;
         }
 
-        public Vector3 CenterPosition { get; private set; }
+        public float BaseHeight { get; private set; }
 
         [Serializable]
         public struct Settings

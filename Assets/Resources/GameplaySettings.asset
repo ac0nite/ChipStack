@@ -31,7 +31,7 @@ MonoBehaviour:
       StartPosition: -13
       CompletedDistance: 0.01
     Circle:
-      Type: 2
+      Type: 1
       Radius:
         Amplitude: 2
         Min: 1
@@ -39,10 +39,19 @@ MonoBehaviour:
       Speed:
         Amplitude: 2.86
         Min: 0.79
-        Speed: 1
-    MoveAnimation:
-      Duration: 0.2
+        Speed: 0.5
+    DownBlockMoveAnimation:
+      Duration: 0.1
       Ease: 5
+      Delay: 0
+    RemainderMoveAnimation:
+      Duration: 1
+      Ease: 10
+      Delay: 0
+    RemainderElasticAnimation:
+      Duration: 0.15
+      Ease: 21
+      Delay: 0
   CameraSettings:
     Ratio: 0
     Offset: 0
@@ -65,7 +74,7 @@ MonoBehaviour:
       type: 3}
     RemainderPoolCapacity: 3
     IntersectionSettings:
-      MinSize: 0.2
+      MinSize: 0.1
   PreparingGameplay:
     StartPosition: {x: 0, y: 15, z: 0}
     MoveDuration: 1

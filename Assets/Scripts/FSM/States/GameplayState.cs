@@ -22,7 +22,7 @@ namespace FSM.States
         public override void Enter()
         {
             ScreenManager.Show<GameplayScreen>();
-            ScreenManager.Show<ModifyScreenPopup>();
+            //ScreenManager.Show<ModifyScreenPopup>();
             
             _cameraMover.Rotate();
             _roundHandler.Subscribe();
