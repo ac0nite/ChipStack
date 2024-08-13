@@ -66,7 +66,7 @@ MonoBehaviour:
     ResetDuration: 3
     ResetEase: 5
   BlockModelSettings:
-    BlockPrefab: {fileID: 7476946508061357136, guid: 8854dead60aa32e47af29c3cc5566fed,
+    BlockPrefab: {fileID: 7476946508061357136, guid: 3d89d2d6ec31343d2bb64d3b256215d9,
       type: 3}
     BlockPoolCapacity: 30
     DefaultBlockSize: {x: 5, y: 1, z: 5}
@@ -82,6 +82,33 @@ MonoBehaviour:
     ElasticScale: 1.1
     ElasticDuration: 0.18
     ElasticEase: 9
+    AnimationSettings:
+      Delay: 0
+      Speed: 6
+      Curve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
   RewardSettings:
     AdditionalPercentForStack: 3
     NumberOfStackLevelsToReward: 4

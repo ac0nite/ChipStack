@@ -1,6 +1,5 @@
 ﻿using Components;
 using Core.Pool;
-using Intersections;
 using UnityEngine;
 using RectTransform = Intersections.RectTransform;
 

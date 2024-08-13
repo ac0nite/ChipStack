@@ -1,4 +1,5 @@
 ﻿using System;
+using Animations;
 using Blocks;
 using Components;
 using DG.Tweening;
@@ -26,8 +27,13 @@ namespace Gameplay
             _sequence ??= CreateSequence();
             _sequence.OnComplete(() =>
             {
-                _block.View.Component.EnablePhysics();
-                callback?.Invoke();
+                // _block.View.Component.EnablePhysics();
+                _block.View.Animation.Play(AnimationsConstants.Landing, _settings.AnimationSettings, () => 
+                {
+                    Debug.Log($"END!");
+                    callback?.Invoke();
+                });
+                // callback?.Invoke();
             }).Restart();
         }
         
@@ -36,7 +42,7 @@ namespace Gameplay
             return DOTween
                 .Sequence()
                 .Append(DOVirtual.Vector3(_settings.StartPosition, Vector3.up * _blockFacade.BaseHeight, _settings.MoveDuration, (p) => _block.Position = p).SetEase(_settings.MoveEase))
-                .Append(DOVirtual.Vector3(_block.Size, _block.Size * _settings.ElasticScale, _settings.ElasticDuration, (s) => _block.Size = new Vector3(s.x, (s.x > _block.Size.x)? _block.Size.y - (s.x - _block.Size.x) : _block.Size.y + (_block.Size.x - s.x), s.z)).SetEase(_settings.ElasticEase).SetLoops(2, LoopType.Yoyo))
+                //.Append(DOVirtual.Vector3(_block.Size, _block.Size * _settings.ElasticScale, _settings.ElasticDuration, (s) => _block.Size = new Vector3(s.x, (s.x > _block.Size.x)? _block.Size.y - (s.x - _block.Size.x) : _block.Size.y + (_block.Size.x - s.x), s.z)).SetEase(_settings.ElasticEase).SetLoops(2, LoopType.Yoyo))
                 .SetAutoKill(false)
                 .SetRecyclable(true);
         }
@@ -53,6 +59,7 @@ namespace Gameplay
             public float ElasticScale;
             public float ElasticDuration;
             public Ease ElasticEase;
+            public AnimationBase.Settings AnimationSettings;
         }
     }
 }
