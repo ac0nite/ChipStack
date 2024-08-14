@@ -10,7 +10,7 @@ namespace FSM.States
 
         public PreGameplayState(GameplayContext context) : base(context)
         {
-            _preparingGameplay = new PreparingGameplay(_settings.PreparingGameplay, _context.BlockFacade);
+            _preparingGameplay = new PreparingGameplay(_settings.AnimationSettings, _context.BlockFacade);
         }
 
         public override void Enter()

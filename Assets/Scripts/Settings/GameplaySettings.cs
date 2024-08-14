@@ -1,4 +1,5 @@
-﻿using Blocks;
+﻿using Animations;
+using Blocks;
 using CameraComponent;
 using ColorComponent;
 using Core.Utils;
@@ -20,5 +21,6 @@ namespace Settings
         public PreparingGameplay.Settings PreparingGameplay;
         public CurrencyManager.Settings RewardSettings;
         public RoundHandler.Settings RoundSettings;
+        public TweenAnimationSettings AnimationSettings;
     }
 }
