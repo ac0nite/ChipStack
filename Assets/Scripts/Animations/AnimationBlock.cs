@@ -51,6 +51,7 @@ namespace Animations
     public static class AnimationsConstants
     {
         public static readonly int Idle = Animator.StringToHash("Idle");
+        public static readonly int FlyLanding = Animator.StringToHash("FlyLanding");
         public static readonly int Landing = Animator.StringToHash("Landing");
         public static readonly int Speed = Animator.StringToHash(nameof(Speed));
     }

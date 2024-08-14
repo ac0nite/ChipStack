@@ -25,9 +25,10 @@ namespace Gameplay
             _block = _blockFacade.BlockSpawn();
             
             _sequence ??= CreateSequence();
+            _block.View.Animation.Play(AnimationsConstants.FlyLanding, _settings.AnimationFlySettings);
             _sequence.OnComplete(() =>
             {
-                // _block.View.Component.EnablePhysics();
+                //_block.View.Component.EnablePhysics();
                 _block.View.Animation.Play(AnimationsConstants.Landing, _settings.AnimationSettings, () => 
                 {
                     Debug.Log($"END!");
@@ -59,6 +60,7 @@ namespace Gameplay
             public float ElasticScale;
             public float ElasticDuration;
             public Ease ElasticEase;
+            public AnimationBase.Settings AnimationFlySettings;
             public AnimationBase.Settings AnimationSettings;
         }
     }

@@ -49,7 +49,7 @@ namespace Blocks
         public void ChangeTransform(RectTransform rectTransform)
         {
             rectTransform.ApplyTo(View.transform);
-            View.Component.EnablePhysics();
+            //View.Component.EnablePhysics();
         }
 
         public void ChangeTransform(Vector3 position, Vector3 scale)
