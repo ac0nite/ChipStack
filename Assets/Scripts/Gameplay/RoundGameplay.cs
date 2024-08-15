@@ -100,7 +100,7 @@ namespace Gameplay
             else
             {
                 Debug.LogWarning($"Block has no intersection", _movableBlock.View);
-                _movableBlock.View.Component.EnablePhysics();
+                //_movableBlock.View.Component.EnablePhysics();
                 OnExitRoundEvent?.Invoke();
             }
         }
