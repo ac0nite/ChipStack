@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Animations
@@ -23,11 +24,11 @@ namespace Animations
             _animator = animator;
         }
         
-        public virtual void Play(int id, Settings settings, Action callback = null)
+        public void Play(Settings settings, Action callback = null)
         {
             _animator.DelayAsync(settings.Delay).ContinueWith(animator =>
             {
-                animator.SetTrigger(id);
+                animator.SetTrigger(settings.Id);
                 animator.SetFloat(AnimationsConstants.Speed, settings.Speed);
                 _ = animator.OnCompletedAsync(callback);
             });
@@ -38,8 +39,20 @@ namespace Animations
         [Serializable]
         public class Settings
         {
-            public float Delay = 0;
-            public float Speed = 1;
+            [ValueDropdown(nameof(AnimationsDropdownList))]
+            public int Id;
+            [MinValue(0)]
+            public float Delay;
+            [MinValue(0.01f)]
+            public float Speed;
+
+#if ODIN_INSPECTOR
+            private static readonly IEnumerable AnimationsDropdownList = new ValueDropdownList<int>()
+            {
+                { nameof(AnimationsConstants.FlyLanding), AnimationsConstants.FlyLanding },
+                { nameof(AnimationsConstants.Landing), AnimationsConstants.Landing },
+            };
+#endif
         }
 
         #endregion
@@ -51,16 +64,7 @@ namespace Animations
         public static readonly int FlyLanding = Animator.StringToHash(nameof(FlyLanding));
         public static readonly int Landing = Animator.StringToHash(nameof(Landing));
         public static readonly int Speed = Animator.StringToHash(nameof(Speed));
-        
-        public static readonly IEnumerable<string> DropDowns = new[]
-        {
-            nameof(FlyLanding), 
-            nameof(Landing)
-        };
     }
-    
-    // [Serializable]
-    // public class KeyCodeGameObjectListDictionary : UnitySerializedDictionary<DropDowns, AnimationBase.Settings> { }
     
     public static class AnimatorExtension
     {
@@ -81,36 +85,6 @@ namespace Animations
         {
             await UniTask.Yield();
             return animator.GetCurrentAnimatorStateInfo(layerIndex).length;
-        }
-    }
-    
-    public abstract class UnitySerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
-    {
-        [SerializeField, HideInInspector]
-        private List<TKey> keyData = new List<TKey>();
-	
-        [SerializeField, HideInInspector]
-        private List<TValue> valueData = new List<TValue>();
-
-        void ISerializationCallbackReceiver.OnAfterDeserialize()
-        {
-            this.Clear();
-            for (int i = 0; i < this.keyData.Count && i < this.valueData.Count; i++)
-            {
-                this[this.keyData[i]] = this.valueData[i];
-            }
-        }
-
-        void ISerializationCallbackReceiver.OnBeforeSerialize()
-        {
-            this.keyData.Clear();
-            this.valueData.Clear();
-
-            foreach (var item in this)
-            {
-                this.keyData.Add(item.Key);
-                this.valueData.Add(item.Value);
-            }
         }
     }
 }

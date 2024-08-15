@@ -83,59 +83,13 @@ MonoBehaviour:
     ElasticDuration: 0.18
     ElasticEase: 9
     AnimationFlySettings:
+      Id: 0
       Delay: 0
       Speed: 1
-      Curve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
     AnimationSettings:
+      Id: 0
       Delay: 0
       Speed: 6
-      Curve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
   RewardSettings:
     AdditionalPercentForStack: 3
     NumberOfStackLevelsToReward: 4
@@ -143,17 +97,4 @@ MonoBehaviour:
   RoundSettings:
     MultiplicityBlocksToUpCamera: 2
     CameraUpPosition: {x: 0, y: 1.45, z: 0}
-  AnimationSettings:
-    InitialDrop:
-      BeginPosition: {x: 0, y: 15, z: 0}
-      Move:
-        Delay: 0
-        Duration: 10
-        Ease: 11
-      ScaleSize: {x: 1.1, y: 1, z: 1.1}
-      Size:
-        Delay: 0
-        Duration: 1
-        Ease: 4
-        Loops: 2
-        LoopType: 1
+  AnimationSettings: {fileID: 11400000, guid: ed63a7753ae264222a21edf79cce3e15, type: 2}

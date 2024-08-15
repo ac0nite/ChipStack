@@ -21,6 +21,6 @@ namespace Settings
         public PreparingGameplay.Settings PreparingGameplay;
         public CurrencyManager.Settings RewardSettings;
         public RoundHandler.Settings RoundSettings;
-        public TweenAnimationSettings AnimationSettings;
+        public AnimationSettings AnimationSettings;
     }
 }
