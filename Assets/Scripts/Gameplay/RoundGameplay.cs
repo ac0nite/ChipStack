@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Numerics;
 using Animations;
 using Blocks;
@@ -25,6 +26,7 @@ namespace Gameplay
         private readonly TweenComponent _remainderComponent;
         private Block _movableBlock;
         private Remainder _remainder;
+        private readonly DropAnimation _dropAnimation;
 
         public event Action OnEnterRoundEvent;
         public event Action OnNextBlockEvent;
@@ -40,7 +42,8 @@ namespace Gameplay
             _movement = new Movement(CreateCenterComponent());
             _input = InputManager.Instance;
             _intersection = _blockFacade.Intersection;
-            
+            _dropAnimation = new DropAnimation();
+
             // _blockComponent = TweenComponent.CreateMoveDownAnimation(defaultSettings.DownBlockMoveAnimation);
             // _remainderComponent = TweenComponent.CreateMoveRemainderAnimation(defaultSettings.RemainderMoveAnimation, defaultSettings.RemainderElasticAnimation);
         }
@@ -77,7 +80,10 @@ namespace Gameplay
 
             if (_intersection.HasIntersect)
             {
-                UpdateDownAnimationParam(_intersection.Offset);
+                _dropAnimation
+                    .SetBlocks(_blockFacade.GetLastSpawned(3).ToArray())
+                    .SetParams(DownPosition(_intersection.Offset))
+                    .Play();
 
                 // _blockComponent.Play(() =>
                 // {
@@ -105,7 +111,7 @@ namespace Gameplay
             }
         }
 
-        private void UpdateDownAnimationParam(Vector2 offset)
+        private Vector3 DownPosition(Vector2 offset)
         {
             // if (offset != Vector2.zero)
             // {
@@ -116,6 +122,11 @@ namespace Gameplay
             // _blockComponent.MoveComponent.UpdateParams(
             //     _movableBlock,
             //     new Vector3(_movableBlock.Position.x + offset.x, _blockFacade.BaseHeight, _movableBlock.Position.z + offset.y));
+            
+            return new Vector3(
+                _movableBlock.Position.x + offset.x, 
+                _blockFacade.BaseHeight, 
+                _movableBlock.Position.z + offset.y);
         }
 
         private void UpdateRemainderAnimationParam((RectTransform one, RectTransform two) remainders, Vector3 direction)

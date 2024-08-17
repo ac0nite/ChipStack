@@ -1,15 +1,22 @@
+using System;
+using DG.Tweening;
+
 namespace Animations
 {
     public class TweenAnimation : TweenAnimationBase
     {
-        public static TweenAnimation CreateInitialDrop(TweenAnimationSettings.InitialDropSettings settings)
+        public static TweenAnimation CreateSimpleMove(TweenComponent.Settings settings)
         {
-            var tween =  CreateMoveAndSize();
-            tween.AppendSequence(tween.Move.CreateChangeTween(settings.Move));
-            tween.JoinSequence(tween.Size.CreateChangeLoopTween(settings.Size));
+            var tween =  CreateOnlyMove();
+            tween.AppendSequence(tween.Move.CreateChangeTween(settings));
             return tween;
         }
-        
+
+        private void StepOnCompleted(Action stepCallback)
+        {
+            sequence.OnStepComplete(() => stepCallback?.Invoke());
+        }
+
         private static TweenAnimation CreateOnlyMove()
         {
             return new TweenAnimation

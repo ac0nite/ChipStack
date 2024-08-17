@@ -18,7 +18,6 @@ namespace Settings
         public GradientModel.Settings GradientSettings;
         public CameraMovement.Settings CameraMovementSettings;
         public BlockFacade.Settings BlockModelSettings;
-        public PreparingGameplay.Settings PreparingGameplay;
         public CurrencyManager.Settings RewardSettings;
         public RoundHandler.Settings RoundSettings;
         public AnimationSettings AnimationSettings;

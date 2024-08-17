@@ -51,6 +51,9 @@ namespace Animations
             {
                 { nameof(AnimationsConstants.FlyLanding), AnimationsConstants.FlyLanding },
                 { nameof(AnimationsConstants.Landing), AnimationsConstants.Landing },
+                { nameof(AnimationsConstants.DeformationHard), AnimationsConstants.DeformationHard },
+                { nameof(AnimationsConstants.DeformationMiddle), AnimationsConstants.DeformationMiddle },
+                { nameof(AnimationsConstants.DeformationSlight), AnimationsConstants.DeformationSlight },
             };
 #endif
         }
@@ -64,6 +67,9 @@ namespace Animations
         public static readonly int FlyLanding = Animator.StringToHash(nameof(FlyLanding));
         public static readonly int Landing = Animator.StringToHash(nameof(Landing));
         public static readonly int Speed = Animator.StringToHash(nameof(Speed));
+        public static readonly int DeformationHard = Animator.StringToHash(nameof(DeformationHard));
+        public static readonly int DeformationMiddle = Animator.StringToHash(nameof(DeformationMiddle));
+        public static readonly int DeformationSlight = Animator.StringToHash(nameof(DeformationSlight));
     }
     
     public static class AnimatorExtension

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Intersections;
 using Remainders;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Blocks
         Remainder RemainderSpawn();
         BlocksIntersection Intersection { get; }
         float BaseHeight { get; }
+        IReadOnlyList<Block> GetLastSpawned(int count);
         void Clear();
     }
 
@@ -50,6 +52,11 @@ namespace Blocks
         public Remainder RemainderSpawn() => _remainderSpawner.Spawn();
         public BlocksIntersection Intersection { get; private set; }
 
+        public IReadOnlyList<Block> GetLastSpawned(int count)
+        {
+            return _blockSpawner.Spawned.GetRange(_blockSpawner.Spawned.Count - count, count).ToArray();
+        }
+
         public void Clear()
         {
             Intersection.Clear();
@@ -59,6 +66,8 @@ namespace Blocks
         }
 
         public float BaseHeight { get; private set; }
+        
+        public List<Block> GetSpawned(int count) => _blockSpawner.Spawned.GetRange(0, count);
 
         [Serializable]
         public struct Settings

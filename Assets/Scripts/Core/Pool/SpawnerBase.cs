@@ -14,7 +14,7 @@ namespace Core.Pool
         where TPresenter : IPresenter<TComponent>
         where TComponent : Component
     {
-        private List<TPresenter> _spawned;
+        protected List<TPresenter> _spawned;
         private readonly Func<TComponent, TPresenter> _factory;
 
         protected SpawnerBase(TComponent prefab, int capacity, Func<TComponent, TPresenter> factory) : base(prefab, capacity)

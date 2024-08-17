@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core.Pool;
 
 namespace Blocks
@@ -29,5 +30,7 @@ namespace Blocks
             presenter.ClearAndDisable();
             return presenter;
         }
+
+        public List<Block> Spawned => _spawned;
     }
 }

@@ -24,8 +24,8 @@ namespace Animations
 
     public class TweenComponent
     {
-        public static TweenComponent UseMove() => new TweenComponent(new AnimationComponent(PropertyWrapper.Move));
-        public static TweenComponent UseSize() => new TweenComponent(new AnimationComponent(PropertyWrapper.Size));
+        public static TweenComponent UseMove() => new (new AnimationComponent(PropertyWrapper.Move));
+        public static TweenComponent UseSize() => new (new AnimationComponent(PropertyWrapper.Size));
 
         private TweenComponent(AnimationComponent component)
         {
@@ -38,14 +38,14 @@ namespace Animations
             .Float(0f, 1f, settings.Duration, TweenChangeUpdate)
             .SetDelay(settings.Delay)
             .SetEase(settings.Ease)
-            .OnComplete(() => Debug.Log("Move completed!"));
+            .OnComplete(AnimComponent.NextParams);
         
         public Tweener CreateChangeLoopTween(SettingsLoop settings) => DOVirtual
             .Float(0f, 1f, settings.Duration, TweenChangeUpdate)
             .SetDelay(settings.Delay)
             .SetEase(settings.Ease)
             .SetLoops(settings.Loops, settings.LoopType)
-            .OnComplete(() => Debug.Log("Size completed!"));
+            .OnComplete(AnimComponent.NextParams);
 
         private void TweenChangeUpdate(float value)
         {
@@ -54,6 +54,9 @@ namespace Animations
 
         public class AnimationComponent
         {
+            public static AnimationComponent AnimationMoveComponent() => new (PropertyWrapper.Move);
+            public static AnimationComponent AnimationSizeComponent() => new (PropertyWrapper.Size);
+            
             private readonly PropertyWrapper _property;
             private IComponent _component;
             
@@ -92,6 +95,11 @@ namespace Animations
             {
                 From = Value;
                 To = ScaledVector(From, toScaled);
+            }
+
+            public void NextParams()
+            {
+                Debug.Log($"Next params");
             }
         }
         public class PropertyWrapper

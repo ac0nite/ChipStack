@@ -16,13 +16,47 @@ MonoBehaviour:
     BeginPosition: {x: 0, y: 15, z: 0}
     Move:
       Delay: 0
-      Duration: 0.32
-      Ease: 0
+      Duration: 2
+      Ease: 11
     DownAnimation:
       Id: -997339283
       Delay: 0
-      Speed: 0.01
+      Speed: 1
     HitAnimation:
       Id: 545781641
       Delay: 0
-      Speed: 0.01
+      Speed: 2.5
+  Drop:
+    Move:
+      Delay: 0
+      Duration: 0
+      Ease: 0
+    TopHitAnimation:
+      Id: 188905053
+      Delay: 0
+      Speed: 1
+    MiddleHitAnimation:
+      Id: 385191392
+      Delay: 0.1
+      Speed: 1
+    BottomHitAnimation:
+      Id: 423223817
+      Delay: 0.15
+      Speed: 1
+  Split:
+    Move:
+      Delay: 0
+      Duration: 0
+      Ease: 0
+    TopHitAnimation:
+      Id: 0
+      Delay: 0
+      Speed: 0
+    MiddleHitAnimation:
+      Id: 0
+      Delay: 0
+      Speed: 0
+    BottomHitAnimation:
+      Id: 0
+      Delay: 0
+      Speed: 0
