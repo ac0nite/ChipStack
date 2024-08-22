@@ -32,6 +32,7 @@
         private void ViewDisposeHandler()
         {
             Dispose();            
+            _view.OnDisposeEvent -= ViewDisposeHandler;
         }
 
         protected abstract void Dispose();

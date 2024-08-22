@@ -27,7 +27,8 @@ namespace FSM
                 .Register<PreGameplayState>()
                 .Register<GameplayState>()
                 .Register<ResultState>()
-                .Register<ResetState>();
+                .Register<ResetState>()
+                .Register<DebugState>();
         }
     }   
 }

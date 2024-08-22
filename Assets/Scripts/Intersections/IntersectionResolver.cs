@@ -4,18 +4,19 @@ using UnityEngine;
 
 namespace Intersections
 {
-    public class BlocksIntersection
+    public class IntersectionResolver
     {
         private IComponent _bottom;
         private IComponent _top;
-        
-        private Rect _general;
+
         private (Rect one, Rect two) _remainders;
-    
-        private readonly RectTransform _rectTransformZero = RectTransform.Zero;
+        
         private readonly Settings _settings;
 
-        public BlocksIntersection(Settings settings)
+        public enum Direction
+        { top_left, top_right, bottom_left, bottom_right }
+
+        public IntersectionResolver(Settings settings)
         {
             _settings = settings;
             _bottom = null;
@@ -55,10 +56,11 @@ namespace Intersections
             }
         }
 
-        public Rect GeneralRect => _general;
-        public (Rect one, Rect two) RemaindersRect => CalculateTopRemaindersRect(_general);
+        public Rect GeneralRect { get; private set; }
+
+        public (Rect one, Rect two) RemaindersRect => CalculateTopRemaindersRect(GeneralRect);
         
-        private Rect GetRect(IComponent block)
+        private static Rect GetRect(IComponent block)
         {
             var pos = block.Position;
             var scale = block.Size;
@@ -82,7 +84,7 @@ namespace Intersections
             }
         }
 
-        public Vector2 Offset { get; private set; }
+        public Vector2 Offset { get; private set; } = Vector2.zero;
 
         private bool HasIntersectionWithClamp(Rect a, Rect b, float min)
         {
@@ -94,9 +96,6 @@ namespace Intersections
 
             if (x1 < x2 && y1 < y2)
             {
-                var x1d = x1;
-                var y1d = y1;
-                
                 var width = x2 - x1;
                 var height = y2 - y1;
                 if (b.width - width < min)
@@ -113,19 +112,54 @@ namespace Intersections
                     y1 = a.yMin;
                 }
                 
-                // Debug.Log($"{x1d + Offset.x} {y1d + Offset.y} == {x1} {y1}");
-                
-                _general = new Rect(x1, y1, width, height);
+                GeneralRect = new Rect(x1, y1, width, height);
 
                 return true;
             }
             else
             {
-                _general = Rect.zero;
+                GeneralRect = Rect.zero;
                 return false;
             }
         }
 
+        private (Rect, Rect) CalculateTopExtendedRemaindersRect(Rect intersection)
+        {
+            var topScale = _top.Size;
+
+            Vector2 remOnePos, remTwoPos;
+            var width = topScale.x - intersection.width;
+            var height = topScale.z - intersection.height;
+        
+            if (_top.Position.x < _bottom.Position.x)
+            {
+                remOnePos.x = intersection.xMin - width;
+                remOnePos.y = intersection.yMin;
+            }
+            else
+            {
+                remOnePos.x = intersection.xMax;
+                remOnePos.y = intersection.yMin;
+            }
+
+            if (_top.Position.z > _bottom.Position.z)
+            {
+                remTwoPos.x = intersection.xMin;
+                remTwoPos.y = intersection.yMax;
+            }
+            else
+            {
+                remTwoPos.x = intersection.xMin;
+                remTwoPos.y = intersection.yMin - height;
+            
+                remOnePos.y = intersection.yMin - height;
+            }
+
+            // здесь получается, верхний отступ больше, чем нижний
+            return (new Rect(remOnePos.x, remOnePos.y, width, topScale.z), 
+                new Rect(remTwoPos.x, remTwoPos.y, intersection.width, height));
+        }
+        
         private (Rect, Rect) CalculateTopRemaindersRect(Rect intersection)
         {
             var topScale = _top.Size;
@@ -158,7 +192,8 @@ namespace Intersections
                 remOnePos.y = intersection.yMin - height;
             }
 
-            return (new Rect(remOnePos.x, remOnePos.y, width, topScale.z), 
+            // здесь получается, углы пустые
+            return (new Rect(remOnePos.x, remOnePos.y, width, intersection.height), 
                 new Rect(remTwoPos.x, remTwoPos.y, intersection.width, height));
         }
         

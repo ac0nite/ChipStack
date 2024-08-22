@@ -1,5 +1,4 @@
-﻿using System;
-using Animations;
+﻿using Animations;
 using Remainders;
 using UnityEngine;
 

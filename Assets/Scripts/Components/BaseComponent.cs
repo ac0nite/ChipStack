@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Remainders;
+using UnityEngine;
 
 namespace Components
 {
@@ -6,6 +7,7 @@ namespace Components
     {
         public Vector3 Position { get; set; }
         public Vector3 Size { get; set; }
+        public void ChangePivot(PivotTransform.PivotWidth pivotWidth, PivotTransform.PivotHeight pivotHeight);
     }
     public class BaseComponent : MonoBehaviour, IComponent
     {
@@ -19,6 +21,11 @@ namespace Components
         {
             get => transform.localScale;
             set => transform.localScale = value;
+        }
+
+        public void ChangePivot(PivotTransform.PivotWidth pivotWidth, PivotTransform.PivotHeight pivotHeight)
+        {
+            throw new System.NotImplementedException();
         }
     }   
 }

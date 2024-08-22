@@ -9,7 +9,6 @@ using Intersections;
 using MEC;
 using TMPro;
 using UnityEngine;
-using RectTransform = Intersections.RectTransform;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
@@ -20,13 +19,14 @@ namespace Gameplay
         private readonly IBlockFacade _blockFacade;
         private readonly Movement _movement;
         private readonly InputManager _input;
-        private readonly BlocksIntersection _intersection;
+        private readonly IntersectionResolver _intersectionResolver;
         private readonly Movement.Settings _defaultSettings;
-        private readonly TweenComponent _blockComponent;
-        private readonly TweenComponent _remainderComponent;
+        // private readonly TweenComponent _blockComponent;
+        // private readonly TweenComponent _remainderComponent;
         private Block _movableBlock;
         private Remainder _remainder;
         private readonly DropAnimation _dropAnimation;
+        private readonly MoveDropAnimation _moveDropAnimation;
 
         public event Action OnEnterRoundEvent;
         public event Action OnNextBlockEvent;
@@ -41,7 +41,8 @@ namespace Gameplay
             _defaultSettings = defaultSettings;
             _movement = new Movement(CreateCenterComponent());
             _input = InputManager.Instance;
-            _intersection = _blockFacade.Intersection;
+            _intersectionResolver = _blockFacade.IntersectionResolver;
+            _moveDropAnimation = new MoveDropAnimation();
             _dropAnimation = new DropAnimation();
 
             // _blockComponent = TweenComponent.CreateMoveDownAnimation(defaultSettings.DownBlockMoveAnimation);
@@ -78,12 +79,42 @@ namespace Gameplay
             _movement.Stop();
             _input.Locked();
 
-            if (_intersection.HasIntersect)
+            if (_intersectionResolver.HasIntersect)
             {
-                _dropAnimation
-                    .SetBlocks(_blockFacade.GetLastSpawned(3).ToArray())
-                    .SetParams(DownPosition(_intersection.Offset))
-                    .Play();
+                _moveDropAnimation
+                    .SetBlocks(_movableBlock)
+                    .SetParams(DownPosition(_intersectionResolver.Offset))
+                    .Play(() =>
+                    {
+                        var generalIntersection = _intersectionResolver.GeneralRect.ToIntersection(_movableBlock.Position.y, _movableBlock.Size.y);
+                        var remaindersIntersection = _intersectionResolver.RemaindersRect.ToIntersection(_movableBlock.Position.y, _movableBlock.Size.y);
+                        
+                        var v1 = _movableBlock.Position;
+                        
+                        _movableBlock.ChangeTransform(generalIntersection);
+                        
+                        _dropAnimation
+                            .SetBlocks(_blockFacade.GetLastSpawned(3).ToArray())
+                            .Play(() =>
+                            {
+                                var v0 = _movableBlock.Position;
+                                _remainder = _blockFacade.RemainderSpawn().Initialise(remaindersIntersection);
+                                _remainder.Enable();
+                                // UpdateRemainderAnimationParam(remaindersRectTransform, v1 - v0);
+                                // _remainderComponent.Play(null);
+                                
+                                OnIntersectionAreaEvent?.Invoke(generalIntersection.Area);
+                                MoveNextBlock();
+                            });
+                    });
+                
+                // var generalRectTransform = _intersection.GeneralRect.ToRectTransform(_movableBlock.Position.y, _movableBlock.Size.y);
+                // _movableBlock.ChangeTransform(generalRectTransform);
+                //
+                // _dropAnimation
+                //     .SetBlocks(_blockFacade.GetLastSpawned(3).ToArray())
+                //     .SetParams(DownPosition(_intersection.Offset))
+                //     .Play(() => Debug.Log($"drop completed!"));
 
                 // _blockComponent.Play(() =>
                 // {
@@ -122,6 +153,7 @@ namespace Gameplay
             // _blockComponent.MoveComponent.UpdateParams(
             //     _movableBlock,
             //     new Vector3(_movableBlock.Position.x + offset.x, _blockFacade.BaseHeight, _movableBlock.Position.z + offset.y));
+            Debug.Log($"DownPosition: {new Vector3(_movableBlock.Position.x + offset.x, _blockFacade.BaseHeight, _movableBlock.Position.z + offset.y)}");
             
             return new Vector3(
                 _movableBlock.Position.x + offset.x, 
@@ -129,7 +161,7 @@ namespace Gameplay
                 _movableBlock.Position.z + offset.y);
         }
 
-        private void UpdateRemainderAnimationParam((RectTransform one, RectTransform two) remainders, Vector3 direction)
+        private void UpdateRemainderAnimationParam((Intersection one, Intersection two) remainders, Vector3 direction)
         {
             var remOneIsValid = remainders.one.IsValid;
             var remTwoIsValid = remainders.two.IsValid;

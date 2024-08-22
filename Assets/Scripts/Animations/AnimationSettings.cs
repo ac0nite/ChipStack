@@ -1,4 +1,6 @@
 using System;
+using Gameplay;
+using Remainders;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -7,9 +9,14 @@ namespace Animations
     [CreateAssetMenu(menuName = "Gameplay/AnimationSettings", fileName = "AnimationSettings", order = 0)]
     public class AnimationSettings : ScriptableObject
     {
+        [FoldoutGroup("Group 1")]
         public InitialDropAnimation InitialDrop;
+        [FoldoutGroup("Group 2")]
         public DropAnimation Drop;
+        [FoldoutGroup("Group 2")]
         public SplitAnimation Split;
+        
+        public InitialDropAnimationDebug InitialDropDebug;
     }
 
     [Serializable]
@@ -23,6 +30,17 @@ namespace Animations
         public AnimationBase.Settings DownAnimation;
         public AnimationBase.Settings HitAnimation;
     }
+
+    [Serializable]
+    public class InitialDropAnimationDebug
+    {
+        public Vector3 BeginPosition;
+        public AnimationComponent.Settings Move;
+        [Space]
+        public AnimationBase.Settings FlyDown;
+        public AnimationBase.Settings FlyTouchDown;
+        public AnimationBase.Settings Landing;
+    }
     
     [Serializable]
     public class DropAnimation
@@ -31,6 +49,7 @@ namespace Animations
         public TweenComponent.Settings Move;
         
         [Title("animator", titleAlignment: TitleAlignments.Centered)]
+        public AnimationBase.Settings DropMoveAnimation;
         public AnimationBase.Settings TopHitAnimation;
         public AnimationBase.Settings MiddleHitAnimation;
         public AnimationBase.Settings BottomHitAnimation;

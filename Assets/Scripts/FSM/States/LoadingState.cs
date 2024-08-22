@@ -14,5 +14,5 @@ namespace FSM.States
             ScreenManager.Show<LoadingScreen>();
             _context.StatesMachineModel.ChangeState<ServiceState>();
         }
-    }   
+    }
 }

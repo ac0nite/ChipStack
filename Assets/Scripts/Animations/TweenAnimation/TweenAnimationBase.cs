@@ -55,4 +55,56 @@ namespace Animations
             Size?.AnimComponent.SetComponent(component);
         }
     }
+    
+    public class SequenceWrapper
+    {
+        private Sequence sequence;
+
+        public void AppendSequence(params Tween[] tweens)
+        {
+            sequence ??= DOTween.Sequence();
+            
+            foreach (var tween in tweens)
+                sequence.Append(tween);
+            
+            sequence
+                .SetAutoKill(false)
+                .SetRecyclable(true)
+                .Pause();
+        }
+        
+        public void JoinSequence(params Tween[] tweens)
+        {
+            sequence ??= DOTween.Sequence();
+            
+            foreach (var tween in tweens)
+                sequence.Join(tween);
+            
+            sequence
+                .SetAutoKill(false)
+                .SetRecyclable(true)
+                .Pause();
+        }
+        
+        public void StepOnCompleted(Action callback)
+        {
+            sequence?.OnStepComplete(() => callback?.Invoke());
+        }
+
+        public void OnStart(Action callback)
+        {
+            sequence?.OnStart(() => callback?.Invoke());
+        }
+        
+        public void Play(Action callback)
+        {
+            sequence
+                ?.OnComplete(() =>
+                {
+                    Debug.Log($"Tween completed!");
+                    callback?.Invoke();
+                })
+                .Restart(false);
+        }
+    }
 }

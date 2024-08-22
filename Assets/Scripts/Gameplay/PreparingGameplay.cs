@@ -17,6 +17,8 @@ namespace Gameplay
 
         public void Run(Action callback)
         {
+            
+            Debug.Log($"Run!");
             _animation
                 .SetBlocks(_blockFacade.BlockSpawn())
                 .SetParams(Vector3.up * _blockFacade.BaseHeight)

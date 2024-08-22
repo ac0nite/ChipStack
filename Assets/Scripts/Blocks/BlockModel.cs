@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Intersections;
 using Remainders;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Blocks
         Block BlockSpawn();
         Block LastBlockSpawned { get; }
         Remainder RemainderSpawn();
-        BlocksIntersection Intersection { get; }
+        IntersectionResolver IntersectionResolver { get; }
         float BaseHeight { get; }
         IReadOnlyList<Block> GetLastSpawned(int count);
         void Clear();
@@ -31,7 +32,7 @@ namespace Blocks
             _blockSpawner = new BlockSpawner(settings.BlockPrefab, settings.BlockPoolCapacity, view => new Block(view));
             _remainderSpawner = new RemainderSpawner(settings.RemainderPrefab, settings.RemainderPoolCapacity, view => new Remainder(view));
 
-            Intersection = new BlocksIntersection(settings.IntersectionSettings);
+            IntersectionResolver = new IntersectionResolver(settings.IntersectionSettings);
             
             _stepHeight = settings.BlockPrefab.transform.lossyScale.y;
             BaseHeight = -_stepHeight * 0.5f;
@@ -42,7 +43,7 @@ namespace Blocks
         {
             LastBlockSpawned = _blockSpawner.Spawn();
             LastBlockSpawned.Size = _defaultBlockSize;
-            Intersection.Add(LastBlockSpawned);
+            IntersectionResolver.Add(LastBlockSpawned);
             BaseHeight += _stepHeight;
             return LastBlockSpawned;
         }
@@ -50,16 +51,21 @@ namespace Blocks
         public Block LastBlockSpawned { get; private set; }
 
         public Remainder RemainderSpawn() => _remainderSpawner.Spawn();
-        public BlocksIntersection Intersection { get; private set; }
+        public IntersectionResolver IntersectionResolver { get; private set; }
 
         public IReadOnlyList<Block> GetLastSpawned(int count)
         {
-            return _blockSpawner.Spawned.GetRange(_blockSpawner.Spawned.Count - count, count).ToArray();
+            var all = _blockSpawner.Spawned.Count;
+            return _blockSpawner.Spawned
+                .Skip(Math.Max(all - count, 0))
+                .Take(Math.Min(count, all))
+                .Reverse()
+                .ToArray();
         }
 
         public void Clear()
         {
-            Intersection.Clear();
+            IntersectionResolver.Clear();
             _blockSpawner.DespawnAll();
             _remainderSpawner.DespawnAll();
             BaseHeight = _defaultPosition.y;
@@ -77,7 +83,7 @@ namespace Blocks
             public Vector3 DefaultBlockSize;
             public RemainderView RemainderPrefab;
             public int RemainderPoolCapacity;
-            public BlocksIntersection.Settings IntersectionSettings;
+            public IntersectionResolver.Settings IntersectionSettings;
         }
     }
 }

@@ -17,11 +17,18 @@ MonoBehaviour:
     Move:
       Delay: 0
       Duration: 2
+      UseEase: 0
       Ease: 11
+      Curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     DownAnimation:
       Id: -997339283
       Delay: 0
-      Speed: 1
+      Speed: 0.2
     HitAnimation:
       Id: 545781641
       Delay: 0
@@ -29,25 +36,43 @@ MonoBehaviour:
   Drop:
     Move:
       Delay: 0
-      Duration: 0
-      Ease: 0
+      Duration: 0.2
+      UseEase: 0
+      Ease: 1
+      Curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    DropMoveAnimation:
+      Id: -997339283
+      Delay: 0
+      Speed: 1
     TopHitAnimation:
       Id: 188905053
       Delay: 0
-      Speed: 1
+      Speed: 0.5
     MiddleHitAnimation:
       Id: 385191392
-      Delay: 0.1
-      Speed: 1
+      Delay: 0.05
+      Speed: 0.5
     BottomHitAnimation:
-      Id: 423223817
-      Delay: 0.15
-      Speed: 1
+      Id: 383227183
+      Delay: 0.1
+      Speed: 0.5
   Split:
     Move:
       Delay: 0
       Duration: 0
+      UseEase: 0
       Ease: 0
+      Curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     TopHitAnimation:
       Id: 0
       Delay: 0
@@ -60,3 +85,28 @@ MonoBehaviour:
       Id: 0
       Delay: 0
       Speed: 0
+  InitialDropDebug:
+    BeginPosition: {x: 0, y: 15, z: 0}
+    Move:
+      Delay: 0
+      Duration: 0.5
+      UseEase: 1
+      Ease: 1
+      Curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    FlyDown:
+      Id: -1396034885
+      Delay: 0
+      Speed: 2
+    FlyTouchDown:
+      Id: -694713774
+      Delay: 0
+      Speed: 10
+    Landing:
+      Id: 240190028
+      Delay: 0
+      Speed: 10

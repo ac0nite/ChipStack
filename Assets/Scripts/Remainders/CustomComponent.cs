@@ -34,16 +34,22 @@ namespace Remainders
     
         public void EnablePhysics()
         {
-            _rigidbody.useGravity = true;
-            _rigidbody.isKinematic = false;
-            _collider.enabled = true;
+            if (_rigidbody)
+            {
+                _rigidbody.useGravity = true;
+                _rigidbody.isKinematic = false;
+            }
+            if (_collider) _collider.enabled = true;
         }
     
         public void DisablePhysics()
         {
-            _rigidbody.useGravity = false;
-            _rigidbody.isKinematic = true;
-            _collider.enabled = false;
+            if (_rigidbody)
+            {
+                _rigidbody.isKinematic = true;
+                _rigidbody.useGravity = false;
+            }
+            if (_collider) _collider.enabled = false;
         }
     
         public void EnableRenderers()

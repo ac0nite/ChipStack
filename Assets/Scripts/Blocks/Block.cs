@@ -1,7 +1,8 @@
 ﻿using Components;
 using Core.Pool;
+using Intersections;
+using Remainders;
 using UnityEngine;
-using RectTransform = Intersections.RectTransform;
 
 namespace Blocks
 {
@@ -21,18 +22,23 @@ namespace Blocks
     
         public Vector3 Position
         {
-            get => View.transform.position;
+            get => View.PivotTransform.Position;
             set
             {
                 // Debug.Log($"Change: {value}");
-                View.transform.position = value;
+                View.PivotTransform.Position = value;
             }
         }
 
         public Vector3 Size
         {
-            get => View.transform.localScale;
-            set => View.transform.localScale = value;
+            get => View.PivotTransform.Size;
+            set => View.PivotTransform.Size = value;
+        }
+
+        public void ChangePivot(PivotTransform.PivotWidth pivotWidth, PivotTransform.PivotHeight pivotHeight)
+        {
+            View.PivotTransform.SetPivot(pivotWidth, pivotHeight);
         }
 
         public void Enable()
@@ -46,9 +52,9 @@ namespace Blocks
             View.Component.DisableActive();
         }
 
-        public void ChangeTransform(RectTransform rectTransform)
+        public void ChangeTransform(Intersection intersection)
         {
-            rectTransform.ApplyTo(View.transform);
+            intersection.ApplyTo(View.PivotTransform);
             //View.Component.EnablePhysics();
         }
 

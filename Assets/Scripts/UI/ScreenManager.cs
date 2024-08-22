@@ -3,6 +3,7 @@ using Core.UI.Behaviour;
 using Core.UI.MVP;
 using Cysharp.Threading.Tasks;
 using UI.Popups;
+using UI.Screens.Debug;
 using UI.Screens.Gameplay;
 using UI.Screens.Loading;
 using UI.Screens.PreGameplay;
@@ -24,7 +25,8 @@ namespace UI
             _instance.Register<PreGameplayScreenPresenter, PreGameplayScreen>(context.StatesMachineModel);
             _instance.Register<GameplayScreenPresenter, GameplayScreen>(context.Currency.ScoreModelGetter);
             _instance.Register<ResultScreenPresenter, ResultScreen>(context.Currency.ScoreModelGetter, context.StatesMachineModel);
-
+            _instance.Register<DebugScreenPresenter, DebugScreen>(context.BlockFacade);
+            
             _instance.Register<ModifyScreenPopupPresenter, ModifyScreenPopup>();
             
             var shading = _instance.Register<ShadingScreenPresenter, ShadingScreen>();
@@ -32,14 +34,14 @@ namespace UI
             _instance.Behaviour = new ScreensBehaviour(1, new ScreenBehaviour(), new ModalScreenBehaviour(shading));
         }
         
-        public static void Show<Tview>() where Tview : ViewBase
+        public static void Show<TView>() where TView : ViewBase
         {
-            _instance.ShowScreen<Tview>();            
+            _instance.ShowScreen<TView>();            
         }
         
-        public static void Hide<Tview>() where Tview : ViewBase
+        public static void Hide<TView>() where TView : ViewBase
         {
-            _instance.HideScreen<Tview>();
+            _instance.HideScreen<TView>();
         }
 
         #region LOADING

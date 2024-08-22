@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace Animations
@@ -14,6 +16,26 @@ namespace Animations
         }
     }
 
+    public static class AnimatorTiming
+    {
+        private static readonly List<int> _animatorsId = new();
+        private static readonly Dictionary<int, float> _timings = new ();
+
+        public static void UpdateTiming(Animator animator)
+        {
+            if(_animatorsId.Contains(Animator.StringToHash(animator.name))) return;
+            _animatorsId.Add(Animator.StringToHash(animator.name));
+            var clips = animator.runtimeAnimatorController.animationClips;
+            clips.ForEach(clip =>
+            {
+                _timings[Animator.StringToHash(clip.name)] = clip.length;
+                Debug.Log($"{clip.name}:{Animator.StringToHash(clip.name)} - {clip.length}");
+            });
+        }
+        
+        public static float GetTiming(int id) => _timings[id];
+    }
+
     public class AnimationBase
     {
         protected const int LayerIndex = 0;
@@ -22,6 +44,7 @@ namespace Animations
         public AnimationBase(Animator animator)
         {
             _animator = animator;
+            AnimatorTiming.UpdateTiming(animator);
         }
         
         public void Play(Settings settings, Action callback = null)
@@ -30,7 +53,7 @@ namespace Animations
             {
                 animator.SetTrigger(settings.Id);
                 animator.SetFloat(AnimationsConstants.Speed, settings.Speed);
-                _ = animator.OnCompletedAsync(callback);
+                _ = animator.OnCompletedAsync(AnimatorTiming.GetTiming(settings.Id) / settings.Speed, callback);
             });
         }
 
@@ -49,11 +72,9 @@ namespace Animations
 #if ODIN_INSPECTOR
             private static readonly IEnumerable AnimationsDropdownList = new ValueDropdownList<int>()
             {
-                { nameof(AnimationsConstants.FlyLanding), AnimationsConstants.FlyLanding },
-                { nameof(AnimationsConstants.Landing), AnimationsConstants.Landing },
-                { nameof(AnimationsConstants.DeformationHard), AnimationsConstants.DeformationHard },
-                { nameof(AnimationsConstants.DeformationMiddle), AnimationsConstants.DeformationMiddle },
-                { nameof(AnimationsConstants.DeformationSlight), AnimationsConstants.DeformationSlight },
+                { nameof(AnimationsConstants.FlyDown), AnimationsConstants.FlyDown },
+                { nameof(AnimationsConstants.FlyTouchDown), AnimationsConstants.FlyTouchDown },
+                { nameof(AnimationsConstants.LandingHard), AnimationsConstants.LandingHard },
             };
 #endif
         }
@@ -64,12 +85,10 @@ namespace Animations
     public static class AnimationsConstants
     {
         public static readonly int Idle = Animator.StringToHash(nameof(Idle));
-        public static readonly int FlyLanding = Animator.StringToHash(nameof(FlyLanding));
-        public static readonly int Landing = Animator.StringToHash(nameof(Landing));
+        public static readonly int FlyDown = Animator.StringToHash(nameof(FlyDown));
+        public static readonly int FlyTouchDown = Animator.StringToHash(nameof(FlyTouchDown));
         public static readonly int Speed = Animator.StringToHash(nameof(Speed));
-        public static readonly int DeformationHard = Animator.StringToHash(nameof(DeformationHard));
-        public static readonly int DeformationMiddle = Animator.StringToHash(nameof(DeformationMiddle));
-        public static readonly int DeformationSlight = Animator.StringToHash(nameof(DeformationSlight));
+        public static readonly int LandingHard = Animator.StringToHash(nameof(LandingHard));
     }
     
     public static class AnimatorExtension
@@ -80,10 +99,12 @@ namespace Animations
             return animator;
         }
         
-        public static async UniTask OnCompletedAsync(this Animator animator, Action callback, int layerIndex = 0)
+        public static async UniTask OnCompletedAsync(this Animator animator, float delay,  Action callback, int layerIndex = 0)
         {
-            var length = await animator.ClipLengthAsync(layerIndex);
-            await UniTask.WaitForSeconds(length);
+            //var length = await animator.ClipLengthAsync(layerIndex);
+            //var length = AnimatorTiming.GetTiming(id);
+            await UniTask.WaitForSeconds(delay);
+            Debug.Log($"Delay: {delay}");
             callback?.Invoke();
         }
         

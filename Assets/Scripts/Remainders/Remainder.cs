@@ -5,7 +5,6 @@ using Intersections;
 using MEC;
 using Remainders;
 using UnityEngine;
-using RectTransform = Intersections.RectTransform;
 
 public class Remainder : IPresenter<RemainderView>, IComponent
 {
@@ -20,13 +19,13 @@ public class Remainder : IPresenter<RemainderView>, IComponent
         pool.Release(View);
     }
 
-    public Remainder Initialise((RectTransform one, RectTransform two) intersection)
+    public Remainder Initialise((Intersection one, Intersection two) intersection)
     {
         intersection.one.ApplyTo(View.OneRemainder);
         intersection.two.ApplyTo(View.TwoRemainder);
         
-        View.OneRemainder.gameObject.SetActive(intersection.one.IsValid);
-        View.TwoRemainder.gameObject.SetActive(intersection.two.IsValid);
+        View.OneRemainder.GameObject.SetActive(intersection.one.IsValid);
+        View.TwoRemainder.GameObject.SetActive(intersection.two.IsValid);
 
         return this;
     }
@@ -62,5 +61,11 @@ public class Remainder : IPresenter<RemainderView>, IComponent
     {
         get => View.transform.localScale;
         set => View.transform.localScale = value;
+    }
+
+    public void ChangePivot(PivotTransform.PivotWidth pivotWidth, PivotTransform.PivotHeight pivotHeight)
+    {
+        View.OneRemainder.SetPivot(pivotWidth, pivotHeight);
+        View.TwoRemainder.SetPivot(pivotWidth, pivotHeight);
     }
 }

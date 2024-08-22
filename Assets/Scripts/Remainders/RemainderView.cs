@@ -5,9 +5,9 @@ namespace Remainders
 {
     public class RemainderView : ViewBase
     {
-        [SerializeField] private Transform _oneRemainder;
-        [SerializeField] private Transform _twoRemainder;
-        public Transform OneRemainder => _oneRemainder;
-        public Transform TwoRemainder => _twoRemainder;
+        [SerializeField] private PivotTransform _oneRemainder;
+        [SerializeField] private PivotTransform _twoRemainder;
+        public PivotTransform OneRemainder => _oneRemainder;
+        public PivotTransform TwoRemainder => _twoRemainder;
     }
 }
