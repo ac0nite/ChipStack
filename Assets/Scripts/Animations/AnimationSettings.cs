@@ -17,6 +17,7 @@ namespace Animations
         public SplitAnimation Split;
         
         public InitialDropAnimationDebug InitialDropDebug;
+        public DropAnimationDebug DropDebug;
     }
 
     [Serializable]
@@ -40,6 +41,17 @@ namespace Animations
         public AnimationBase.Settings FlyDown;
         public AnimationBase.Settings FlyTouchDown;
         public AnimationBase.Settings Landing;
+    }
+    
+    [Serializable]
+    public class DropAnimationDebug
+    {
+        public AnimationComponent.Settings Move;
+        [Space]
+        public AnimationBase.Settings DropHard;
+        public AnimationBase.Settings DropMiddle;
+        public AnimationBase.Settings DropLight;
+        public AnimationBase.Settings Stretching;
     }
     
     [Serializable]

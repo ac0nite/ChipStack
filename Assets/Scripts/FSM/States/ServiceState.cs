@@ -15,7 +15,7 @@ namespace FSM.States
             Timing.CallDelayed(0.1f, () =>
             {
                 ScreenManager.Hide<LoadingScreen>();
-                // _context.StatesMachineModel.ChangeState<PreGameplayState>();
+                //_context.StatesMachineModel.ChangeState<PreGameplayState>();
                 _context.StatesMachineModel.ChangeState<DebugState>();
             });
         }

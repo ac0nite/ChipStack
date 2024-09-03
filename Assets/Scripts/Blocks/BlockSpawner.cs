@@ -12,10 +12,7 @@ namespace Blocks
 
         protected override BlockView InternalInstantiate(BlockView view)
         {
-            view.Component.SetTransformDefault();
-            view.Component.DisablePhysics();
-            view.Component.DisableActive();
-        
+            view.Reset();
             return base.InternalInstantiate(view);
         }
 

@@ -1,16 +1,19 @@
 ﻿using System;
+using Animations;
 using Components;
 using Core.Pool;
 using Intersections;
 using MEC;
+using Pivots;
 using Remainders;
 using UnityEngine;
 
-public class Remainder : IPresenter<RemainderView>, IComponent
+public class Remainder : IPresenter<RemainderView>, IAnimationComponent
 {
     public Remainder(RemainderView view)
     {
         View = view;
+        Animation = new AnimationBlock(view.Animator);
     }
     
     public RemainderView View { get; }
@@ -19,31 +22,31 @@ public class Remainder : IPresenter<RemainderView>, IComponent
         pool.Release(View);
     }
 
-    public Remainder Initialise((Intersection one, Intersection two) intersection)
+    public Remainder Initialise((Intersection one, Intersection two) intersection, Vector3 stretching)
     {
-        intersection.one.ApplyTo(View.OneRemainder);
-        intersection.two.ApplyTo(View.TwoRemainder);
+        intersection.one.ApplyTo(View.One);
+        intersection.two.ApplyTo(View.Two);
         
-        View.OneRemainder.GameObject.SetActive(intersection.one.IsValid);
-        View.TwoRemainder.GameObject.SetActive(intersection.two.IsValid);
+        View.SetActive(intersection.one.IsValid, intersection.two.IsValid);
+        
+        var pivot = stretching.ToPivotTransform();
+        ChangePivot(pivot.width, pivot.height);
 
         return this;
     }
 
     public void Enable()
     {
-        View.Component.EnableActive();
+        View.Enable();
     }
 
     public void AddForce(Vector3 direction)
     {
-        View.Component.AddForce(direction);
+        throw new System.NotImplementedException();
     }
     public void ClearAndDisable()
     {
-        View.Component.DisablePhysics();
-        View.Component.SetTransformDefault();
-        View.Component.DisableActive();
+        View.Reset();
     }
 
     public void CompletionOnFall(float delayTime, Action<Remainder> action)
@@ -53,19 +56,21 @@ public class Remainder : IPresenter<RemainderView>, IComponent
 
     public Vector3 Position
     {
-        get => View.transform.position;
-        set => View.transform.position = value;
+        get => View.Root.Position;
+        set => View.Root.Position = value;
     }
 
     public Vector3 Size
     {
-        get => View.transform.localScale;
-        set => View.transform.localScale = value;
+        get => View.Root.Size;
+        set => View.Root.Size = value;
     }
 
+    public AnimationBlock Animation { get; }
     public void ChangePivot(PivotTransform.PivotWidth pivotWidth, PivotTransform.PivotHeight pivotHeight)
     {
-        View.OneRemainder.SetPivot(pivotWidth, pivotHeight);
-        View.TwoRemainder.SetPivot(pivotWidth, pivotHeight);
+        View.Root.SetPivot(pivotWidth, pivotHeight);
+        View.One.SetPivot(pivotWidth, pivotHeight);
+        View.Two.SetPivot(pivotWidth, pivotHeight);
     }
 }

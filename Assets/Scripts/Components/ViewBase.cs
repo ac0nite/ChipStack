@@ -1,23 +1,31 @@
-﻿using Animations;
-using Remainders;
+﻿using Remainders;
 using UnityEngine;
 
 namespace Components
 {
-    public class ViewBase : MonoBehaviour
+    public class ViewBase : MonoBehaviour, IViewComponent
     {
-        public CustomComponent Component { get; private set; }
-        public AnimationBlock Animation { get; private set; }
-
-        private void OnValidate()
-        {
-            Awake();
-        }
-
+        public Transform Root => transform;
+        public Animator Animator { get; private set; }
+        
+        private CustomPhysics _physics;
+        
+        private void OnValidate() => Awake();
+        
         protected virtual void Awake()
         {
-            Component = new CustomComponent(transform);
-            Animation = new AnimationBlock(Component.Animator);
+            Animator = GetComponentInChildren<Animator>();
+            _physics = new CustomPhysics(GetComponentInChildren<Rigidbody>());
+        }
+
+        public virtual void Enable() => gameObject.SetActive(true);
+        public virtual void Disable() => gameObject.SetActive(false);
+        public void Reset()
+        {
+            Disable();
+            _physics.Disable();
+            
+            // TODO RESET VIEW
         }
     }
 }

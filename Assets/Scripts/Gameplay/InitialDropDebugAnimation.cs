@@ -1,8 +1,8 @@
 using System;
 using Animations;
-using Blocks;
 using Components;
 using DG.Tweening;
+using Pivots;
 using Remainders;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -12,18 +12,18 @@ namespace Gameplay
 
     public class AnimationComponent
     {
-        public IComponent AnimComponent { get; set; }
+        public IComponent Component { get; set; }
         public Vector3 From { get; set; }
         public Vector3 To { get; set; }
 
         private void UpdateMove(float value)
         {
-            AnimComponent.Position = Vector3.Lerp(From, To, value);
+            Component.Position = Vector3.Lerp(From, To, value);
         }
         
         private void UpdateSize(float value)
         {
-            AnimComponent.Size = Vector3.Lerp(From, To, value);
+            Component.Size = Vector3.Lerp(From, To, value);
         }
 
         public Tween MoveTween(Settings settings)
@@ -48,7 +48,7 @@ namespace Gameplay
             public bool UseEase;
             [ShowIf(nameof(UseEase))]
             public Ease Ease;
-            [ShowIf(nameof(UseEase), false)]
+            [HideIf(nameof(UseEase))]
             public AnimationCurve Curve;
         }
     }
@@ -56,8 +56,7 @@ namespace Gameplay
     {
         private readonly InitialDropAnimationDebug _settings;
         private readonly AnimationComponent _moveDownAnimation;
-        private AnimationBlock _animation;
-
+        private IAnimationComponent _component;
 
         public InitialDropDebugAnimation()
         {
@@ -65,11 +64,11 @@ namespace Gameplay
             _moveDownAnimation = new AnimationComponent();
             _sequence.AppendSequence(_moveDownAnimation.MoveTween(_settings.Move));
         }
-        public override GameplayAnimationBase SetBlocks(params Block[] blocks)
+        public override GameplayAnimationBase SetComponents(params IAnimationComponent[] components)
         {
-            _moveDownAnimation.AnimComponent = blocks[0];
-            _moveDownAnimation.AnimComponent.ChangePivot(PivotTransform.PivotWidth.center, PivotTransform.PivotHeight.bottom);
-            _animation = blocks[0].View.Animation;
+            _component = components[0];
+            _moveDownAnimation.Component = _component;
+            _component.ChangePivot(PivotTransform.PivotWidth.center, PivotTransform.PivotHeight.bottom);
             return this;
         }
 
@@ -83,11 +82,76 @@ namespace Gameplay
 
         public override void Play(Action callback = null)
         {
-            _animation.Play(_settings.FlyDown);
+            _component.Animation.Play(_settings.FlyDown);
             _sequence.Play(() =>
             {
-                _animation.Play(_settings.FlyTouchDown, () => _animation.Play(_settings.Landing, callback));
+                _component.Animation.Play(_settings.FlyTouchDown, () => _component.Animation.Play(_settings.Landing, callback));
             });
+        }
+    }
+    
+    public class DropAnimationDebug : GameplayAnimationBase
+    {
+        private readonly Animations.DropAnimationDebug _settings;
+        private readonly AnimationComponent _moveDownAnimation;
+        private Vector3 _stratching;
+        private IAnimationComponent[] _components;
+
+        public DropAnimationDebug()
+        {
+            _settings = _animationSettings.DropDebug;
+            _moveDownAnimation = new AnimationComponent();
+            _sequence.AppendSequence(_moveDownAnimation.MoveTween(_settings.Move));
+        }
+        public override GameplayAnimationBase SetComponents(params IAnimationComponent[] components)
+        {
+            _components = components;
+            _moveDownAnimation.Component = components[0];
+            return this;
+        }
+
+        public override GameplayAnimationBase SetParams(params Vector3[] targets)
+        {
+            _moveDownAnimation.From = targets[0];
+            _moveDownAnimation.To = targets[1];
+            _stratching = targets[2];
+            return this;
+        }
+
+        public override void Play(Action callback = null)
+        {
+            _sequence.Play(() =>
+            {
+                var count = _components.Length;
+                for (int i = 0; i < count; i++)
+                {
+                    var animation = i switch
+                    {
+                        0 => _settings.DropHard,
+                        1 => _settings.DropMiddle,
+                        _ => _settings.DropLight
+                    };
+                    _components[i].ChangePivot(PivotTransform.PivotWidth.center, PivotTransform.PivotHeight.bottom);
+                    _components[i].Animation.Play(animation, i == count - 1 ? Stratching : null);
+                }
+            });
+
+            void Stratching()
+            {
+                var pivot = _stratching.ToPivotTransform();
+                _components[0].ChangePivot(pivot.width, pivot.height);
+                _components[0].Animation.Play(StretchingSettings(), callback);
+            }
+            
+            AnimationBase.Settings StretchingSettings()
+            {
+                return new AnimationBase.Settings
+                {
+                    Delay = _settings.Stretching.Delay,
+                    Speed = _settings.Stretching.Speed,
+                    Id = _stratching.ToStretchingAnimationId()
+                };
+            }
         }
     }
 }

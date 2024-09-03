@@ -5,83 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2be2e8d7-aac3-4350-bd84-84af8c35215c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Animations/RemainderAnimatorController.controller" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/FlyDown.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/FlyTouchDown.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Inspector/Config/Editor/AOTGenerationConfig.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Inspector/Config/Editor/AOTGenerationConfig.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Inspector/Config/Editor/ColorPaletteManager.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Inspector/Config/Editor/ColorPaletteManager.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Inspector/Config/Editor/ImportSettingsConfig.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Inspector/Config/Editor/ImportSettingsConfig.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Inspector/Config/Resources.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Inspector/Config/Resources/Sirenix.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Inspector/Config/Resources/Sirenix/GlobalSerializationConfig.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Inspector/Config/Resources/Sirenix/GlobalSerializationConfig.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/FSM/States/DebugState.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/FSM/States/DebugState.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/InitialDropDebugAnimation.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/InitialDropDebugAnimation.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/MoveDropAnimation.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/MoveDropAnimation.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Remainders/PivotTransform.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Remainders/PivotTransform.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreen.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreen.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreenPresenter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreenPresenter.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Utils/Vector3Extension.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Utils/Vector3Extension.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Remainders/CustomPhysics.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Remainders/CustomPhysics.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ChipStack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ChipStack/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Animations/BlockAnimationController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/BlockAnimationController.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Deformation_1.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Deformation_1.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FlyTouchDown.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Deformation_2.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Deformation_2.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/RemainderAnimatorController.controller.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Deformation_3.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Deformation_3.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FlyDown.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Idle.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Idle.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Idle.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Idle.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Landing.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Landing.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LandingHard.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/fly_landing.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LandingHard.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/fly_landing.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Assemblies/NoEditor/Sirenix.Serialization.dll.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Assemblies/NoEditor/Sirenix.Serialization.dll.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Assemblies/NoEditor/Sirenix.Utilities.dll.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Assemblies/NoEditor/Sirenix.Utilities.dll.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Assemblies/NoEmitAndNoEditor/Sirenix.Serialization.dll.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Assemblies/NoEmitAndNoEditor/Sirenix.Serialization.dll.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Assemblies/NoEmitAndNoEditor/Sirenix.Utilities.dll.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Assemblies/NoEmitAndNoEditor/Sirenix.Utilities.dll.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.Config.dll.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.Config.dll.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Inspector/Config/Editor/OdinModuleConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Inspector/Config/Editor/OdinModuleConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Validator/Editor/Config/GlobalValidationConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Validator/Editor/Config/GlobalValidationConfig.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/RemainderAnimatorController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/RemainderAnimatorController.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Idle.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Idle.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LandingHard.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LandingHard.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Cube_prefab_V2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Cube_prefab_V2.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Remainder.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Remainder.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/GameplaySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/GameplaySettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animations/AnimationBlock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animations/AnimationBlock.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animations/AnimationSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animations/AnimationSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animations/AnimationSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animations/AnimationSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animations/TweenAnimation/TweenAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animations/TweenAnimation/TweenAnimation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animations/TweenAnimation/TweenAnimationBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animations/TweenAnimation/TweenAnimationBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animations/TweenAnimation/TweenComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animations/TweenAnimation/TweenComponent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Blocks/Block.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Blocks/Block.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Blocks/BlockModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Blocks/BlockModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Blocks/BlockSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Blocks/BlockSpawner.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Blocks/BlockView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Blocks/BlockView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/BaseComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/BaseComponent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/ViewBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/ViewBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/UI/MVP/ScreenPresenterBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/UI/MVP/ScreenPresenterBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM/GameplayStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FSM/GameplayStateMachine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM/States/LoadingState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FSM/States/LoadingState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM/States/ServiceState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FSM/States/ServiceState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/DropAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/DropAnimation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/GameplayAnimationBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/GameplayAnimationBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Movement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Movement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/InitialAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/InitialAnimation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/InitialDropDebugAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/InitialDropDebugAnimation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/MoveDropAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/MoveDropAnimation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/PreparingGameplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/PreparingGameplay.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/RoundGameplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/RoundGameplay.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Intersections/BlocksIntersection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Intersections/IntersectionResolver.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Intersections/BlocksIntersection.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Intersections/IntersectionResolver.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Intersections/RectTransform.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Intersections/Intersection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Intersections/RectTransform.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Intersections/Intersection.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Intersections/Intersection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Intersections/Intersection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Intersections/IntersectionResolver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Intersections/IntersectionResolver.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Remainders/CustomComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Remainders/CustomComponent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Remainders/Remainder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Remainders/Remainder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Remainders/RemainderSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Remainders/RemainderSpawner.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Remainders/RemainderView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Remainders/RemainderView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/ScreenManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/ScreenManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreen.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreenPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreenPresenter.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,11 +55,14 @@
     <setting file="file://$PROJECT_DIR$/Assets/Plugins/Trinary Software/Timing.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/InputManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Vibration.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.cysharp.unitask@fbe0bf8515/Runtime/CompilerServices/StateMachineRunner.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.7.6/Editor/Animation/AnimationClipExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.7.6/Editor/Items/MarkerItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.7.6/Editor/TimelineHelpers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.7.6/Editor/Trackhead.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/RawImageEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Util/UIBehaviourExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2ccb053bed3740ab940e67afec38ab31469200/bd/faa68bcd/Single.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4ca12a27839c4520ae2cff4784fbdfaa27800/0e/71e29105/Animator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4ca12a27839c4520ae2cff4784fbdfaa27800/39/f7498274/AnimatorStateInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4ca12a27839c4520ae2cff4784fbdfaa27800/f9/b36c535f/AnimatorClipInfo.cs" root0="SKIP_HIGHLIGHTING" />
@@ -111,8 +73,12 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82a2fd073ee449928e161903460426d72ae00/72/100868a0/TweenSettingsExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82a2fd073ee449928e161903460426d72ae00/dc/a4ac4017/DOTween.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8481da9d1e6d49e49d69b3dfd8f5b38326600/72/5d8630a7/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b6766e3290da440a9cad3c2fec747f665800/08/8bf0f169/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/de80aed0bd3646409e8bfb15c101f005e2000/48/e6bab797/Object.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f2cf42003cd744e7b37e391a811225f2174000/3f/9de29cac/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f2cf42003cd744e7b37e391a811225f2174000/6e/aded1239/Behaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f2cf42003cd744e7b37e391a811225f2174000/77/b3e4fad7/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f2cf42003cd744e7b37e391a811225f2174000/aa/b5f5e349/Mathf.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f2cf42003cd744e7b37e391a811225f2174000/f2/24d05bf9/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -189,10 +155,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="1158">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="40429">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="1158" />
+      <option name="pid" value="40429" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -222,7 +188,9 @@
       <workItem from="1723758032112" duration="5386000" />
       <workItem from="1723894993407" duration="10948000" />
       <workItem from="1723992471908" duration="11434000" />
-      <workItem from="1724085919310" duration="31130000" />
+      <workItem from="1724085919310" duration="48270000" />
+      <workItem from="1724490903183" duration="25114000" />
+      <workItem from="1724751918104" duration="69546000" />
     </task>
     <servers />
   </component>
@@ -255,17 +223,30 @@
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Animations/AnimationBlock.cs</url>
-          <line>35</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Animations/AnimationBlock.cs" containingFunctionPresentation="Method 'GetTiming'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreenPresenter.cs</url>
+          <line>73</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreenPresenter.cs" containingFunctionPresentation="Local function 'DownPosition'">
             <startOffsets>
-              <option value="1148" />
+              <option value="3185" />
             </startOffsets>
             <endOffsets>
-              <option value="1160" />
+              <option value="3362" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="20" />
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Intersections/IntersectionResolver.cs</url>
+          <line>143</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Intersections/IntersectionResolver.cs" containingFunctionPresentation="Method 'CalculateTopExtendedRemaindersRect'">
+            <startOffsets>
+              <option value="4066" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4107" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

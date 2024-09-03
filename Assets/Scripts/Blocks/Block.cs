@@ -1,33 +1,31 @@
-﻿using Components;
+﻿using Animations;
+using Components;
 using Core.Pool;
 using Intersections;
+using Pivots;
 using Remainders;
 using UnityEngine;
 
 namespace Blocks
 {
-    public class Block : IPresenter<BlockView>, IComponent
+    public class Block : IPresenter<BlockView>, IAnimationComponent
     {
+        public Block(BlockView view)
+        {
+            View = view;
+            Animation = new AnimationBlock(view.Animator);
+        }
         public BlockView View { get; private set; }
     
         public void SendToPool(Poolable<BlockView> pool)
         {
             pool.Release(View);
         }
-
-        public Block(BlockView view)
-        {
-            View = view;
-        }
     
         public Vector3 Position
         {
             get => View.PivotTransform.Position;
-            set
-            {
-                // Debug.Log($"Change: {value}");
-                View.PivotTransform.Position = value;
-            }
+            set => View.PivotTransform.Position = value;
         }
 
         public Vector3 Size
@@ -36,6 +34,8 @@ namespace Blocks
             set => View.PivotTransform.Size = value;
         }
 
+        public AnimationBlock Animation { get; }
+
         public void ChangePivot(PivotTransform.PivotWidth pivotWidth, PivotTransform.PivotHeight pivotHeight)
         {
             View.PivotTransform.SetPivot(pivotWidth, pivotHeight);
@@ -43,25 +43,20 @@ namespace Blocks
 
         public void Enable()
         {
-            View.Component.EnableActive();
+            View.Enable();
         }
         public void ClearAndDisable()
         {
-            View.Component.DisablePhysics();
-            View.Component.SetTransformDefault();
-            View.Component.DisableActive();
+            View.Reset();
+            // View.Component.DisablePhysics();
+            // View.Component.SetTransformDefault();
+            // View.Component.DisableActive();
         }
 
         public void ChangeTransform(Intersection intersection)
         {
             intersection.ApplyTo(View.PivotTransform);
             //View.Component.EnablePhysics();
-        }
-
-        public void ChangeTransform(Vector3 position, Vector3 scale)
-        {
-            Position = position;
-            Size = scale;
         }
     }
 }

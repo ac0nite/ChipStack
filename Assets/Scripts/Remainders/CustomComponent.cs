@@ -7,15 +7,10 @@ namespace Remainders
     [Serializable]
     public class CustomComponent
     {
-        [SerializeField]
         private readonly Rigidbody _rigidbody;
-        [SerializeField]
         private readonly Transform _transform;
-        [SerializeField]
         private readonly CustomRenderer[] _renderers;
-        [SerializeField]
         private readonly Collider _collider;
-        [SerializeField] 
         private readonly Animator _animator;
 
         public CustomComponent(Transform transform)

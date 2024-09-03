@@ -75,6 +75,8 @@ namespace Animations
                 { nameof(AnimationsConstants.FlyDown), AnimationsConstants.FlyDown },
                 { nameof(AnimationsConstants.FlyTouchDown), AnimationsConstants.FlyTouchDown },
                 { nameof(AnimationsConstants.LandingHard), AnimationsConstants.LandingHard },
+                { nameof(AnimationsConstants.LandingMiddle), AnimationsConstants.LandingMiddle },
+                { nameof(AnimationsConstants.LandingLight), AnimationsConstants.LandingLight },
             };
 #endif
         }
@@ -89,6 +91,11 @@ namespace Animations
         public static readonly int FlyTouchDown = Animator.StringToHash(nameof(FlyTouchDown));
         public static readonly int Speed = Animator.StringToHash(nameof(Speed));
         public static readonly int LandingHard = Animator.StringToHash(nameof(LandingHard));
+        public static readonly int LandingMiddle = Animator.StringToHash(nameof(LandingMiddle));
+        public static readonly int LandingLight = Animator.StringToHash(nameof(LandingLight));
+        public static readonly int StretchingHorizontal = Animator.StringToHash(nameof(StretchingHorizontal));
+        public static readonly int StretchingVertical = Animator.StringToHash(nameof(StretchingVertical));
+        public static readonly int StretchingTwoSide = Animator.StringToHash(nameof(StretchingTwoSide));
     }
     
     public static class AnimatorExtension

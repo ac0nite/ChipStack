@@ -1,4 +1,5 @@
-﻿using Remainders;
+﻿using Components;
+using Pivots;
 using UnityEngine;
 
 namespace Intersections
@@ -14,7 +15,7 @@ namespace Intersections
             _size = new Vector3(rect.width, depth, rect.height);
         }
 
-        public void ApplyTo(PivotTransform applyToTransform)
+        public void ApplyTo(IPivotTransform applyToTransform)
         {
             applyToTransform.Position = _position;
             applyToTransform.Size = _size;
@@ -40,6 +41,11 @@ namespace Intersections
         {
             return new Intersection(rect, width, depth);
         }
+        
+        public static Intersection ToIntersection(this Rect rect, IComponent component)
+        {
+            return new Intersection(rect, component.Position.y, component.Size.y);
+        }
     }
 
     public static class RectPairExtension
@@ -47,6 +53,11 @@ namespace Intersections
         public static (Intersection one, Intersection two) ToIntersection(this (Rect one, Rect two) pair, float width, float depth)
         {
             return (pair.one.ToIntersection(width, depth), pair.two.ToIntersection(width, depth));
+        }
+        
+        public static (Intersection one, Intersection two) ToIntersection(this (Rect one, Rect two) pair, IComponent component)
+        {
+            return (pair.one.ToIntersection(component.Position.y, component.Size.y), pair.two.ToIntersection(component.Position.y, component.Size.y));
         }
     }
 }

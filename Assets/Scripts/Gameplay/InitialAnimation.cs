@@ -1,6 +1,7 @@
 using System;
 using Animations;
 using Blocks;
+using Components;
 using UnityEngine;
 
 public class InitialAnimation : GameplayAnimationBase
@@ -14,11 +15,10 @@ public class InitialAnimation : GameplayAnimationBase
         _moving = TweenAnimation.CreateSimpleMove(_settings.Move);
     }
     
-    public override GameplayAnimationBase SetBlocks(params Block[] blocks)
+    public override GameplayAnimationBase SetComponents(params IAnimationComponent[] components)
     {
-        var block = blocks[0];
-        _moving.Move.AnimComponent.SetComponent(block);
-        _animation = block.View.Animation;
+        _moving.Move.AnimComponent.SetComponent(components[0]);
+        _animation = components[0].Animation;
         return this;
     }
 

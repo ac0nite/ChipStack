@@ -40,18 +40,6 @@ MonoBehaviour:
         Amplitude: 2.86
         Min: 0.79
         Speed: 0.5
-    DownBlockMoveAnimation:
-      Delay: 0
-      Duration: 0.1
-      Ease: 5
-    RemainderMoveAnimation:
-      Delay: 0
-      Duration: 1
-      Ease: 10
-    RemainderElasticAnimation:
-      Delay: 0
-      Duration: 0.15
-      Ease: 21
   CameraSettings:
     Ratio: 0
     Offset: 0
@@ -70,26 +58,11 @@ MonoBehaviour:
       type: 3}
     BlockPoolCapacity: 30
     DefaultBlockSize: {x: 5, y: 1, z: 5}
-    RemainderPrefab: {fileID: 7590861073006618975, guid: db95e9ce2deb0514facaa76ff9683b74,
+    RemainderPrefab: {fileID: 4768298985767267062, guid: f311496e0a45c41bcbb70a012f09ad8b,
       type: 3}
     RemainderPoolCapacity: 3
     IntersectionSettings:
       MinSize: 0.1
-  PreparingGameplay:
-    StartPosition: {x: 0, y: 15, z: 0}
-    MoveDuration: 1
-    MoveEase: 11
-    ElasticScale: 1.1
-    ElasticDuration: 0.18
-    ElasticEase: 9
-    AnimationFlySettings:
-      Id: 0
-      Delay: 0
-      Speed: 1
-    AnimationSettings:
-      Id: 0
-      Delay: 0
-      Speed: 6
   RewardSettings:
     AdditionalPercentForStack: 3
     NumberOfStackLevelsToReward: 4

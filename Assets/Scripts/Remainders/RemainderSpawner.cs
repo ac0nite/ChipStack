@@ -10,9 +10,7 @@ public class RemainderSpawner : SpawnerBase<RemainderView, Remainder>
 
     protected override RemainderView InternalInstantiate(RemainderView view)
     {
-        view.Component.SetTransformDefault();
-        view.Component.DisablePhysics();
-        view.Component.DisableActive();
+        view.Reset();
         return base.InternalInstantiate(view);
     }
 

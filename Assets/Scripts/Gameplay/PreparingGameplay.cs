@@ -20,7 +20,7 @@ namespace Gameplay
             
             Debug.Log($"Run!");
             _animation
-                .SetBlocks(_blockFacade.BlockSpawn())
+                .SetComponents(_blockFacade.BlockSpawn())
                 .SetParams(Vector3.up * _blockFacade.BaseHeight)
                 .Play(callback);
         }

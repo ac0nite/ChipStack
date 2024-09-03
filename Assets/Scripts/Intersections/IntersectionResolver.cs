@@ -13,9 +13,6 @@ namespace Intersections
         
         private readonly Settings _settings;
 
-        public enum Direction
-        { top_left, top_right, bottom_left, bottom_right }
-
         public IntersectionResolver(Settings settings)
         {
             _settings = settings;
@@ -85,6 +82,7 @@ namespace Intersections
         }
 
         public Vector2 Offset { get; private set; } = Vector2.zero;
+        public Vector3 Stretching { get; private set; } = Vector3.zero;
 
         private bool HasIntersectionWithClamp(Rect a, Rect b, float min)
         {
@@ -92,7 +90,8 @@ namespace Intersections
             var y1 = Mathf.Max(a.yMin, b.yMin);
             var x2 = Mathf.Min(a.xMax, b.xMax);
             var y2 = Mathf.Min(a.yMax, b.yMax);
-            Offset = Vector3.zero;
+            
+            Offset = Vector2.zero;
 
             if (x1 < x2 && y1 < y2)
             {
@@ -100,14 +99,14 @@ namespace Intersections
                 var height = y2 - y1;
                 if (b.width - width < min)
                 {
-                    Offset = new Vector2(x1 - a.xMin, 0);
+                    Offset = new Vector2(a.position.x - b.position.x, 0);
                     width = b.width;
                     x1 = a.xMin;
                 }
                 
                 if (b.height - height < min)
                 {
-                    Offset = new Vector2(Offset.x, y1 - a.yMin);
+                    Offset = new Vector2(Offset.x, a.position.y - b.position.y);
                     height = b.height;
                     y1 = a.yMin;
                 }
@@ -152,7 +151,7 @@ namespace Intersections
                 remTwoPos.x = intersection.xMin;
                 remTwoPos.y = intersection.yMin - height;
             
-                remOnePos.y = intersection.yMin - height;
+                remOnePos.y = intersection.yMin;
             }
 
             // здесь получается, верхний отступ больше, чем нижний
@@ -164,6 +163,8 @@ namespace Intersections
         {
             var topScale = _top.Size;
 
+            Stretching = Vector3.zero;
+            
             Vector2 remOnePos, remTwoPos;
             var width = topScale.x - intersection.width;
             var height = topScale.z - intersection.height;
@@ -172,24 +173,32 @@ namespace Intersections
             {
                 remOnePos.x = intersection.xMin - width;
                 remOnePos.y = intersection.yMin;
+                
+                if(width > 0) Stretching += Vector3.left;
             }
             else
             {
                 remOnePos.x = intersection.xMax;
                 remOnePos.y = intersection.yMin;
+                
+                if(width > 0) Stretching += Vector3.right;
             }
 
             if (_top.Position.z > _bottom.Position.z)
             {
                 remTwoPos.x = intersection.xMin;
                 remTwoPos.y = intersection.yMax;
+                
+                if(height > 0) Stretching += Vector3.forward;
             }
             else
             {
                 remTwoPos.x = intersection.xMin;
                 remTwoPos.y = intersection.yMin - height;
             
-                remOnePos.y = intersection.yMin - height;
+                remOnePos.y = intersection.yMin;
+                
+                if(height > 0) Stretching += Vector3.back;
             }
 
             // здесь получается, углы пустые

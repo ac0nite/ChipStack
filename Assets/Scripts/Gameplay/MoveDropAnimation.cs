@@ -1,6 +1,6 @@
 using System;
 using Animations;
-using Blocks;
+using Components;
 using UnityEngine;
 
 namespace Gameplay
@@ -16,10 +16,10 @@ namespace Gameplay
             _settings = _animationSettings.Drop;
             _moving = TweenAnimation.CreateSimpleMove(_settings.Move);
         }
-        public override GameplayAnimationBase SetBlocks(params Block[] blocks)
+        public override GameplayAnimationBase SetComponents(params IAnimationComponent[] components)
         {
-            _moving.Move.AnimComponent.SetComponent(blocks[0]);
-            _animation = blocks[0].View.Animation;
+            _moving.Move.AnimComponent.SetComponent(components[0]);
+            _animation = components[0].Animation;
             return this;
         }
 

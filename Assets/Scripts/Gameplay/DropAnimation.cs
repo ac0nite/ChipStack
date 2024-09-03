@@ -1,6 +1,7 @@
 using System;
 using Animations;
 using Blocks;
+using Components;
 using UnityEngine;
 
 namespace Gameplay
@@ -8,15 +9,15 @@ namespace Gameplay
     public class DropAnimation : GameplayAnimationBase
     {
         private readonly Animations.DropAnimation _settings;
-        private Block[] _blocks;
+        private IAnimationComponent[] _components;
 
         public DropAnimation()
         {
             _settings = _animationSettings.Drop;
         }
-        public override GameplayAnimationBase SetBlocks(params Block[] blocks)
+        public override GameplayAnimationBase SetComponents(params IAnimationComponent[] components)
         {
-            _blocks = blocks;
+            _components = components;
             return this;
         }
 
@@ -27,7 +28,7 @@ namespace Gameplay
 
         public override void Play(Action callback = null)
         {
-            var count = _blocks.Length;
+            var count = _components.Length;
             for (int i = 0; i < count; i++)
             {
                 var animation = i switch
@@ -36,7 +37,7 @@ namespace Gameplay
                     1 => _settings.MiddleHitAnimation,
                     _ => _settings.BottomHitAnimation
                 };
-                _blocks[i].View.Animation.Play(animation, i == count - 1 ? callback : null);
+                _components[i].Animation.Play(animation, i == count - 1 ? callback : null);
             }
         }
     }

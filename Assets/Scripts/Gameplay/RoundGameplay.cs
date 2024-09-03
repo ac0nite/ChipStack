@@ -82,7 +82,7 @@ namespace Gameplay
             if (_intersectionResolver.HasIntersect)
             {
                 _moveDropAnimation
-                    .SetBlocks(_movableBlock)
+                    .SetComponents(_movableBlock)
                     .SetParams(DownPosition(_intersectionResolver.Offset))
                     .Play(() =>
                     {
@@ -94,11 +94,11 @@ namespace Gameplay
                         _movableBlock.ChangeTransform(generalIntersection);
                         
                         _dropAnimation
-                            .SetBlocks(_blockFacade.GetLastSpawned(3).ToArray())
+                            .SetComponents(_blockFacade.GetLastSpawned(3).ToArray())
                             .Play(() =>
                             {
                                 var v0 = _movableBlock.Position;
-                                _remainder = _blockFacade.RemainderSpawn().Initialise(remaindersIntersection);
+                                _remainder = _blockFacade.RemainderSpawn().Initialise(remaindersIntersection, _intersectionResolver.Stretching);
                                 _remainder.Enable();
                                 // UpdateRemainderAnimationParam(remaindersRectTransform, v1 - v0);
                                 // _remainderComponent.Play(null);

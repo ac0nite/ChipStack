@@ -3,6 +3,7 @@ using Core.UI.MVP;
 using SavingData;
 using UnityEngine;
 using UnityEngine.UI;
+using Vector3 = System.Numerics.Vector3;
 
 namespace UI.Screens.Debug
 {
@@ -17,6 +18,8 @@ namespace UI.Screens.Debug
         public event Action OnInitialButtonPressedEvent;
         public event Action OnDownButtonPressedEvent;
         public event Action OnClearButtonPressedEvent;
+        
+        public Vector3 DebugPosition => new Vector3(_axisXSlider.value, 0, _axisZSlider.value);
         protected override void Subscribe()
         {
             _axisXSlider.maxValue = 2.5f;

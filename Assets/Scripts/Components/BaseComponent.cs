@@ -1,4 +1,5 @@
-﻿using Remainders;
+﻿using Animations;
+using Pivots;
 using UnityEngine;
 
 namespace Components
@@ -7,7 +8,22 @@ namespace Components
     {
         public Vector3 Position { get; set; }
         public Vector3 Size { get; set; }
-        public void ChangePivot(PivotTransform.PivotWidth pivotWidth, PivotTransform.PivotHeight pivotHeight);
+    }
+
+    public interface IAnimationComponent : IComponent
+    {
+        AnimationBlock Animation { get; }
+        void ChangePivot(PivotTransform.PivotWidth pivotWidth, PivotTransform.PivotHeight pivotHeight);
+    }
+
+    public interface IViewComponent
+    {
+        public Transform Root { get; }
+        public Animator Animator { get; }
+
+        public void Enable();
+        public void Disable();
+        public void Reset();
     }
     public class BaseComponent : MonoBehaviour, IComponent
     {

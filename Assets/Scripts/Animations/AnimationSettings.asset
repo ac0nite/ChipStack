@@ -89,7 +89,7 @@ MonoBehaviour:
     BeginPosition: {x: 0, y: 15, z: 0}
     Move:
       Delay: 0
-      Duration: 0.5
+      Duration: 0.3
       UseEase: 1
       Ease: 1
       Curve:
@@ -101,12 +101,40 @@ MonoBehaviour:
     FlyDown:
       Id: -1396034885
       Delay: 0
-      Speed: 2
+      Speed: 4
     FlyTouchDown:
       Id: -694713774
       Delay: 0
-      Speed: 10
+      Speed: 20
     Landing:
       Id: 240190028
       Delay: 0
-      Speed: 10
+      Speed: 1.9
+  DropDebug:
+    Move:
+      Delay: 0
+      Duration: 0.2
+      UseEase: 1
+      Ease: 1
+      Curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    DropHard:
+      Id: 240190028
+      Delay: 0
+      Speed: 1
+    DropMiddle:
+      Id: 306454214
+      Delay: 0.05
+      Speed: 1
+    DropLight:
+      Id: 2086839977
+      Delay: 0.1
+      Speed: 1
+    Stretching:
+      Id: 0
+      Delay: 0
+      Speed: 4

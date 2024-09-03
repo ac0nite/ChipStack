@@ -1,5 +1,5 @@
 ﻿using Components;
-using Remainders;
+using Pivots;
 using UnityEngine;
 
 namespace Blocks
@@ -7,6 +7,8 @@ namespace Blocks
     [ExecuteInEditMode]
     public class BlockView : ViewBase
     {
-        public PivotTransform PivotTransform;
+        [SerializeField] private PivotTransform _pivotTransform;
+
+        public IPivotTransform PivotTransform => _pivotTransform;
     }
 }
