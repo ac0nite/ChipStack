@@ -24,21 +24,23 @@ namespace Blocks
     
         public Vector3 Position
         {
-            get => View.PivotTransform.Position;
-            set => View.PivotTransform.Position = value;
+            get => View.PivotComponent.Position;
+            set => View.PivotComponent.Position = value;
         }
 
         public Vector3 Size
         {
-            get => View.PivotTransform.Size;
-            set => View.PivotTransform.Size = value;
+            get => View.PivotComponent.Size;
+            set => View.PivotComponent.Size = value;
         }
+
+        public bool IsActive => View.PivotComponent.IsActive;
 
         public AnimationBlock Animation { get; }
 
-        public void ChangePivot(PivotTransform.PivotWidth pivotWidth, PivotTransform.PivotHeight pivotHeight)
+        public void ChangePivot(PivotComponent.WidthAlignment widthAlignment, PivotComponent.HeightAlignment heightAlignment)
         {
-            View.PivotTransform.SetPivot(pivotWidth, pivotHeight);
+            View.PivotComponent.SetPivotAlignment(widthAlignment, heightAlignment);
         }
 
         public void Enable()
@@ -48,15 +50,11 @@ namespace Blocks
         public void ClearAndDisable()
         {
             View.Reset();
-            // View.Component.DisablePhysics();
-            // View.Component.SetTransformDefault();
-            // View.Component.DisableActive();
         }
 
         public void ChangeTransform(Intersection intersection)
         {
-            intersection.ApplyTo(View.PivotTransform);
-            //View.Component.EnablePhysics();
+            intersection.ApplyTo(View.PivotComponent);
         }
     }
 }

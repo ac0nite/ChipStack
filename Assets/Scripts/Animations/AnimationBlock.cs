@@ -33,7 +33,10 @@ namespace Animations
             });
         }
         
-        public static float GetTiming(int id) => _timings[id];
+        public static float GetTiming(int id)
+        {
+            return _timings[id];
+        }
     }
 
     public class AnimationBase
@@ -54,6 +57,15 @@ namespace Animations
                 animator.SetTrigger(settings.Id);
                 animator.SetFloat(AnimationsConstants.Speed, settings.Speed);
                 _ = animator.OnCompletedAsync(AnimatorTiming.GetTiming(settings.Id) / settings.Speed, callback);
+            });
+        }
+
+        public void PlayWithTransitionIdle(Settings settings, Action callback = null)
+        {
+            Play(settings, () =>
+            {
+                _animator.SetTrigger(AnimationsConstants.Idle);
+                callback?.Invoke();
             });
         }
 

@@ -1,9 +1,8 @@
-﻿using System;
-using Animations;
+﻿using Animations;
 using Components;
 using Core.Pool;
+using Cysharp.Threading.Tasks;
 using Intersections;
-using MEC;
 using Pivots;
 using Remainders;
 using UnityEngine;
@@ -22,23 +21,42 @@ public class Remainder : IPresenter<RemainderView>, IAnimationComponent
         pool.Release(View);
     }
 
-    public Remainder Initialise((Intersection one, Intersection two) intersection, Vector3 stretching)
+    public Remainder Initialise(IPivotExtended root, (Intersection one, Intersection two) intersection, Vector3 stretching)
     {
-        intersection.one.ApplyTo(View.One);
-        intersection.two.ApplyTo(View.Two);
+        View.Root.Position = root.Position;
+        View.Root.Size = root.Size;
+        
+        intersection.one.ApplyTo(View.One, View.Root.Size);
+        intersection.two.ApplyTo(View.Two, View.Root.Size);
         
         View.SetActive(intersection.one.IsValid, intersection.two.IsValid);
         
-        var pivot = stretching.ToPivotTransform();
+        var pivot = stretching.ToPivotAlignment();
         ChangePivot(pivot.width, pivot.height);
 
+        _ = ChangePivotScaleAsync(root.Pivot.localScale);
+        
         return this;
+    }
+
+    private async UniTask ChangePivotScaleAsync(Vector3 scale)
+    {
+        View.PivotsAdjuster.Enable();
+        await UniTask.DelayFrame(1);
+        View.Root.Pivot.localScale = scale;
+        View.PivotsAdjuster.Disable();
+        await UniTask.DelayFrame(1);
+        View.Root.FineTunePivotAlignment();
+        View.One.FineTunePivotAlignment();
+        View.Two.FineTunePivotAlignment();
     }
 
     public void Enable()
     {
         View.Enable();
     }
+    
+    public IPivotsAdjuster PivotsAdjuster => View.PivotsAdjuster;
 
     public void AddForce(Vector3 direction)
     {
@@ -47,11 +65,6 @@ public class Remainder : IPresenter<RemainderView>, IAnimationComponent
     public void ClearAndDisable()
     {
         View.Reset();
-    }
-
-    public void CompletionOnFall(float delayTime, Action<Remainder> action)
-    {
-        Timing.CallDelayed(delayTime, () => action(this));
     }
 
     public Vector3 Position
@@ -66,11 +79,13 @@ public class Remainder : IPresenter<RemainderView>, IAnimationComponent
         set => View.Root.Size = value;
     }
 
+    public bool IsActive => View.Root.IsActive;
+
     public AnimationBlock Animation { get; }
-    public void ChangePivot(PivotTransform.PivotWidth pivotWidth, PivotTransform.PivotHeight pivotHeight)
+    public void ChangePivot(PivotComponent.WidthAlignment widthAlignment, PivotComponent.HeightAlignment heightAlignment)
     {
-        View.Root.SetPivot(pivotWidth, pivotHeight);
-        View.One.SetPivot(pivotWidth, pivotHeight);
-        View.Two.SetPivot(pivotWidth, pivotHeight);
+        View.Root.SetPivotAlignment(widthAlignment, heightAlignment);
+        View.One.SetPivotAlignment(widthAlignment, heightAlignment);
+        View.Two.SetPivotAlignment(widthAlignment, heightAlignment);
     }
 }

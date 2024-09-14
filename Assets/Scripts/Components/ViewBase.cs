@@ -20,7 +20,7 @@ namespace Components
 
         public virtual void Enable() => gameObject.SetActive(true);
         public virtual void Disable() => gameObject.SetActive(false);
-        public void Reset()
+        public virtual void Reset()
         {
             Disable();
             _physics.Disable();

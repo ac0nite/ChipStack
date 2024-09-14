@@ -68,7 +68,7 @@ namespace Gameplay
         {
             _component = components[0];
             _moveDownAnimation.Component = _component;
-            _component.ChangePivot(PivotTransform.PivotWidth.center, PivotTransform.PivotHeight.bottom);
+            _component.ChangePivot(PivotComponent.WidthAlignment.center, PivotComponent.HeightAlignment.bottom);
             return this;
         }
 
@@ -131,16 +131,18 @@ namespace Gameplay
                         1 => _settings.DropMiddle,
                         _ => _settings.DropLight
                     };
-                    _components[i].ChangePivot(PivotTransform.PivotWidth.center, PivotTransform.PivotHeight.bottom);
+                    _components[i].ChangePivot(PivotComponent.WidthAlignment.center, PivotComponent.HeightAlignment.bottom);
                     _components[i].Animation.Play(animation, i == count - 1 ? Stratching : null);
                 }
             });
 
             void Stratching()
             {
-                var pivot = _stratching.ToPivotTransform();
+                var pivot = _stratching.ToPivotAlignment();
                 _components[0].ChangePivot(pivot.width, pivot.height);
-                _components[0].Animation.Play(StretchingSettings(), callback);
+                
+                //callback?.Invoke();
+                _components[0].Animation.PlayWithTransitionIdle(StretchingSettings(), callback);
             }
             
             AnimationBase.Settings StretchingSettings()

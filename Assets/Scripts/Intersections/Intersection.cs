@@ -1,4 +1,5 @@
 ﻿using Components;
+using Core.Utils.Extended;
 using Pivots;
 using UnityEngine;
 
@@ -15,10 +16,16 @@ namespace Intersections
             _size = new Vector3(rect.width, depth, rect.height);
         }
 
-        public void ApplyTo(IPivotTransform applyToTransform)
+        public void ApplyTo(IPivot applyTo)
         {
-            applyToTransform.Position = _position;
-            applyToTransform.Size = _size;
+            applyTo.Position = _position;
+            applyTo.Size = _size;
+        }
+        
+        public void ApplyTo(IPivot applyTo, Vector3 divider)
+        {
+            applyTo.Position = _position;
+            applyTo.Size = _size.Divide(divider);
         }
         public bool IsValid => _size is { x: > 0, z: > 0 };
         

@@ -5,41 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2be2e8d7-aac3-4350-bd84-84af8c35215c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Utils/Vector3Extension.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Utils/Vector3Extension.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Remainders/CustomPhysics.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Remainders/CustomPhysics.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Remainder 2(Clone).prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Remainder 2(Clone).prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotComponent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotsAdjuster.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Pivots/Vector3Extensions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Pivots/Vector3Extensions.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ChipStack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ChipStack/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Animations/BlockAnimationController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/BlockAnimationController.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/RemainderAnimatorController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/RemainderAnimatorController.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Idle.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Idle.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LandingHard.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LandingHard.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Cube_prefab_V2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Cube_prefab_V2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Remainder.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Remainder.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/GameplaySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/GameplaySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Remainder 2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Remainder 2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animations/AnimationBlock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animations/AnimationBlock.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animations/AnimationSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animations/AnimationSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animations/AnimationSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animations/AnimationSettings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Blocks/Block.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Blocks/Block.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Blocks/BlockSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Blocks/BlockSpawner.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Blocks/BlockView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Blocks/BlockView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/BaseComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/BaseComponent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/ViewBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/ViewBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM/States/ServiceState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FSM/States/ServiceState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/DropAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/DropAnimation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/GameplayAnimationBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/GameplayAnimationBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/InitialAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/InitialAnimation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Utils/SettingsScriptableObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Utils/SettingsScriptableObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Utils/Vector3Extension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Utils/Vector3Extension.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/InitialDropDebugAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/InitialDropDebugAnimation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/MoveDropAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/MoveDropAnimation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/PreparingGameplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/PreparingGameplay.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/RoundGameplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/RoundGameplay.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Intersections/Intersection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Intersections/Intersection.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Intersections/IntersectionResolver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Intersections/IntersectionResolver.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Remainders/CustomComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Remainders/CustomComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pivots/IPivotTransform.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pivots/IPivot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pivots/IPivotTransform.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pivots/IPivot.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotCroppedScaling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotCroppedScaling.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotScaling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotScaling.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotTransform.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotTransform.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotComponent.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotsScaling.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotsScaling.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotsAdjuster.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Remainders/Remainder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Remainders/Remainder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Remainders/RemainderSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Remainders/RemainderSpawner.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Remainders/RemainderView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Remainders/RemainderView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreen.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreenPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreenPresenter.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,24 +108,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "develop",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.codeium.AppSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;/Users/andrey.sachuk/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache&quot;,
-      &quot;/Users/andrey.sachuk/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache&quot;,
-      &quot;/Users/andrey.sachuk/Library/Application Support/Symbols/src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/Users/andrey.sachuk/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
+      "/Users/andrey.sachuk/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
+      "/Users/andrey.sachuk/Library/Application Support/Symbols/src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/2022.3.15f1/Unity.app/Contents/MacOS/Unity" />
@@ -155,10 +155,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="40429">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="76515">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="40429" />
+      <option name="pid" value="76515" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -190,7 +190,14 @@
       <workItem from="1723992471908" duration="11434000" />
       <workItem from="1724085919310" duration="48270000" />
       <workItem from="1724490903183" duration="25114000" />
-      <workItem from="1724751918104" duration="69546000" />
+      <workItem from="1724751918104" duration="111708000" />
+      <workItem from="1725917998469" duration="61000" />
+      <workItem from="1725918068375" duration="203000" />
+      <workItem from="1725918280108" duration="25000" />
+      <workItem from="1725918313221" duration="2407000" />
+      <workItem from="1725921396221" duration="131000" />
+      <workItem from="1725921535200" duration="305000" />
+      <workItem from="1725921855252" duration="43883000" />
     </task>
     <servers />
   </component>
@@ -223,32 +230,88 @@
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreenPresenter.cs</url>
-          <line>73</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/Debug/DebugScreenPresenter.cs" containingFunctionPresentation="Local function 'DownPosition'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Pivots/PivotComponent.cs</url>
+          <line>39</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotTransform.cs" containingFunctionPresentation="Method 'SetPivot'">
             <startOffsets>
-              <option value="3185" />
+              <option value="1212" />
             </startOffsets>
             <endOffsets>
-              <option value="3362" />
+              <option value="1245" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="28" />
+          <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Intersections/IntersectionResolver.cs</url>
-          <line>143</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Intersections/IntersectionResolver.cs" containingFunctionPresentation="Method 'CalculateTopExtendedRemaindersRect'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Pivots/PivotsAdjuster.cs</url>
+          <line>62</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotsScaling.cs" containingFunctionPresentation="Method 'UpdatePivotPositionAndScale'">
             <startOffsets>
-              <option value="4066" />
+              <option value="1942" />
             </startOffsets>
             <endOffsets>
-              <option value="4107" />
+              <option value="1984" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="31" />
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Pivots/PivotsAdjuster.cs</url>
+          <line>68</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotsScaling.cs" containingFunctionPresentation="Method 'UpdatePivotPositionAndScale'">
+            <startOffsets>
+              <option value="2149" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2191" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Animations/AnimationBlock.cs</url>
+          <line>49</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Animations/AnimationBlock.cs" containingFunctionPresentation="Constructor 'AnimationBase'">
+            <startOffsets>
+              <option value="1438" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1476" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Pivots/PivotsAdjuster.cs</url>
+          <line>39</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotsAdjuster.cs" containingFunctionPresentation="Method 'Disable'">
+            <startOffsets>
+              <option value="1173" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1250" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Pivots/PivotsAdjuster.cs</url>
+          <line>40</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Pivots/PivotsAdjuster.cs" containingFunctionPresentation="Method 'Disable'">
+            <startOffsets>
+              <option value="1267" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1291" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -57,16 +57,16 @@ namespace UI.Screens.Debug
             InitializeNextBlock();
             if (_blockFacade.IntersectionResolver.HasIntersect)
             {
-                UnityEngine.Debug.Log($"Stretching: {_blockFacade.IntersectionResolver.Stretching} Offset: {_blockFacade.IntersectionResolver.Offset.x} {_blockFacade.IntersectionResolver.Offset.y}");
-                var lasSpawned = _blockFacade.GetLastSpawned(3);
-                dropAnimation.SetComponents(lasSpawned.ToArray());
-                dropAnimation.SetParams(_blockFacade.LastBlockSpawned.Position,DownPosition(_blockFacade.IntersectionResolver.Offset), _blockFacade.IntersectionResolver.Stretching);
+                block = _blockFacade.LastBlockSpawned;
+                dropAnimation.SetComponents(_blockFacade.GetLastSpawned(3).ToArray());
+                dropAnimation.SetParams(_blockFacade.LastBlockSpawned.Position, DownPosition(_blockFacade.IntersectionResolver.Offset), _blockFacade.IntersectionResolver.Stretching);
                 dropAnimation.Play(() =>
                 {
                     var general = _blockFacade.IntersectionResolver.GeneralRect.ToIntersection(_blockFacade.LastBlockSpawned);
                     var intersections = _blockFacade.IntersectionResolver.RemaindersRect.ToIntersection(_blockFacade.LastBlockSpawned);
-                    //_blockFacade.LastBlockSpawned.ChangeTransform(general);
-                    _blockFacade.RemainderSpawn().Initialise(intersections, _blockFacade.IntersectionResolver.Stretching).Enable();
+                    var stretching = _blockFacade.IntersectionResolver.Stretching;
+                    _blockFacade.RemainderSpawn().Initialise(_blockFacade.LastBlockSpawned.View.PivotComponent, intersections, stretching).Enable();
+                    _blockFacade.LastBlockSpawned.ChangeTransform(general);
                 });
 
                 Vector3 DownPosition(Vector2 offset)

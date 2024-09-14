@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481779a868d5b96449dbb23a217246b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pivotTransform: {fileID: 2941400316050307096}
+  pivotComponent: {fileID: 2941400316050307096}
 --- !u!114 &2941400316050307096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,8 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26fd18a94102493796f313d2a45496bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _root: {fileID: 7476946508061357141}
-  _pivot: {fileID: 7577198607045770552}
-  _model: {fileID: 2792768328329299430}
-  _pivotWidth: 0
-  _pivotHeight: 0
+  _rootTransform: {fileID: 7476946508061357141}
+  _pivotTransform: {fileID: 7577198607045770552}
+  _modelTransform: {fileID: 2792768328329299430}
+  _widthAlignment: 0
+  _heightAlignment: 0

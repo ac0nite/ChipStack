@@ -18,5 +18,20 @@ namespace Core.Utils.Extended
         {
             return new Vector3(value.x, value.y, z);
         }
+        
+        public static Vector3 Divide(this Vector3 value, Vector3 divider)
+        {
+            return new Vector3(value.x / divider.x, value.y / divider.y, value.z / divider.z);
+        }
+
+
+        public static Vector3 ScaleProportionallyTo(this Vector3 value, Vector3 relative, float baseValue = 1)
+        {
+            var invBaseValue = 1f / baseValue;
+            return new Vector3(
+                value.x * relative.x * invBaseValue,
+                value.y * relative.y * invBaseValue,
+                value.z * relative.z * invBaseValue);
+        }
     }
 }

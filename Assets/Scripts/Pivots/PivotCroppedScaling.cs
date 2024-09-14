@@ -7,20 +7,20 @@ namespace Pivots
     {
         private readonly Vector3 _defaultPosition;
         private readonly Transform _rootPivot;
-        private readonly CroppedAxisDelegate _croppedAxis;
+        // private readonly CroppedAxisDelegate _croppedAxis;
 
         public delegate void CroppedAxisDelegate();
 
-        public PivotCroppedScaling(IPivotExtendedTransform root, IPivotExtendedTransform child, CroppedAxisDelegate cropped) 
+        public PivotCroppedScaling(IPivotExtended root, IPivotExtended child) 
             : base(root, child)
         {
-            CroppedAxisXDelegate ??= UpdateCroppedAxisXPositionAndScale;
-            CroppedAxisZDelegate ??= UpdateCroppedAxisZPositionAndScale;
+            // CroppedAxisXDelegate = () => UpdateCroppedAxisXPositionAndScale();
+            // CroppedAxisZDelegate = () => UpdateCroppedAxisZPositionAndScale();
             
             _defaultPosition = child.Pivot.localPosition;
             _rootPivot = root.Pivot;
 
-            _croppedAxis = cropped;
+            // _croppedAxis = cropped;
         }
 
         public static CroppedAxisDelegate CroppedAxisXDelegate { get; private set; }
@@ -29,13 +29,14 @@ namespace Pivots
         public override void UpdatePositionAndScale()
         {
             base.UpdatePositionAndScale();
-            _croppedAxis?.Invoke();
+            UpdateCroppedAxisXPositionAndScale();
         }
 
         private void UpdateCroppedAxisXPositionAndScale()
         {
             _child.Pivot.localPosition = _child.Pivot.localPosition.SetX(_defaultPosition.x);
             _child.Pivot.localScale = _child.Pivot.localScale.SetX(1f/_rootPivot.localScale.x);
+            Debug.Log($"UpdateCroppedAxisXPositionAndScale: {_child.Pivot.localPosition.x} {_child.Pivot.localScale.x}");
         }
         
         private void UpdateCroppedAxisZPositionAndScale()

@@ -98,7 +98,7 @@ namespace Gameplay
                             .Play(() =>
                             {
                                 var v0 = _movableBlock.Position;
-                                _remainder = _blockFacade.RemainderSpawn().Initialise(remaindersIntersection, _intersectionResolver.Stretching);
+                                _remainder = _blockFacade.RemainderSpawn().Initialise(_blockFacade.LastBlockSpawned.View.PivotComponent, remaindersIntersection, _intersectionResolver.Stretching);
                                 _remainder.Enable();
                                 // UpdateRemainderAnimationParam(remaindersRectTransform, v1 - v0);
                                 // _remainderComponent.Play(null);

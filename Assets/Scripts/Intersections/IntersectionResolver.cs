@@ -55,7 +55,8 @@ namespace Intersections
 
         public Rect GeneralRect { get; private set; }
 
-        public (Rect one, Rect two) RemaindersRect => CalculateTopRemaindersRect(GeneralRect);
+        //public (Rect one, Rect two) RemaindersRect => CalculateTopRemaindersRect(GeneralRect);
+        public (Rect one, Rect two) RemaindersRect => CalculateTopExtendedRemaindersRect(GeneralRect);
         
         private static Rect GetRect(IComponent block)
         {
@@ -125,6 +126,8 @@ namespace Intersections
         private (Rect, Rect) CalculateTopExtendedRemaindersRect(Rect intersection)
         {
             var topScale = _top.Size;
+            
+            Stretching = Vector3.zero;
 
             Vector2 remOnePos, remTwoPos;
             var width = topScale.x - intersection.width;
@@ -134,17 +137,23 @@ namespace Intersections
             {
                 remOnePos.x = intersection.xMin - width;
                 remOnePos.y = intersection.yMin;
+                
+                if(width > 0) Stretching += Vector3.left;
             }
             else
             {
                 remOnePos.x = intersection.xMax;
                 remOnePos.y = intersection.yMin;
+                
+                if(width > 0) Stretching += Vector3.right;
             }
 
             if (_top.Position.z > _bottom.Position.z)
             {
                 remTwoPos.x = intersection.xMin;
                 remTwoPos.y = intersection.yMax;
+                
+                if(height > 0) Stretching += Vector3.forward;
             }
             else
             {
@@ -152,6 +161,8 @@ namespace Intersections
                 remTwoPos.y = intersection.yMin - height;
             
                 remOnePos.y = intersection.yMin;
+                
+                if(height > 0) Stretching += Vector3.back;
             }
 
             // здесь получается, верхний отступ больше, чем нижний

@@ -1,14 +1,15 @@
 ﻿using Components;
 using Pivots;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Blocks
 {
     [ExecuteInEditMode]
     public class BlockView : ViewBase
     {
-        [SerializeField] private PivotTransform _pivotTransform;
+        [SerializeField] private PivotComponent pivotComponent;
 
-        public IPivotTransform PivotTransform => _pivotTransform;
+        public IPivotExtended PivotComponent => pivotComponent;
     }
 }

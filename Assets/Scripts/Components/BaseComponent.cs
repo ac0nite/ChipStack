@@ -8,12 +8,13 @@ namespace Components
     {
         public Vector3 Position { get; set; }
         public Vector3 Size { get; set; }
+        bool IsActive { get; }
     }
 
     public interface IAnimationComponent : IComponent
     {
         AnimationBlock Animation { get; }
-        void ChangePivot(PivotTransform.PivotWidth pivotWidth, PivotTransform.PivotHeight pivotHeight);
+        void ChangePivot(PivotComponent.WidthAlignment widthAlignment, PivotComponent.HeightAlignment heightAlignment);
     }
 
     public interface IViewComponent
@@ -39,9 +40,6 @@ namespace Components
             set => transform.localScale = value;
         }
 
-        public void ChangePivot(PivotTransform.PivotWidth pivotWidth, PivotTransform.PivotHeight pivotHeight)
-        {
-            throw new System.NotImplementedException();
-        }
+        public bool IsActive => gameObject.activeSelf;
     }   
 }

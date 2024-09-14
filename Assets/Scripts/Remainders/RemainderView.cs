@@ -1,30 +1,57 @@
 ﻿using Components;
+using MEC;
 using Pivots;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Remainders
 {
     public class RemainderView : ViewBase
     {
-        [SerializeField] private PivotTransform _rootPivotTransform;
-        [SerializeField] private PivotTransform _onePivotTransform;
-        [SerializeField] private PivotTransform _twoPivotTransform;
-        [SerializeField] private PivotsScaling _pivotsScaling;
-        public IPivotTransform Root => _rootPivotTransform;
-        public IPivotTransform One => _onePivotTransform;
-        public IPivotTransform Two => _twoPivotTransform;
-        public IPivotsScaling PivotsScaling => _pivotsScaling;
+        [SerializeField] private PivotComponent rootPivotComponent;
+        [SerializeField] private PivotComponent onePivotComponent;
+        [SerializeField] private PivotComponent twoPivotComponent;
+        public IPivotExtended Root => rootPivotComponent;
+        public IPivotExtended One => onePivotComponent;
+        public IPivotExtended Two => twoPivotComponent;
 
-        protected override void Awake()
+        public IPivotsAdjuster PivotsAdjuster
         {
-            base.Awake();
-            _pivotsScaling.SetParams(_rootPivotTransform, _onePivotTransform, _twoPivotTransform);
+            get
+            {
+                return _pivotsAdjuster ??= new PivotsAdjuster(rootPivotComponent, onePivotComponent, twoPivotComponent);
+            }
         }
+        
+        private IPivotsAdjuster _pivotsAdjuster;
 
         public void SetActive(bool oneIsValid, bool twoIsValid)
         {
-            _onePivotTransform.gameObject.SetActive(oneIsValid);
-            _twoPivotTransform.gameObject.SetActive(twoIsValid);
+            onePivotComponent.gameObject.SetActive(oneIsValid);
+            twoPivotComponent.gameObject.SetActive(twoIsValid);
         }
+
+        public override void Reset()
+        {
+            twoPivotComponent.Reset();
+            onePivotComponent.Reset();
+            rootPivotComponent.Reset();
+            
+            base.Reset();
+        }
+
+#if UNITY_EDITOR
+        [Button]
+        private void EnablePivotsAdjuster()
+        {
+            PivotsAdjuster.Enable(Segment.EditorUpdate);
+        }
+        
+        [Button]
+        private void DisablePivotsAdjuster()
+        {
+            PivotsAdjuster.Disable();
+        }
+#endif
     }
 }
