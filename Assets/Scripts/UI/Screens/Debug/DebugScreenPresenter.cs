@@ -1,6 +1,7 @@
 using System.Linq;
 using Blocks;
 using Core.UI.MVP;
+using Core.Utils.Extended;
 using Gameplay;
 using Intersections;
 using Settings;
@@ -14,6 +15,7 @@ namespace UI.Screens.Debug
         private InitialDropDebugAnimation initialAnimation;
         private DropAnimationDebug dropAnimation;
         private readonly Movement.Settings _gameplaySettings;
+        private RemainderAnimationDebug remainderAnimation;
 
         public DebugScreenPresenter(DebugScreen view, IBlockFacade blockFacade) : base(view)
         {
@@ -47,6 +49,7 @@ namespace UI.Screens.Debug
         private void DropAnimation()
         {
             dropAnimation ??= new DropAnimationDebug();
+            remainderAnimation ??= new RemainderAnimationDebug();
             Block block;
             if (_blockFacade.GetLastSpawned(1).Count == 0)
             {
@@ -58,15 +61,26 @@ namespace UI.Screens.Debug
             if (_blockFacade.IntersectionResolver.HasIntersect)
             {
                 block = _blockFacade.LastBlockSpawned;
+
+                var intersectionsRect = _blockFacade.IntersectionResolver.RemaindersRect;
+                
                 dropAnimation.SetComponents(_blockFacade.GetLastSpawned(3).ToArray());
                 dropAnimation.SetParams(_blockFacade.LastBlockSpawned.Position, DownPosition(_blockFacade.IntersectionResolver.Offset), _blockFacade.IntersectionResolver.Stretching);
                 dropAnimation.Play(() =>
                 {
-                    var general = _blockFacade.IntersectionResolver.GeneralRect.ToIntersection(_blockFacade.LastBlockSpawned);
-                    var intersections = _blockFacade.IntersectionResolver.RemaindersRect.ToIntersection(_blockFacade.LastBlockSpawned);
+                    var general = _blockFacade.IntersectionResolver.GeneralRect.ToIntersection(block);
+                    var intersections = intersectionsRect.ToIntersection(block);
                     var stretching = _blockFacade.IntersectionResolver.Stretching;
-                    _blockFacade.RemainderSpawn().Initialise(_blockFacade.LastBlockSpawned.View.PivotComponent, intersections, stretching).Enable();
-                    _blockFacade.LastBlockSpawned.ChangeTransform(general);
+                    var remainder = _blockFacade.RemainderSpawn().Initialise(block.View.PivotComponent, intersections, stretching);
+                    remainder.Enable();
+                    var oldPosition = block.Position;
+                    block.ChangeTransform(general);
+                    
+                    var direction = oldPosition - block.Position;
+                    var remainderAnimParams = UpdateRemainderParams(remainder.Position, direction, intersections);
+                    remainderAnimation.SetComponents(remainder);
+                    remainderAnimation.SetParams(remainderAnimParams.move, remainderAnimParams.down);
+                    remainderAnimation.Play();
                 });
 
                 Vector3 DownPosition(Vector2 offset)
@@ -92,6 +106,19 @@ namespace UI.Screens.Debug
                 block.Position = position;
                 
                 UnityEngine.Debug.Log($"LAST: {block.View.transform.name} {block.View.transform.position} {block.Position}", block.View.transform);
+            }
+            
+            (Vector3 move, Vector3 down) UpdateRemainderParams(Vector3 position, Vector3 direction, (Intersection one, Intersection two) remainders)
+            {
+                if (remainders.one.IsValid && !remainders.two.IsValid)
+                    direction.z = 0;
+                else if(!remainders.one.IsValid && remainders.two.IsValid)
+                    direction.x = 0;
+            
+                var move = position + direction.normalized * 2f;
+                var down = move.SetY(0);
+                
+                return (move, down);
             }
         }
         

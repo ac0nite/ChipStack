@@ -126,9 +126,7 @@ namespace Intersections
         private (Rect, Rect) CalculateTopExtendedRemaindersRect(Rect intersection)
         {
             var topScale = _top.Size;
-            
             Stretching = Vector3.zero;
-
             Vector2 remOnePos, remTwoPos;
             var width = topScale.x - intersection.width;
             var height = topScale.z - intersection.height;
@@ -160,7 +158,7 @@ namespace Intersections
                 remTwoPos.x = intersection.xMin;
                 remTwoPos.y = intersection.yMin - height;
             
-                remOnePos.y = intersection.yMin;
+                remOnePos.y = intersection.yMin - height;
                 
                 if(height > 0) Stretching += Vector3.back;
             }
@@ -169,6 +167,7 @@ namespace Intersections
             return (new Rect(remOnePos.x, remOnePos.y, width, topScale.z), 
                 new Rect(remTwoPos.x, remTwoPos.y, intersection.width, height));
         }
+
         
         private (Rect, Rect) CalculateTopRemaindersRect(Rect intersection)
         {

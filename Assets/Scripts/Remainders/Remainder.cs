@@ -21,34 +21,26 @@ public class Remainder : IPresenter<RemainderView>, IAnimationComponent
         pool.Release(View);
     }
 
-    public Remainder Initialise(IPivotExtended root, (Intersection one, Intersection two) intersection, Vector3 stretching)
+    public Remainder Initialise(IPivotExtended target, (Intersection one, Intersection two) intersection, Vector3 stretching)
     {
-        View.Root.Position = root.Position;
-        View.Root.Size = root.Size;
+        View.Root.Position = target.Position;
+        View.Root.Size = target.Size;
         
-        intersection.one.ApplyTo(View.One, View.Root.Size);
-        intersection.two.ApplyTo(View.Two, View.Root.Size);
+        intersection.one.ApplyTo(View.One, target.Size);
+        intersection.two.ApplyTo(View.Two, target.Size);
         
         View.SetActive(intersection.one.IsValid, intersection.two.IsValid);
         
         var pivot = stretching.ToPivotAlignment();
         ChangePivot(pivot.width, pivot.height);
-
-        _ = ChangePivotScaleAsync(root.Pivot.localScale);
         
-        return this;
-    }
-
-    private async UniTask ChangePivotScaleAsync(Vector3 scale)
-    {
-        View.PivotsAdjuster.Enable();
-        await UniTask.DelayFrame(1);
-        View.Root.Pivot.localScale = scale;
-        View.PivotsAdjuster.Disable();
-        await UniTask.DelayFrame(1);
+        View.PivotsAdjuster.ForceUpdate(target.Pivot.localScale); 
+        
         View.Root.FineTunePivotAlignment();
         View.One.FineTunePivotAlignment();
         View.Two.FineTunePivotAlignment();
+        
+        return this;
     }
 
     public void Enable()

@@ -44,7 +44,7 @@ namespace Remainders
         [Button]
         private void EnablePivotsAdjuster()
         {
-            PivotsAdjuster.Enable(Segment.EditorUpdate);
+            PivotsAdjuster.Enable(UnityEngine.Application.isPlaying ? Segment.Update : Segment.EditorUpdate);
         }
         
         [Button]

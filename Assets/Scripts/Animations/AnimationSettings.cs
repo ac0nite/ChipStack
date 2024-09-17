@@ -18,6 +18,7 @@ namespace Animations
         
         public InitialDropAnimationDebug InitialDropDebug;
         public DropAnimationDebug DropDebug;
+        public RemainderDebugAnimation RemainderDebug;
     }
 
     [Serializable]
@@ -52,6 +53,13 @@ namespace Animations
         public AnimationBase.Settings DropMiddle;
         public AnimationBase.Settings DropLight;
         public AnimationBase.Settings Stretching;
+    }
+
+    [Serializable]
+    public class RemainderDebugAnimation
+    {
+        public AnimationComponent.Settings Move;
+        public AnimationComponent.Settings Down;
     }
     
     [Serializable]

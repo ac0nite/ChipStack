@@ -29,10 +29,11 @@ namespace Pivots
             
             var ratio = Vector3.one.Divide(child.Root.localScale);
             
+            
             _from = new Vector3(
-                IsLeft(root) ? _to.x - ratio.x : ratio.x - _to.x,
+                IsLeft(root) ? - position.x - ratio.x : ratio.x - position.x,
                 position.y,
-                IsBottom(root) ? _to.z - ratio.z : ratio.z - _to.z);
+                IsBottom(root) ? - position.z - ratio.z : ratio.z - position.z);
             
             _t = new Vector3(
                 Mathf.InverseLerp(_from.x, _to.x, position.x),
@@ -51,7 +52,7 @@ namespace Pivots
                 1 / (1f -  _t.y),
                 1 / (1f -  _t.z));
             
-            // Debug.Log($"Initial: {this}");
+            Debug.Log($"Initial: {this}");
         }
 
         private static Vector3 CalcSize(IPivotExtended root)

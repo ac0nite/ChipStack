@@ -137,4 +137,27 @@ MonoBehaviour:
     Stretching:
       Id: 240190028
       Delay: 0
-      Speed: 4
+      Speed: 1
+  RemainderDebug:
+    Move:
+      Delay: 0
+      Duration: 1
+      UseEase: 1
+      Ease: 1
+      Curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    Down:
+      Delay: 0
+      Duration: 0.3
+      UseEase: 1
+      Ease: 1
+      Curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4

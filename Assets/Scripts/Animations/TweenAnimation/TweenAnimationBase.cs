@@ -66,11 +66,10 @@ namespace Animations
             
             foreach (var tween in tweens)
                 sequence.Append(tween);
-            
+
             sequence
                 .SetAutoKill(false)
-                .SetRecyclable(true)
-                .Pause();
+                .SetRecyclable(true);
         }
         
         public void JoinSequence(params Tween[] tweens)
@@ -82,13 +81,12 @@ namespace Animations
             
             sequence
                 .SetAutoKill(false)
-                .SetRecyclable(true)
-                .Pause();
+                .SetRecyclable(true);
         }
         
         public void StepOnCompleted(Action callback)
         {
-            sequence?.OnStepComplete(() => callback?.Invoke());
+            //sequence?.OnStepComplete(() => callback?.Invoke());
         }
 
         public void OnStart(Action callback)
@@ -98,10 +96,11 @@ namespace Animations
         
         public void Play(Action callback)
         {
+            //Debug.Log($"Internal Play");
             sequence
-                ?.OnComplete(() =>
+                .OnComplete(() =>
                 {
-                    Debug.Log($"Tween completed!");
+                    Debug.Log($"Internal Tween completed!");
                     callback?.Invoke();
                 })
                 .Restart(false);

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using MEC;
+using UnityEngine;
 
 namespace Pivots
 {
@@ -7,6 +8,7 @@ namespace Pivots
     {
         void Enable(MEC.Segment segment = Segment.Update);
         void Disable();
+        void ForceUpdate(Vector3 rootPivotScale);
     }
     
     public class PivotsAdjuster : IPivotsAdjuster
@@ -41,7 +43,14 @@ namespace Pivots
                 _updateCoroutine = null;
 #endif
         }
-        
+
+        public void ForceUpdate(Vector3 rootPivotScale)
+        {
+            InitializePivotPositionAndScaling();
+            _root.Pivot.localScale = rootPivotScale;
+            UpdatePivotPositionAndScale();
+        }
+
         private IEnumerator<float> UpdatePivotsCoroutine()
         {
             while (true)
@@ -60,6 +69,8 @@ namespace Pivots
 
         private void UpdatePivotPositionAndScale()
         {
+            //Debug.Log("UpdatePivotPositionAndScale");
+            
             if (_onePivotScaling.IsChanged(_root))
                 _onePivotScaling.UpdatePositionAndScale();
 
